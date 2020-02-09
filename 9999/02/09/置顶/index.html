@@ -18,7 +18,7 @@
 <meta name="description" content="博客会记录一些课程笔记和课程实验报告，还有一些技术类文章和生活类文章，欢迎参观！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="置顶">
-<meta property="og:url" content="http://yoursite.com/9999/02/09/%E7%BD%AE%E9%A1%B6/index.html">
+<meta property="og:url" content="https://chaomeiyan.github.io/.com/9999/02/09/%E7%BD%AE%E9%A1%B6/index.html">
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="博客会记录一些课程笔记和课程实验报告，还有一些技术类文章和生活类文章，欢迎参观！">
 <meta property="article:published_time" content="9999-02-09T10:17:47.000Z">
@@ -75,12 +75,14 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: 
+        search: true
     }
 </script>
 
 
-    <script> yiliaConfig.jquery_ui = [false]; </script>
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
 
 
 
@@ -109,6 +111,13 @@
         <p class="header-subtitle">中国科学技术大学计算机学院大二在读</p>
         
 
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
         
 
 
@@ -213,7 +222,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">中国科学技术大学计算机学院大二在读</div>
                 </section>
                 
             </div>
@@ -324,8 +333,8 @@
         <p><span>发布时间:</span>9999-02-09, 18:17:47</p>
         <p><span>最后更新:</span>2020-02-09, 19:31:58</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/9999/02/09/%E7%BD%AE%E9%A1%B6/" title="置顶">http://yoursite.com/9999/02/09/%E7%BD%AE%E9%A1%B6/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/9999/02/09/%E7%BD%AE%E9%A1%B6/　　作者: Maxwell" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/9999/02/09/%E7%BD%AE%E9%A1%B6/" title="置顶">https://chaomeiyan.github.io/.com/9999/02/09/%E7%BD%AE%E9%A1%B6/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://chaomeiyan.github.io/.com/9999/02/09/%E7%BD%AE%E9%A1%B6/　　作者: Maxwell" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -434,7 +443,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2020 Maxwell
+                2020 Maxwell
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
@@ -483,6 +492,27 @@
 
 
 
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <div class="scroll" id="scroll">
