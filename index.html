@@ -393,7 +393,7 @@
 <li>大多数深度学习模型并没有解析解，只能通过优化算法有限次迭代模型参数来尽可能降低损失函数的值。这类解叫作数值解</li>
 </ul>
 <p><strong>小批量随机梯度下降算法</strong>：先选取一组模型参数的初始值，如随机选取；接下来对参数进行多次迭代，使每次迭代都可能降低损失函数的值。在每次迭代中，先随机均匀采样一个由固定数目训练数据样本所组成的小批量（mini-batch）BB，然后求小批量中数据样本的平均损失有关模型参数的导数（梯度），最后用此结果与预先设定的一个正数的乘积作为模型参数在本次迭代的减小量。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200213231034126.png" alt="image-20200213231034126"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200213231034126.png" alt="image-20200213231034126"></p>
 <p>在上式中，|B||B|代表每个小批量中的样本个数（批量大小，batch size），ηη称作学习率（learning rate）并取正数。需要强调的是，这里的批量大小和学习率的值是人为设定的，并不是通过模型训练学出的，因此叫作超参数（hyperparameter）。我们通常所说的“调参”指的正是调节超参数，例如通过反复试错来找到超参数合适的值。在少数情况下，超参数也可以通过模型训练学出。本书对此类情况不做讨论。</p>
 <h5 id="模型预测"><a href="#模型预测" class="headerlink" title="模型预测"></a>模型预测</h5><p>模型训练完成后，我们将模型参数w1,w2,bw1,w2,b在优化算法停止时的值分别记作w^1,w^2,b^w^1,w^2,b^。注意，这里我们得到的并不一定是最小化损失函数的最优解w∗1,w∗2,b∗w1∗,w2∗,b∗，而是对最优解的一个近似。然后，我们就可以使用学出的线性回归模型x1w^1+x2w^2+b^x1w^1+x2w^2+b^来估算训练数据集以外任意一栋面积（平方米）为x1x1、房龄（年）为x2x2的房屋的价格了。这里的估算也叫作模型预测、模型推断或模型测试。</p>
 <h4 id="线性回归的表示方法"><a href="#线性回归的表示方法" class="headerlink" title="线性回归的表示方法"></a>线性回归的表示方法</h4><h5 id="神经网络图"><a href="#神经网络图" class="headerlink" title="神经网络图"></a>神经网络图</h5><h5 id="矢量计算表达式"><a href="#矢量计算表达式" class="headerlink" title="矢量计算表达式"></a>矢量计算表达式</h5><h4 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h4><h5 id="从零实现"><a href="#从零实现" class="headerlink" title="从零实现"></a>从零实现</h5><p>只利用<code>NDArray</code>和<code>autograd</code>来实现一个线性回归的训练。</p>
@@ -434,41 +434,41 @@
 <h3 id="softmax回归"><a href="#softmax回归" class="headerlink" title="softmax回归"></a>softmax回归</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>我们考虑一个简单的图像分类问题，其输入图像的高和宽均为2像素，且色彩为灰度。这样每个像素值都可以用一个标量表示。我们将图像中的4像素分别记为x1,x2,x3,x4x1,x2,x3,x4。假设训练数据集中图像的真实标签为狗、猫或鸡（假设可以用4像素表示出这3种动物），这些标签分别对应离散值y1,y2,y3y1,y2,y3。</p>
 <p>我们通常使用离散的数值来表示类别，例如y1=1,y2=2,y3=3y1=1,y2=2,y3=3。如此，一张图像的标签为1、2和3这3个数值中的一个。虽然我们仍然可以使用回归模型来进行建模，并将预测值就近定点化到1、2和3这3个离散值之一，但这种连续值到离散值的转化通常会影响到分类质量。因此我们一般使用更加适合离散值输出的模型来解决分类问题。</p>
 <p>softmax回归跟线性回归一样将输入特征与权重做线性叠加。与线性回归的一个主要不同在于，softmax回归的输出值个数等于标签里的类别数。因为一共有4种特征和3种输出动物类别，所以权重包含12个标量（带下标的ww）、偏差包含3个标量（带下标的bb），且对每个输入计算o1,o2,o3o1,o2,o3这3个输出：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214185133386.png" alt="image-20200214185133386"></p>
-<h4 id="softmax运算"><a href="#softmax运算" class="headerlink" title="softmax运算"></a>softmax运算</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214185306619.png" alt="image-20200214185306619"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185133386.png" alt="image-20200214185133386"></p>
+<h4 id="softmax运算"><a href="#softmax运算" class="headerlink" title="softmax运算"></a>softmax运算</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185306619.png" alt="image-20200214185306619"></p>
 <p>softmax运算的主要作用就是将输出变成概率</p>
 <h5 id="单样本分类的矢量计算表达式"><a href="#单样本分类的矢量计算表达式" class="headerlink" title="单样本分类的矢量计算表达式"></a>单样本分类的矢量计算表达式</h5><p>为了提高计算效率，我们可以将单样本分类通过矢量计算来表达。在上面的图像分类问题中，假设softmax回归的权重和偏差参数分别为</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214185514162.png" alt="image-20200214185514162"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214185527427.png" alt="image-20200214185527427"></p>
-<h5 id="小批量样本分类的矢量计算表达式"><a href="#小批量样本分类的矢量计算表达式" class="headerlink" title="小批量样本分类的矢量计算表达式"></a>小批量样本分类的矢量计算表达式</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214185615500.png" alt="image-20200214185615500"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185514162.png" alt="image-20200214185514162"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185527427.png" alt="image-20200214185527427"></p>
+<h5 id="小批量样本分类的矢量计算表达式"><a href="#小批量样本分类的矢量计算表达式" class="headerlink" title="小批量样本分类的矢量计算表达式"></a>小批量样本分类的矢量计算表达式</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185615500.png" alt="image-20200214185615500"></p>
 <h5 id="交叉熵损失函数"><a href="#交叉熵损失函数" class="headerlink" title="交叉熵损失函数"></a>交叉熵损失函数</h5><p>使用更适合衡量两个概率分布差异的测量函数。其中，交叉熵（cross entropy）是一个常用的衡量方法：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214185736467.png" alt="image-20200214185736467"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214185747953.png" alt="image-20200214185747953"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185736467.png" alt="image-20200214185736467"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185747953.png" alt="image-20200214185747953"></p>
 <h3 id="多层感知机"><a href="#多层感知机" class="headerlink" title="多层感知机"></a>多层感知机</h3><p>深度学习主要关注<strong>多层模型</strong>，以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。</p>
 <p>多层感知机在单层神经网络的基础上引入了一到多个隐藏层（hidden layer）。隐藏层位于输入层和输出层之间。图3.3展示了一个多层感知机的神经网络图。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214185915895.png" alt="image-20200214185915895"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185915895.png" alt="image-20200214185915895"></p>
 <p>在图3.3所示的多层感知机中，输入和输出个数分别为4和3，中间的隐藏层中包含了5个隐藏单元（hidden unit）。由于输入层不涉及计算，图3.3中的多层感知机的层数为2。由图3.3可见，隐藏层中的神经元和输入层中各个输入完全连接，输出层中的神经元和隐藏层中的各个神经元也完全连接。因此，多层感知机中的隐藏层和输出层都是全连接层。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214191515464.png" alt="image-20200214191515464"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191515464.png" alt="image-20200214191515464"></p>
 <h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p>上述问题的根源在于全连接层只是对数据做仿射变换（affine transformation），而多个仿射变换的叠加仍然是一个仿射变换。解决问题的一个方法是引入非线性变换，例如对隐藏变量使用按元素运算的非线性函数进行变换，然后再作为下一个全连接层的输入。这个非线性函数被称为激活函数（activation function）。下面我们介绍几个常用的激活函数。</p>
 <h6 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h6><p>ReLU（rectified linear unit）函数提供了一个很简单的非线性变换。给定元素xx，该函数定义为：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214191625304.png" alt="image-20200214191625304"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214191653649.png" alt="image-20200214191653649"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191625304.png" alt="image-20200214191625304"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191653649.png" alt="image-20200214191653649"></p>
 <h5 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h5><p>sigmoid函数可以将元素的值变换到0和1之间：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214192828397.png" alt="image-20200214192828397"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192828397.png" alt="image-20200214192828397"></p>
 <p>sigmoid函数在早期的神经网络中较为普遍，但它目前逐渐被更简单的ReLU函数取代。在后面“循环神经网络”一章中我们会介绍如何利用它值域在0到1之间这一特性来控制信息在神经网络中的流动。下面绘制了sigmoid函数。当输入接近0时，sigmoid函数接近线性变换。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214192847825.png" alt="image-20200214192847825"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192847825.png" alt="image-20200214192847825"></p>
 <p>依据链式法则，sigmoid函数的导数</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214192920205.png" alt="image-20200214192920205"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192920205.png" alt="image-20200214192920205"></p>
 <p>下面绘制了sigmoid函数的导数。当输入为0时，sigmoid函数的导数达到最大值0.25；当输入越偏离0时，sigmoid函数的导数越接近0。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214192933747.png" alt="image-20200214192933747"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192933747.png" alt="image-20200214192933747"></p>
 <h5 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h5><p>tanh（双曲正切）函数可以将元素的值变换到-1和1之间：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214192956917.png" alt="image-20200214192956917"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192956917.png" alt="image-20200214192956917"></p>
 <p>我们接着绘制tanh函数。当输入接近0时，tanh函数接近线性变换。虽然该函数的形状和sigmoid函数的形状很像，但tanh函数在坐标系的原点上对称。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with autograd.record():</span><br><span class="line">    y &#x3D; x.tanh()</span><br><span class="line">xyplot(x, y, &#39;tanh&#39;)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214193020375.png" alt="image-20200214193020375"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214193034688.png" alt="image-20200214193034688"></p>
-<h5 id="多层感知机-1"><a href="#多层感知机-1" class="headerlink" title="多层感知机"></a>多层感知机</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1%5Cimage-20200214202555144.png" alt="image-20200214202555144"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214193020375.png" alt="image-20200214193020375"></p>
+<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214193034688.png" alt="image-20200214193034688"></p>
+<h5 id="多层感知机-1"><a href="#多层感知机-1" class="headerlink" title="多层感知机"></a>多层感知机</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214202555144.png" alt="image-20200214202555144"></p>
 
       
     </div>
