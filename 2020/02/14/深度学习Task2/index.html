@@ -14,18 +14,22 @@
 <meta name="author" content="Maxwell" />
 
 
-    
-    
 
-
-<meta name="description" content="中国科学技术大学计算机学院大二在读">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Maxwell&#39;s Blog">
-<meta property="og:url" content="https://chaomeiyan.github.io/.com/index.html">
+<meta name="description" content="文本预处理文本是一类序列数据，一篇文章可以看作是字符或单词的序列，本节将介绍文本数据的常见预处理步骤，预处理通常包括四个步骤：  读入文本 分词 建立字典，将每个词映射到一个唯一的索引（index） 将文本从词的序列转换为索引的序列，方便输入模型  读入文本我们用一部英文小说，即H. G. Well的Time Machine，作为示例，展示文本预处理的具体过程。 123456789101112im">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习Task2">
+<meta property="og:url" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/index.html">
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
-<meta property="og:description" content="中国科学技术大学计算机学院大二在读">
+<meta property="og:description" content="文本预处理文本是一类序列数据，一篇文章可以看作是字符或单词的序列，本节将介绍文本数据的常见预处理步骤，预处理通常包括四个步骤：  读入文本 分词 建立字典，将每个词映射到一个唯一的索引（index） 将文本从词的序列转换为索引的序列，方便输入模型  读入文本我们用一部英文小说，即H. G. Well的Time Machine，作为示例，展示文本预处理的具体过程。 123456789101112im">
+<meta property="og:image" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png">
+<meta property="og:image" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213249636.png">
+<meta property="og:image" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213504355.png">
+<meta property="article:published_time" content="2020-02-14T13:27:19.000Z">
+<meta property="article:modified_time" content="2020-02-14T13:39:50.510Z">
 <meta property="article:author" content="Maxwell">
+<meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -55,13 +59,11 @@
 
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Maxwell&#39;s Blog</title>
+<title>深度学习Task2 | Maxwell&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -70,8 +72,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -278,73 +280,7 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-置顶" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/9999/02/09/%E7%BD%AE%E9%A1%B6/" class="article-date">
-      <time datetime="9999-02-09T10:17:47.000Z" itemprop="datePublished">9999-02-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/9999/02/09/%E7%BD%AE%E9%A1%B6/">置顶</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              博客会记录一些课程笔记和课程实验报告，还有一些技术类文章和生活类文章，欢迎参观！
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%AE%E9%A1%B6/" rel="tag">置顶</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/9999/02/09/%E7%BD%AE%E9%A1%B6/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-深度学习Task2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-深度学习Task2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/" class="article-date">
@@ -362,12 +298,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/">深度学习Task2</a>
+    <h1 class="article-title" itemprop="name">
+      深度学习Task2
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -497,354 +444,127 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hhh" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/14/hhh/" class="article-date">
-      <time datetime="2020-02-14T13:11:59.000Z" itemprop="datePublished">2020-02-14</time>
-</a>
-
-
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/">深度学习Task2</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Maxwell</a></p>
+        <p><span>发布时间:</span>2020-02-14, 21:27:19</p>
+        <p><span>最后更新:</span>2020-02-14, 21:39:50</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/" title="深度学习Task2">https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/　　作者: Maxwell" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+
+
+
+    <nav id="article-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/14/hhh/">hhh</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><img src="/.com/2020/02/14/hhh/image-20200213210339683.png" alt="image-20200213210339683"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-深度学习Task1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/" class="article-date">
-      <time datetime="2020-02-14T12:39:29.000Z" itemprop="datePublished">2020-02-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/9999/02/09/%E7%BD%AE%E9%A1%B6/">
+                    置顶
+                </a>
+            </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/">深度学习Task1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="机器学习与深度学习的关系"><a href="#机器学习与深度学习的关系" class="headerlink" title="机器学习与深度学习的关系"></a>机器学习与深度学习的关系</h3><p>​        机器学习研究如何使计算机系统利用经验改善性能。它是人工智能领域的分支，也是实现人工智能的一种手段。在机器学习的众多研究方向中，表征学习关注如何自动找出表示数据的合适方式，以便更好地将输入变换为正确的输出，而本书要重点探讨的深度学习是具有多级表示的表征学习方法。在每一级（从原始数据开始），深度学习通过简单的函数将该级的表示变换为更高级的表示。因此，深度学习模型也可以看作是由许多简单函数复合而成的函数。当这些复合的函数足够多时，深度学习模型就可以表达非常复杂的变换。</p>
-<h3 id="深度学习的特点"><a href="#深度学习的特点" class="headerlink" title="深度学习的特点"></a>深度学习的特点</h3><ul>
-<li>深度学习可以逐级表示越来越抽象的概念或模式</li>
-<li>深度学习的一个外在特点是端到端的训练</li>
-</ul>
-<p>​        相对其它经典的机器学习方法而言，深度学习的不同在于：对非最优解的包容、对非凸非线性优化的使用，以及勇于尝试没有被证明过的方法。这种在处理统计问题上的新经验主义吸引了大量人才的涌入，使得大量实际问题有了更好的解决方案。尽管大部分情况下需要为深度学习修改甚至重新发明已经存在数十年的工具，但是这绝对是一件非常有意义并令人兴奋的事。</p>
-<h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><h4 id="线性回归的基本要素"><a href="#线性回归的基本要素" class="headerlink" title="线性回归的基本要素"></a>线性回归的基本要素</h4><h5 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h5><h5 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h5><blockquote>
-<p>训练数据</p>
-</blockquote>
-<blockquote>
-<p>损失函数</p>
-</blockquote>
-<blockquote>
-<p>优化算法</p>
-</blockquote>
-<ul>
-<li>误差最小化问题的解可以直接用公式表达出来。这类解叫作解析解</li>
-<li>大多数深度学习模型并没有解析解，只能通过优化算法有限次迭代模型参数来尽可能降低损失函数的值。这类解叫作数值解</li>
-</ul>
-<p><strong>小批量随机梯度下降算法</strong>：先选取一组模型参数的初始值，如随机选取；接下来对参数进行多次迭代，使每次迭代都可能降低损失函数的值。在每次迭代中，先随机均匀采样一个由固定数目训练数据样本所组成的小批量（mini-batch）BB，然后求小批量中数据样本的平均损失有关模型参数的导数（梯度），最后用此结果与预先设定的一个正数的乘积作为模型参数在本次迭代的减小量。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200213231034126.png" alt="image-20200213231034126"></p>
-<p>在上式中，|B||B|代表每个小批量中的样本个数（批量大小，batch size），ηη称作学习率（learning rate）并取正数。需要强调的是，这里的批量大小和学习率的值是人为设定的，并不是通过模型训练学出的，因此叫作超参数（hyperparameter）。我们通常所说的“调参”指的正是调节超参数，例如通过反复试错来找到超参数合适的值。在少数情况下，超参数也可以通过模型训练学出。本书对此类情况不做讨论。</p>
-<h5 id="模型预测"><a href="#模型预测" class="headerlink" title="模型预测"></a>模型预测</h5><p>模型训练完成后，我们将模型参数w1,w2,bw1,w2,b在优化算法停止时的值分别记作w^1,w^2,b^w^1,w^2,b^。注意，这里我们得到的并不一定是最小化损失函数的最优解w∗1,w∗2,b∗w1∗,w2∗,b∗，而是对最优解的一个近似。然后，我们就可以使用学出的线性回归模型x1w^1+x2w^2+b^x1w^1+x2w^2+b^来估算训练数据集以外任意一栋面积（平方米）为x1x1、房龄（年）为x2x2的房屋的价格了。这里的估算也叫作模型预测、模型推断或模型测试。</p>
-<h4 id="线性回归的表示方法"><a href="#线性回归的表示方法" class="headerlink" title="线性回归的表示方法"></a>线性回归的表示方法</h4><h5 id="神经网络图"><a href="#神经网络图" class="headerlink" title="神经网络图"></a>神经网络图</h5><h5 id="矢量计算表达式"><a href="#矢量计算表达式" class="headerlink" title="矢量计算表达式"></a>矢量计算表达式</h5><h4 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h4><h5 id="从零实现"><a href="#从零实现" class="headerlink" title="从零实现"></a>从零实现</h5><p>只利用<code>NDArray</code>和<code>autograd</code>来实现一个线性回归的训练。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython <span class="keyword">import</span> display</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> autograd, nd</span><br><span class="line"><span class="keyword">import</span> random</span><br></pre></td></tr></table></figure>
-
-<p>生成数据集</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num_examples = <span class="number">1000</span></span><br><span class="line">true_w = [<span class="number">2</span>, <span class="number">-3.4</span>]</span><br><span class="line">true_b = <span class="number">4.2</span></span><br><span class="line">features = nd.random.normal(scale=<span class="number">1</span>, shape=(num_examples, num_inputs))</span><br><span class="line">labels = true_w[<span class="number">0</span>] * features[:, <span class="number">0</span>] + true_w[<span class="number">1</span>] * features[:, <span class="number">1</span>] + true_b</span><br><span class="line">labels += nd.random.normal(scale=<span class="number">0.01</span>, shape=labels.shape)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">use_svg_display</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 用矢量图显示</span></span><br><span class="line">    display.set_matplotlib_formats(<span class="string">'svg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_figsize</span><span class="params">(figsize=<span class="params">(<span class="number">3.5</span>, <span class="number">2.5</span>)</span>)</span>:</span></span><br><span class="line">    use_svg_display()</span><br><span class="line">    <span class="comment"># 设置图的尺寸</span></span><br><span class="line">    plt.rcParams[<span class="string">'figure.figsize'</span>] = figsize</span><br><span class="line"></span><br><span class="line">set_figsize()</span><br><span class="line">plt.scatter(features[:, <span class="number">1</span>].asnumpy(), labels.asnumpy(), <span class="number">1</span>);  <span class="comment"># 加分号只显示图</span></span><br></pre></td></tr></table></figure>
-
-<p>读取数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_iter</span><span class="params">(batch_size, features, labels)</span>:</span></span><br><span class="line">    num_examples = len(features)</span><br><span class="line">    indices = list(range(num_examples))</span><br><span class="line">    random.shuffle(indices)  <span class="comment"># 样本的读取顺序是随机的</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, num_examples, batch_size):</span><br><span class="line">        j = nd.array(indices[i: min(i + batch_size, num_examples)])</span><br><span class="line">        <span class="keyword">yield</span> features.take(j), labels.take(j)  <span class="comment"># take函数根据索引返回对应元素</span></span><br></pre></td></tr></table></figure>
-
-<p>初始化模型参数</p>
-<p>我们将权重初始化成均值为0、标准差为0.01的正态随机数，偏差则初始化成0。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">w = nd.random.normal(scale=<span class="number">0.01</span>, shape=(num_inputs, <span class="number">1</span>))</span><br><span class="line">b = nd.zeros(shape=(<span class="number">1</span>,))</span><br><span class="line"></span><br><span class="line">w.attach_grad()</span><br><span class="line">b.attach_grad()</span><br></pre></td></tr></table></figure>
-
-<p>定义模型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linreg</span><span class="params">(X, w, b)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">return</span> nd.dot(X, w) + b</span><br></pre></td></tr></table></figure>
-
-
-
-<p>定义损失函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squared_loss</span><span class="params">(y_hat, y)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">return</span> (y_hat - y.reshape(y_hat.shape)) ** <span class="number">2</span> / <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>定义优化算法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sgd</span><span class="params">(params, lr, batch_size)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">for</span> param <span class="keyword">in</span> params:</span><br><span class="line">        param[:] = param - lr * param.grad / batch_size</span><br></pre></td></tr></table></figure>
-
-
-
-<p>训练模型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">lr = <span class="number">0.03</span></span><br><span class="line">num_epochs = <span class="number">3</span></span><br><span class="line">net = linreg</span><br><span class="line">loss = squared_loss</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):  <span class="comment"># 训练模型一共需要num_epochs个迭代周期</span></span><br><span class="line">    <span class="comment"># 在每一个迭代周期中，会使用训练数据集中所有样本一次（假设样本数能够被批量大小整除）。X</span></span><br><span class="line">    <span class="comment"># 和y分别是小批量样本的特征和标签</span></span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> data_iter(batch_size, features, labels):</span><br><span class="line">        <span class="keyword">with</span> autograd.record():</span><br><span class="line">            l = loss(net(X, w, b), y)  <span class="comment"># l是有关小批量X和y的损失</span></span><br><span class="line">        l.backward()  <span class="comment"># 小批量的损失对模型参数求梯度</span></span><br><span class="line">        sgd([w, b], lr, batch_size)  <span class="comment"># 使用小批量随机梯度下降迭代模型参数</span></span><br><span class="line">    train_l = loss(net(features, w, b), labels)</span><br><span class="line">    print(<span class="string">'epoch %d, loss %f'</span> % (epoch + <span class="number">1</span>, train_l.mean().asnumpy()))</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="softmax回归"><a href="#softmax回归" class="headerlink" title="softmax回归"></a>softmax回归</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>我们考虑一个简单的图像分类问题，其输入图像的高和宽均为2像素，且色彩为灰度。这样每个像素值都可以用一个标量表示。我们将图像中的4像素分别记为x1,x2,x3,x4x1,x2,x3,x4。假设训练数据集中图像的真实标签为狗、猫或鸡（假设可以用4像素表示出这3种动物），这些标签分别对应离散值y1,y2,y3y1,y2,y3。</p>
-<p>我们通常使用离散的数值来表示类别，例如y1=1,y2=2,y3=3y1=1,y2=2,y3=3。如此，一张图像的标签为1、2和3这3个数值中的一个。虽然我们仍然可以使用回归模型来进行建模，并将预测值就近定点化到1、2和3这3个离散值之一，但这种连续值到离散值的转化通常会影响到分类质量。因此我们一般使用更加适合离散值输出的模型来解决分类问题。</p>
-<p>softmax回归跟线性回归一样将输入特征与权重做线性叠加。与线性回归的一个主要不同在于，softmax回归的输出值个数等于标签里的类别数。因为一共有4种特征和3种输出动物类别，所以权重包含12个标量（带下标的ww）、偏差包含3个标量（带下标的bb），且对每个输入计算o1,o2,o3o1,o2,o3这3个输出：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185133386.png" alt="image-20200214185133386"></p>
-<h4 id="softmax运算"><a href="#softmax运算" class="headerlink" title="softmax运算"></a>softmax运算</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185306619.png" alt="image-20200214185306619"></p>
-<p>softmax运算的主要作用就是将输出变成概率</p>
-<h5 id="单样本分类的矢量计算表达式"><a href="#单样本分类的矢量计算表达式" class="headerlink" title="单样本分类的矢量计算表达式"></a>单样本分类的矢量计算表达式</h5><p>为了提高计算效率，我们可以将单样本分类通过矢量计算来表达。在上面的图像分类问题中，假设softmax回归的权重和偏差参数分别为</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185514162.png" alt="image-20200214185514162"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185527427.png" alt="image-20200214185527427"></p>
-<h5 id="小批量样本分类的矢量计算表达式"><a href="#小批量样本分类的矢量计算表达式" class="headerlink" title="小批量样本分类的矢量计算表达式"></a>小批量样本分类的矢量计算表达式</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185615500.png" alt="image-20200214185615500"></p>
-<h5 id="交叉熵损失函数"><a href="#交叉熵损失函数" class="headerlink" title="交叉熵损失函数"></a>交叉熵损失函数</h5><p>使用更适合衡量两个概率分布差异的测量函数。其中，交叉熵（cross entropy）是一个常用的衡量方法：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185736467.png" alt="image-20200214185736467"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185747953.png" alt="image-20200214185747953"></p>
-<h3 id="多层感知机"><a href="#多层感知机" class="headerlink" title="多层感知机"></a>多层感知机</h3><p>深度学习主要关注<strong>多层模型</strong>，以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。</p>
-<p>多层感知机在单层神经网络的基础上引入了一到多个隐藏层（hidden layer）。隐藏层位于输入层和输出层之间。图3.3展示了一个多层感知机的神经网络图。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185915895.png" alt="image-20200214185915895"></p>
-<p>在图3.3所示的多层感知机中，输入和输出个数分别为4和3，中间的隐藏层中包含了5个隐藏单元（hidden unit）。由于输入层不涉及计算，图3.3中的多层感知机的层数为2。由图3.3可见，隐藏层中的神经元和输入层中各个输入完全连接，输出层中的神经元和隐藏层中的各个神经元也完全连接。因此，多层感知机中的隐藏层和输出层都是全连接层。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191515464.png" alt="image-20200214191515464"></p>
-<h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p>上述问题的根源在于全连接层只是对数据做仿射变换（affine transformation），而多个仿射变换的叠加仍然是一个仿射变换。解决问题的一个方法是引入非线性变换，例如对隐藏变量使用按元素运算的非线性函数进行变换，然后再作为下一个全连接层的输入。这个非线性函数被称为激活函数（activation function）。下面我们介绍几个常用的激活函数。</p>
-<h6 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h6><p>ReLU（rectified linear unit）函数提供了一个很简单的非线性变换。给定元素xx，该函数定义为：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191625304.png" alt="image-20200214191625304"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191653649.png" alt="image-20200214191653649"></p>
-<h5 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h5><p>sigmoid函数可以将元素的值变换到0和1之间：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192828397.png" alt="image-20200214192828397"></p>
-<p>sigmoid函数在早期的神经网络中较为普遍，但它目前逐渐被更简单的ReLU函数取代。在后面“循环神经网络”一章中我们会介绍如何利用它值域在0到1之间这一特性来控制信息在神经网络中的流动。下面绘制了sigmoid函数。当输入接近0时，sigmoid函数接近线性变换。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192847825.png" alt="image-20200214192847825"></p>
-<p>依据链式法则，sigmoid函数的导数</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192920205.png" alt="image-20200214192920205"></p>
-<p>下面绘制了sigmoid函数的导数。当输入为0时，sigmoid函数的导数达到最大值0.25；当输入越偏离0时，sigmoid函数的导数越接近0。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192933747.png" alt="image-20200214192933747"></p>
-<h5 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h5><p>tanh（双曲正切）函数可以将元素的值变换到-1和1之间：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192956917.png" alt="image-20200214192956917"></p>
-<p>我们接着绘制tanh函数。当输入接近0时，tanh函数接近线性变换。虽然该函数的形状和sigmoid函数的形状很像，但tanh函数在坐标系的原点上对称。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with autograd.record():</span><br><span class="line">    y &#x3D; x.tanh()</span><br><span class="line">xyplot(x, y, &#39;tanh&#39;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214193020375.png" alt="image-20200214193020375"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214193034688.png" alt="image-20200214193034688"></p>
-<h5 id="多层感知机-1"><a href="#多层感知机-1" class="headerlink" title="多层感知机"></a>多层感知机</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214202555144.png" alt="image-20200214202555144"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-python中yield的用法详解——最简单，最清晰的解释" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/14/python%E4%B8%ADyield%E7%9A%84%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3%E2%80%94%E2%80%94%E6%9C%80%E7%AE%80%E5%8D%95%EF%BC%8C%E6%9C%80%E6%B8%85%E6%99%B0%E7%9A%84%E8%A7%A3%E9%87%8A/" class="article-date">
-      <time datetime="2020-02-14T06:35:10.000Z" itemprop="datePublished">2020-02-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/14/python%E4%B8%ADyield%E7%9A%84%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3%E2%80%94%E2%80%94%E6%9C%80%E7%AE%80%E5%8D%95%EF%BC%8C%E6%9C%80%E6%B8%85%E6%99%B0%E7%9A%84%E8%A7%A3%E9%87%8A/">python中yield的用法详解——最简单，最清晰的解释</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>首先我要吐槽一下，看程序的过程中遇见了yield这个关键字，然后百度的时候，发现没有一个能简单的让我懂的，讲起来真TM的都是头头是道，什么参数，什么传递的，还口口声声说自己的教程是最简单的，最浅显易懂的，我就想问没有有考虑过读者的感受。</p>
-<p>接下来是正题：</p>
-<p>首先，如果你还没有对yield有个初步分认识，那么你先把yield看做“return”，这个是直观的，它首先是个return，普通的return是什么意思，就是在程序中返回某个值，返回之后程序就不再往下运行了。看做return之后再把它看做一个是生成器（generator）的一部分（带yield的函数才是真正的迭代器），好了，如果你对这些不明白的话，那先把yield看做return,然后直接看下面的程序，你就会明白yield的全部意思了：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"starting..."</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res = <span class="keyword">yield</span> <span class="number">4</span></span><br><span class="line">        print(<span class="string">"res:"</span>,res)</span><br><span class="line">g = foo()</span><br><span class="line">print(next(g))</span><br><span class="line">print(<span class="string">"*"</span>*<span class="number">20</span>)</span><br><span class="line">print(next(g))</span><br></pre></td></tr></table></figure>
-
-
-<p>就这么简单的几行代码就让你明白什么是yield，代码的输出这个：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">starting...</span><br><span class="line"><span class="number">4</span></span><br><span class="line"></span><br><span class="line">********************</span><br><span class="line"></span><br><span class="line">res: <span class="literal">None</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>我直接解释代码运行顺序，相当于代码单步调试：</p>
-<p>1.程序开始执行以后，因为foo函数中有yield关键字，所以foo函数并不会真的执行，而是先得到一个生成器g(相当于一个对象)</p>
-<p>2.直到调用next方法，foo函数正式开始执行，先执行foo函数中的print方法，然后进入while循环</p>
-<p>3.程序遇到yield关键字，然后把yield想想成return,return了一个4之后，程序停止，并没有执行赋值给res操作，此时next(g)语句执行完成，所以输出的前两行（第一个是while上面的print的结果,第二个是return出的结果）是执行print(next(g))的结果，</p>
-<p>4.程序执行print(“<em>“</em>20)，输出20个*</p>
-<p>5.又开始执行下面的print(next(g)),这个时候和上面那个差不多，不过不同的是，这个时候是从刚才那个next程序停止的地方开始执行的，也就是要执行res的赋值操作，这时候要注意，这个时候赋值操作的右边是没有值的（因为刚才那个是return出去了，并没有给赋值操作的左边传参数），所以这个时候res赋值是None,所以接着下面的输出就是res:None,</p>
-<p>6.程序会继续在while里执行，又一次碰到yield,这个时候同样return 出4，然后程序停止，print函数输出的4就是这次return出的4.</p>
-<p>到这里你可能就明白yield和return的关系和区别了，带yield的函数是一个生成器，而不是一个函数了，这个生成器有一个函数就是next函数，next就相当于“下一步”生成哪个数，这一次的next开始的地方是接着上一次的next停止的地方执行的，所以调用next的时候，生成器并不会从foo函数的开始执行，只是接着上一步停止的地方开始，然后遇到yield后，return出要生成的数，此步就结束。</p>
-<hr>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"starting..."</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res = <span class="keyword">yield</span> <span class="number">4</span></span><br><span class="line">        print(<span class="string">"res:"</span>,res)</span><br><span class="line">g = foo()</span><br><span class="line">print(next(g))</span><br><span class="line">print(<span class="string">"*"</span>*<span class="number">20</span>)</span><br><span class="line">print(g.send(<span class="number">7</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>再看一个这个生成器的send函数的例子，这个例子就把上面那个例子的最后一行换掉了，输出结果：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">starting...</span><br><span class="line"><span class="number">4</span></span><br><span class="line"></span><br><span class="line">********************</span><br><span class="line"></span><br><span class="line">res: <span class="number">7</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>先大致说一下send函数的概念：此时你应该注意到上面那个的紫色的字，还有上面那个res的值为什么是None，这个变成了7，到底为什么，这是因为，send是发送一个参数给res的，因为上面讲到，return的时候，并没有把4赋值给res，下次执行的时候只好继续执行赋值操作，只好赋值为None了，而如果用send的话，开始执行的时候，先接着上一次（return 4之后）执行，先把7赋值给了res,然后执行next的作用，遇见下一回的yield，return出结果后结束。</p>
-<p>5.程序执行g.send(7)，程序会从yield关键字那一行继续向下运行，send会把7这个值赋值给res变量</p>
-<p>6.由于send方法中包含next()方法，所以程序会继续向下运行执行print方法，然后再次进入while循环</p>
-<p>7.程序执行再次遇到yield关键字，yield会返回后面的值后，程序再次暂停，直到再次调用next方法或send方法。</p>
-<p>这就结束了，说一下，<strong>为什么用这个生成器</strong>，是因为如果用List的话，会占用更大的空间，比如说取0,1,2,3,4,5,6…………1000</p>
-<p>你可能会这样：</p>
-<p>for n in range(1000):<br>    a=n<br>这个时候range(1000)就默认生成一个含有1000个数的list了，所以很占内存。</p>
-<p>这个时候你可以用刚才的yield组合成生成器进行实现，也可以用xrange(1000)这个生成器实现</p>
-<p>yield组合：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(num)</span>:</span></span><br><span class="line">    print(<span class="string">"starting..."</span>)</span><br><span class="line">    <span class="keyword">while</span> num&lt;<span class="number">10</span>:</span><br><span class="line">        num=num+<span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> num</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> foo(<span class="number">0</span>):</span><br><span class="line">    print(n)</span><br><span class="line">输出：</span><br><span class="line"></span><br><span class="line">starting...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
-
-<p> xrange(1000):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> xrange(<span class="number">1000</span>):</span><br><span class="line">    a=n</span><br></pre></td></tr></table></figure>
-
-
-
-<p> 其中要注意的是python3时已经没有xrange()了，在python3中，range()就是xrange()了，你可以在python3中查看range()的类型，它已经是个&lt;class ‘range’&gt;了，而不是一个list了，毕竟这个是需要优化的。 </p>
-<p>————————————————<br>版权声明：本文为CSDN博主「冯爽朗」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mieleizhi0522/article/details/82142856" target="_blank" rel="noopener">https://blog.csdn.net/mieleizhi0522/article/details/82142856</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/02/14/hhh/">
+                    hhh
+                </a>
+            </div>
+        
     </nav>
+
   
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文本预处理"><span class="toc-number">1.</span> <span class="toc-text">文本预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读入文本"><span class="toc-number">1.1.</span> <span class="toc-text">读入文本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分词"><span class="toc-number">1.2.</span> <span class="toc-text">分词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建立字典"><span class="toc-number">1.3.</span> <span class="toc-text">建立字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将词转为索引"><span class="toc-number">1.4.</span> <span class="toc-text">将词转为索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用现有工具进行分词"><span class="toc-number">1.5.</span> <span class="toc-text">用现有工具进行分词</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语言模型"><span class="toc-number">2.</span> <span class="toc-text">语言模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算"><span class="toc-number">2.2.</span> <span class="toc-text">计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#n元语法"><span class="toc-number">2.3.</span> <span class="toc-text">n元语法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环神经网络基础"><span class="toc-number">3.</span> <span class="toc-text">循环神经网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#循环网络的构造"><span class="toc-number">3.1.</span> <span class="toc-text">循环网络的构造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从零开始实现循环神经网络"><span class="toc-number">3.2.</span> <span class="toc-text">从零开始实现循环神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#one-hot向量"><span class="toc-number">3.2.1.</span> <span class="toc-text">one-hot向量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#初始化模型参数"><span class="toc-number">3.2.2.</span> <span class="toc-text">初始化模型参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#定义模型"><span class="toc-number">3.2.3.</span> <span class="toc-text">定义模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#裁剪梯度"><span class="toc-number">3.2.4.</span> <span class="toc-text">裁剪梯度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#定义预测函数"><span class="toc-number">3.2.5.</span> <span class="toc-text">定义预测函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#困惑度"><span class="toc-number">3.2.6.</span> <span class="toc-text">困惑度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#定义模型训练函数"><span class="toc-number">3.2.7.</span> <span class="toc-text">定义模型训练函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#训练模型并创作歌词"><span class="toc-number">3.2.8.</span> <span class="toc-text">训练模型并创作歌词</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"深度学习Task2　| Maxwell's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/9999/02/09/%E7%BD%AE%E9%A1%B6/" title="上一篇: 置顶">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/02/14/hhh/" title="下一篇: hhh">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/9999/02/09/%E7%BD%AE%E9%A1%B6/">置顶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/">深度学习Task2</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/14/hhh/">hhh</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/">深度学习Task1</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/14/python%E4%B8%ADyield%E7%9A%84%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3%E2%80%94%E2%80%94%E6%9C%80%E7%AE%80%E5%8D%95%EF%BC%8C%E6%9C%80%E6%B8%85%E6%99%B0%E7%9A%84%E8%A7%A3%E9%87%8A/">python中yield的用法详解——最简单，最清晰的解释</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/14/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">Python数据结构和算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/13/markdown%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">markdown学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/12/%E9%80%92%E5%BD%92%E6%96%B9%E6%B3%95%E8%AE%BA/">递归方法论</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/%E4%B8%93%E6%B3%A8%E5%8A%9B%E4%B8%8E%E6%89%A7%E8%A1%8C%E5%8A%9B%E6%98%AF%E4%BA%BA%E4%B8%8E%E4%BA%BA%E4%B9%8B%E9%97%B4%E4%BA%A7%E7%94%9F%E5%B7%AE%E5%88%AB%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8E%9F%E5%9B%A0/">专注力与执行力是人与人之间产生差别的主要原因</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/09/ACM%E5%85%A5%E9%97%A8/">ACM入门</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
