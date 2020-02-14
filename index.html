@@ -416,11 +416,11 @@
 <h3 id="语言模型"><a href="#语言模型" class="headerlink" title="语言模型"></a>语言模型</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>语言模型（language model）是自然语言处理的重要技术。自然语言处理中最常见的数据是文本数据。我们可以把一段自然语言文本看作一段离散的时间序列。假设一段长度为<em>T</em>的文本中的词依次为<em>w</em>1,<em>w</em>2,…,<em>w*</em>T<em>，那么在离散的时间序列中，</em>w<strong>t<em>（1≤</em>t<em>≤</em>T<em>）可看作在时间步（time step）</em>t<em>的输出或标签。给定一个长度为</em>T<em>的词的序列</em>w<em>1,</em>w<em>2,…,</em>w</strong>T*，语言模型将计算该序列的概率：</p>
 <p><em>P</em>(<em>w</em>1,<em>w</em>2,…,<em>w**T</em>).</p>
 <p>语言模型可用于提升语音识别和机器翻译的性能。例如，在语音识别中，给定一段“厨房里食油用完了”的语音，有可能会输出“厨房里食油用完了”和“厨房里石油用完了”这两个读音完全一样的文本序列。如果语言模型判断出前者的概率大于后者的概率，我们就可以根据相同读音的语音输出“厨房里食油用完了”的文本序列。在机器翻译中，如果对英文“you go first”逐词翻译成中文的话，可能得到“你走先”“你先走”等排列方式的文本序列。如果语言模型判断出“你先走”的概率大于其他排列方式的文本序列的概率，我们就可以把“you go first”翻译成“你先走”。</p>
-<h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png" alt="image-20200214213233029"></p>
-<h4 id="n元语法"><a href="#n元语法" class="headerlink" title="n元语法"></a>n元语法</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213249636.png" alt="image-20200214213249636"></p>
+<h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142255_493.png" alt></p>
+<h4 id="n元语法"><a href="#n元语法" class="headerlink" title="n元语法"></a>n元语法</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142255_489.png" alt></p>
 <h3 id="循环神经网络基础"><a href="#循环神经网络基础" class="headerlink" title="循环神经网络基础"></a>循环神经网络基础</h3><p>上一节介绍的nn元语法中，时间步tt的词wtwt基于前面所有词的条件概率只考虑了最近时间步的n−1n−1个词。如果要考虑比t−(n−1)t−(n−1)更早时间步的词对wtwt的可能影响，我们需要增大nn。但这样模型参数的数量将随之呈指数级增长（可参考上一节的练习）。</p>
 <p>本节将介绍循环神经网络。它并非刚性地记忆所有固定长度的序列，而是通过隐藏状态来存储之前时间步的信息。首先我们回忆一下前面介绍过的多层感知机，然后描述如何添加隐藏状态来将它变成循环神经网络。</p>
-<h4 id="循环网络的构造"><a href="#循环网络的构造" class="headerlink" title="循环网络的构造"></a>循环网络的构造</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213504355.png" alt="image-20200214213504355"></p>
+<h4 id="循环网络的构造"><a href="#循环网络的构造" class="headerlink" title="循环网络的构造"></a>循环网络的构造</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142256_508.png" alt></p>
 <h4 id="从零开始实现循环神经网络"><a href="#从零开始实现循环神经网络" class="headerlink" title="从零开始实现循环神经网络"></a>从零开始实现循环神经网络</h4><p>我们先尝试从零开始实现一个基于字符级循环神经网络的语言模型，这里我们使用周杰伦的歌词作为语料，首先我们读入数据：</p>
 <p>In [1]:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import time</span><br><span class="line">import math</span><br><span class="line">import sys</span><br><span class="line">sys.path.append(&quot;&#x2F;home&#x2F;kesci&#x2F;input&quot;)</span><br><span class="line">import d2l_jay9460 as d2l</span><br><span class="line">(corpus_indices, char_to_idx, idx_to_char, vocab_size) &#x3D; d2l.load_data_jay_lyrics()</span><br><span class="line">device &#x3D; torch.device(&#39;cuda&#39; if torch.cuda.is_available() else &#39;cpu&#39;)</span><br></pre></td></tr></table></figure>
@@ -523,62 +523,6 @@
 
 
   
-    <article id="post-hhh" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/14/hhh/" class="article-date">
-      <time datetime="2020-02-14T13:11:59.000Z" itemprop="datePublished">2020-02-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/14/hhh/">hhh</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><img src="/.com/2020/02/14/hhh/image-20200213210339683.png" alt="image-20200213210339683"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-深度学习Task1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -628,7 +572,7 @@
 <li>大多数深度学习模型并没有解析解，只能通过优化算法有限次迭代模型参数来尽可能降低损失函数的值。这类解叫作数值解</li>
 </ul>
 <p><strong>小批量随机梯度下降算法</strong>：先选取一组模型参数的初始值，如随机选取；接下来对参数进行多次迭代，使每次迭代都可能降低损失函数的值。在每次迭代中，先随机均匀采样一个由固定数目训练数据样本所组成的小批量（mini-batch）BB，然后求小批量中数据样本的平均损失有关模型参数的导数（梯度），最后用此结果与预先设定的一个正数的乘积作为模型参数在本次迭代的减小量。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200213231034126.png" alt="image-20200213231034126"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142231_40.png" alt></p>
 <p>在上式中，|B||B|代表每个小批量中的样本个数（批量大小，batch size），ηη称作学习率（learning rate）并取正数。需要强调的是，这里的批量大小和学习率的值是人为设定的，并不是通过模型训练学出的，因此叫作超参数（hyperparameter）。我们通常所说的“调参”指的正是调节超参数，例如通过反复试错来找到超参数合适的值。在少数情况下，超参数也可以通过模型训练学出。本书对此类情况不做讨论。</p>
 <h5 id="模型预测"><a href="#模型预测" class="headerlink" title="模型预测"></a>模型预测</h5><p>模型训练完成后，我们将模型参数w1,w2,bw1,w2,b在优化算法停止时的值分别记作w^1,w^2,b^w^1,w^2,b^。注意，这里我们得到的并不一定是最小化损失函数的最优解w∗1,w∗2,b∗w1∗,w2∗,b∗，而是对最优解的一个近似。然后，我们就可以使用学出的线性回归模型x1w^1+x2w^2+b^x1w^1+x2w^2+b^来估算训练数据集以外任意一栋面积（平方米）为x1x1、房龄（年）为x2x2的房屋的价格了。这里的估算也叫作模型预测、模型推断或模型测试。</p>
 <h4 id="线性回归的表示方法"><a href="#线性回归的表示方法" class="headerlink" title="线性回归的表示方法"></a>线性回归的表示方法</h4><h5 id="神经网络图"><a href="#神经网络图" class="headerlink" title="神经网络图"></a>神经网络图</h5><h5 id="矢量计算表达式"><a href="#矢量计算表达式" class="headerlink" title="矢量计算表达式"></a>矢量计算表达式</h5><h4 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h4><h5 id="从零实现"><a href="#从零实现" class="headerlink" title="从零实现"></a>从零实现</h5><p>只利用<code>NDArray</code>和<code>autograd</code>来实现一个线性回归的训练。</p>
@@ -669,40 +613,40 @@
 <h3 id="softmax回归"><a href="#softmax回归" class="headerlink" title="softmax回归"></a>softmax回归</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>我们考虑一个简单的图像分类问题，其输入图像的高和宽均为2像素，且色彩为灰度。这样每个像素值都可以用一个标量表示。我们将图像中的4像素分别记为x1,x2,x3,x4x1,x2,x3,x4。假设训练数据集中图像的真实标签为狗、猫或鸡（假设可以用4像素表示出这3种动物），这些标签分别对应离散值y1,y2,y3y1,y2,y3。</p>
 <p>我们通常使用离散的数值来表示类别，例如y1=1,y2=2,y3=3y1=1,y2=2,y3=3。如此，一张图像的标签为1、2和3这3个数值中的一个。虽然我们仍然可以使用回归模型来进行建模，并将预测值就近定点化到1、2和3这3个离散值之一，但这种连续值到离散值的转化通常会影响到分类质量。因此我们一般使用更加适合离散值输出的模型来解决分类问题。</p>
 <p>softmax回归跟线性回归一样将输入特征与权重做线性叠加。与线性回归的一个主要不同在于，softmax回归的输出值个数等于标签里的类别数。因为一共有4种特征和3种输出动物类别，所以权重包含12个标量（带下标的ww）、偏差包含3个标量（带下标的bb），且对每个输入计算o1,o2,o3o1,o2,o3这3个输出：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185133386.png" alt="image-20200214185133386"></p>
-<h4 id="softmax运算"><a href="#softmax运算" class="headerlink" title="softmax运算"></a>softmax运算</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185306619.png" alt="image-20200214185306619"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142233_77.png" alt></p>
+<h4 id="softmax运算"><a href="#softmax运算" class="headerlink" title="softmax运算"></a>softmax运算</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142233_3.png" alt></p>
 <p>softmax运算的主要作用就是将输出变成概率</p>
 <h5 id="单样本分类的矢量计算表达式"><a href="#单样本分类的矢量计算表达式" class="headerlink" title="单样本分类的矢量计算表达式"></a>单样本分类的矢量计算表达式</h5><p>为了提高计算效率，我们可以将单样本分类通过矢量计算来表达。在上面的图像分类问题中，假设softmax回归的权重和偏差参数分别为</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185514162.png" alt="image-20200214185514162"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185527427.png" alt="image-20200214185527427"></p>
-<h5 id="小批量样本分类的矢量计算表达式"><a href="#小批量样本分类的矢量计算表达式" class="headerlink" title="小批量样本分类的矢量计算表达式"></a>小批量样本分类的矢量计算表达式</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185615500.png" alt="image-20200214185615500"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_349.png" alt></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_970.png" alt></p>
+<h5 id="小批量样本分类的矢量计算表达式"><a href="#小批量样本分类的矢量计算表达式" class="headerlink" title="小批量样本分类的矢量计算表达式"></a>小批量样本分类的矢量计算表达式</h5><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_645.png" alt></p>
 <h5 id="交叉熵损失函数"><a href="#交叉熵损失函数" class="headerlink" title="交叉熵损失函数"></a>交叉熵损失函数</h5><p>使用更适合衡量两个概率分布差异的测量函数。其中，交叉熵（cross entropy）是一个常用的衡量方法：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185736467.png" alt="image-20200214185736467"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185747953.png" alt="image-20200214185747953"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142235_355.png" alt></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142250_450.png" alt></p>
 <h3 id="多层感知机"><a href="#多层感知机" class="headerlink" title="多层感知机"></a>多层感知机</h3><p>深度学习主要关注<strong>多层模型</strong>，以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。</p>
 <p>多层感知机在单层神经网络的基础上引入了一到多个隐藏层（hidden layer）。隐藏层位于输入层和输出层之间。图3.3展示了一个多层感知机的神经网络图。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214185915895.png" alt="image-20200214185915895"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142251_51.png" alt></p>
 <p>在图3.3所示的多层感知机中，输入和输出个数分别为4和3，中间的隐藏层中包含了5个隐藏单元（hidden unit）。由于输入层不涉及计算，图3.3中的多层感知机的层数为2。由图3.3可见，隐藏层中的神经元和输入层中各个输入完全连接，输出层中的神经元和隐藏层中的各个神经元也完全连接。因此，多层感知机中的隐藏层和输出层都是全连接层。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191515464.png" alt="image-20200214191515464"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142251_572.png" alt></p>
 <h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p>上述问题的根源在于全连接层只是对数据做仿射变换（affine transformation），而多个仿射变换的叠加仍然是一个仿射变换。解决问题的一个方法是引入非线性变换，例如对隐藏变量使用按元素运算的非线性函数进行变换，然后再作为下一个全连接层的输入。这个非线性函数被称为激活函数（activation function）。下面我们介绍几个常用的激活函数。</p>
 <h6 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h6><p>ReLU（rectified linear unit）函数提供了一个很简单的非线性变换。给定元素xx，该函数定义为：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191625304.png" alt="image-20200214191625304"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214191653649.png" alt="image-20200214191653649"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142252_830.png" alt></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142252_944.png" alt></p>
 <h5 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h5><p>sigmoid函数可以将元素的值变换到0和1之间：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192828397.png" alt="image-20200214192828397"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_399.png" alt></p>
 <p>sigmoid函数在早期的神经网络中较为普遍，但它目前逐渐被更简单的ReLU函数取代。在后面“循环神经网络”一章中我们会介绍如何利用它值域在0到1之间这一特性来控制信息在神经网络中的流动。下面绘制了sigmoid函数。当输入接近0时，sigmoid函数接近线性变换。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192847825.png" alt="image-20200214192847825"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_802.png" alt></p>
 <p>依据链式法则，sigmoid函数的导数</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192920205.png" alt="image-20200214192920205"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_388.png" alt></p>
 <p>下面绘制了sigmoid函数的导数。当输入为0时，sigmoid函数的导数达到最大值0.25；当输入越偏离0时，sigmoid函数的导数越接近0。</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192933747.png" alt="image-20200214192933747"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_427.png" alt></p>
 <h5 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h5><p>tanh（双曲正切）函数可以将元素的值变换到-1和1之间：</p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214192956917.png" alt="image-20200214192956917"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_807.png" alt></p>
 <p>我们接着绘制tanh函数。当输入接近0时，tanh函数接近线性变换。虽然该函数的形状和sigmoid函数的形状很像，但tanh函数在坐标系的原点上对称。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with autograd.record():</span><br><span class="line">    y &#x3D; x.tanh()</span><br><span class="line">xyplot(x, y, &#39;tanh&#39;)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214193020375.png" alt="image-20200214193020375"></p>
-<p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214193034688.png" alt="image-20200214193034688"></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_20.png" alt></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142255_743.png" alt></p>
 <h5 id="多层感知机-1"><a href="#多层感知机-1" class="headerlink" title="多层感知机"></a>多层感知机</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214202555144.png" alt="image-20200214202555144"></p>
 
       
@@ -810,6 +754,99 @@
 
 <p> 其中要注意的是python3时已经没有xrange()了，在python3中，range()就是xrange()了，你可以在python3中查看range()的类型，它已经是个&lt;class ‘range’&gt;了，而不是一个list了，毕竟这个是需要优化的。 </p>
 <p>————————————————<br>版权声明：本文为CSDN博主「冯爽朗」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mieleizhi0522/article/details/82142856" target="_blank" rel="noopener">https://blog.csdn.net/mieleizhi0522/article/details/82142856</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Python数据结构和算法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/14/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" class="article-date">
+      <time datetime="2020-02-14T04:12:59.000Z" itemprop="datePublished">2020-02-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/14/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">Python数据结构和算法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="1-解压序列赋值给多个变量"><a href="#1-解压序列赋值给多个变量" class="headerlink" title="1.解压序列赋值给多个变量"></a>1.解压序列赋值给多个变量</h3><p>直接用 = 就可以解压赋值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">x,y = a</span><br></pre></td></tr></table></figure>
+
+<p>实际上，这种解压赋值可以用在任何可迭代对象上面，而不仅仅是<strong>列表</strong>或者<strong>元组</strong>。 包括<strong>字符串</strong>，<strong>文件对象</strong>，<strong>迭代器</strong>和<strong>生成器。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'Hello'</span></span><br><span class="line">a,b,c,d,e = s</span><br></pre></td></tr></table></figure>
+
+<p>当我们只想解压一部分时没有特殊的语法，需要使用任意变量名去占位，然后丢弃不需要的变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="string">'ACE'</span>, <span class="number">50</span>, <span class="number">91.1</span>, (<span class="number">2020</span>, <span class="number">2</span>, <span class="number">14</span>)]</span><br><span class="line">_, shares, price, _ = data</span><br><span class="line"><span class="comment"># 其中_就是不错的占位符 因为平时很少用它来命名变量</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-解压可迭代对象赋值给多个变量"><a href="#2-解压可迭代对象赋值给多个变量" class="headerlink" title="2.解压可迭代对象赋值给多个变量"></a>2.解压可迭代对象赋值给多个变量</h3><p>当可迭代对象的元素个数比较多的时候，怎么才能从这个对象中解压出N个元素出来呢？</p>
+<p>Python 的星号表达式可以用来解决这个问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(grades)</span>:</span></span><br><span class="line">	first, *middle, last = grades</span><br><span class="line">    <span class="keyword">return</span> avg(middle)</span><br><span class="line"><span class="comment"># 注意 不管这个可迭代对象是什么，使用*取出的一定是列表</span></span><br></pre></td></tr></table></figure>
+
+<p>扩展的迭代解压语法是专门为解压不确定个数或任意个数元素的可迭代对象而设计的。 通常，这些可迭代对象的元素结构有确定的规则（比如第 1 个元素后面都是电话号码）， 星号表达式让开发人员可以很容易的利用这些规则来解压出元素来。 而不是通过一些比较复杂的手段去获取这些关联的元素值。</p>
+<p><strong>值得注意的是，星号表达式在迭代元素为可变长元组的序列时是很有用的。</strong> 比如，下面是一个带有标签的元组序列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">records = [</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="string">'bar'</span>, <span class="string">'hello'</span>),</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">3</span>, <span class="number">4</span>),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_foo</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    print(<span class="string">'foo'</span>,x,y)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_bar</span><span class="params">(s)</span>:</span></span><br><span class="line">    print(s)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> tag, *args <span class="keyword">in</span> records:</span><br><span class="line">    <span class="keyword">if</span> tag == <span class="string">'foo'</span>:</span><br><span class="line">		do_foo(*args)</span><br><span class="line">    <span class="keyword">if</span> tag == <span class="string">'bar'</span>:</span><br><span class="line">        do_bar(*args)</span><br></pre></td></tr></table></figure>
+
+<p><strong>星号解压语法在字符串操作的时候也会很有用，比如字符串的分割。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">line = <span class="string">'nobody:*:-2:-2:UnprivilegedUser:/var/empty:/usr/bin/false'</span></span><br><span class="line">uname, *fields, homedir, sh = line.split(<span class="string">':'</span>)</span><br><span class="line"><span class="comment"># split()方法的作用就是以：为界分出多个元素</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>有时候，你想解压一些元素后丢弃它们</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">record = (<span class="string">'ACME'</span>, <span class="number">50</span>, <span class="number">123.45</span>, (<span class="number">12</span>, <span class="number">18</span>, <span class="number">2012</span>))</span><br><span class="line">name, *_, (*_, year) = record</span><br></pre></td></tr></table></figure>
+
+<p><strong>在很多函数式语言中，星号解压语法跟列表处理有许多相似之处。</strong>比如，如果你有一个列表， 你可以很容易的将它分割成前后两部分：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">items = [<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">head, *tail = items</span><br><span class="line"><span class="comment"># 类似切片效果</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-保留最后N个元素"><a href="#3-保留最后N个元素" class="headerlink" title="3.保留最后N个元素"></a>3.保留最后N个元素</h3><p>保留有限历史记录正是 <code>collections.deque</code> 大显身手的时候。比如，下面的代码在多行上面做简单的文本匹配， 并返回匹配所在行的最后N行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(lines, pattern, history=<span class="number">5</span>)</span>:</span></span><br><span class="line">	previous_lines = deque(maxlen=history)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> line:</span><br><span class="line">            <span class="keyword">yield</span> line, previous_lines</span><br><span class="line">        previous_lines.append(line)</span><br><span class="line"></span><br><span class="line"><span class="comment"># example use on a file</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">r'./xxx.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line, prevlines <span class="keyword">in</span> search(f,<span class="string">'ss'</span>):</span><br><span class="line">			<span class="keyword">for</span> pline <span class="keyword">in</span> prevlines:</span><br><span class="line">                print(pline, end=<span class="string">''</span>)</span><br><span class="line">                print(<span class="string">'-'</span> * <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们在写<strong>查询元素</strong>的代码时，通常会使用包含 <code>yield</code> 表达式的<strong>生成器函数</strong>，也就是我们上面示例代码中的那样。 这样可以将搜索过程代码和使用搜索结果代码解耦。</p>
+<p>更一般的， <code>deque</code> 类可以被用在任何你<strong>只需要一个简单队列数据结构的场合</strong>。 如果你不设置最大队列大小，那么就会得到一个无限大小队列，你可以在队列的两端执行添加和弹出元素的操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">q = deque()</span><br><span class="line">q.append(args)</span><br><span class="line">q.pop()</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-查找最大或最小的N个元素"><a href="#4-查找最大或最小的N个元素" class="headerlink" title="4.查找最大或最小的N个元素"></a>4.查找最大或最小的N个元素</h3><p>怎样从一个集合中获得最大或者最小的 N 个元素列表？</p>
 
       
     </div>
