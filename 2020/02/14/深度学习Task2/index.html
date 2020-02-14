@@ -18,18 +18,18 @@
 <meta name="description" content="文本预处理文本是一类序列数据，一篇文章可以看作是字符或单词的序列，本节将介绍文本数据的常见预处理步骤，预处理通常包括四个步骤：  读入文本 分词 建立字典，将每个词映射到一个唯一的索引（index） 将文本从词的序列转换为索引的序列，方便输入模型  读入文本我们用一部英文小说，即H. G. Well的Time Machine，作为示例，展示文本预处理的具体过程。 123456789101112im">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习Task2">
-<meta property="og:url" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/index.html">
+<meta property="og:url" content="https://chaomeiyan.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/index.html">
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
 <meta property="og:description" content="文本预处理文本是一类序列数据，一篇文章可以看作是字符或单词的序列，本节将介绍文本数据的常见预处理步骤，预处理通常包括四个步骤：  读入文本 分词 建立字典，将每个词映射到一个唯一的索引（index） 将文本从词的序列转换为索引的序列，方便输入模型  读入文本我们用一部英文小说，即H. G. Well的Time Machine，作为示例，展示文本预处理的具体过程。 123456789101112im">
-<meta property="og:image" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png">
-<meta property="og:image" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213249636.png">
-<meta property="og:image" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213504355.png">
+<meta property="og:image" content="https://chaomeiyan.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png">
+<meta property="og:image" content="https://chaomeiyan.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213249636.png">
+<meta property="og:image" content="https://chaomeiyan.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213504355.png">
 <meta property="article:published_time" content="2020-02-14T13:27:19.000Z">
 <meta property="article:modified_time" content="2020-02-14T13:39:50.510Z">
 <meta property="article:author" content="Maxwell">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png">
+<meta name="twitter:image" content="https://chaomeiyan.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -363,11 +363,11 @@
 <h3 id="语言模型"><a href="#语言模型" class="headerlink" title="语言模型"></a>语言模型</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>语言模型（language model）是自然语言处理的重要技术。自然语言处理中最常见的数据是文本数据。我们可以把一段自然语言文本看作一段离散的时间序列。假设一段长度为<em>T</em>的文本中的词依次为<em>w</em>1,<em>w</em>2,…,<em>w*</em>T<em>，那么在离散的时间序列中，</em>w<strong>t<em>（1≤</em>t<em>≤</em>T<em>）可看作在时间步（time step）</em>t<em>的输出或标签。给定一个长度为</em>T<em>的词的序列</em>w<em>1,</em>w<em>2,…,</em>w</strong>T*，语言模型将计算该序列的概率：</p>
 <p><em>P</em>(<em>w</em>1,<em>w</em>2,…,<em>w**T</em>).</p>
 <p>语言模型可用于提升语音识别和机器翻译的性能。例如，在语音识别中，给定一段“厨房里食油用完了”的语音，有可能会输出“厨房里食油用完了”和“厨房里石油用完了”这两个读音完全一样的文本序列。如果语言模型判断出前者的概率大于后者的概率，我们就可以根据相同读音的语音输出“厨房里食油用完了”的文本序列。在机器翻译中，如果对英文“you go first”逐词翻译成中文的话，可能得到“你走先”“你先走”等排列方式的文本序列。如果语言模型判断出“你先走”的概率大于其他排列方式的文本序列的概率，我们就可以把“you go first”翻译成“你先走”。</p>
-<h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png" alt="image-20200214213233029"></p>
-<h4 id="n元语法"><a href="#n元语法" class="headerlink" title="n元语法"></a>n元语法</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213249636.png" alt="image-20200214213249636"></p>
+<h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><p><img src="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213233029.png" alt="image-20200214213233029"></p>
+<h4 id="n元语法"><a href="#n元语法" class="headerlink" title="n元语法"></a>n元语法</h4><p><img src="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213249636.png" alt="image-20200214213249636"></p>
 <h3 id="循环神经网络基础"><a href="#循环神经网络基础" class="headerlink" title="循环神经网络基础"></a>循环神经网络基础</h3><p>上一节介绍的nn元语法中，时间步tt的词wtwt基于前面所有词的条件概率只考虑了最近时间步的n−1n−1个词。如果要考虑比t−(n−1)t−(n−1)更早时间步的词对wtwt的可能影响，我们需要增大nn。但这样模型参数的数量将随之呈指数级增长（可参考上一节的练习）。</p>
 <p>本节将介绍循环神经网络。它并非刚性地记忆所有固定长度的序列，而是通过隐藏状态来存储之前时间步的信息。首先我们回忆一下前面介绍过的多层感知机，然后描述如何添加隐藏状态来将它变成循环神经网络。</p>
-<h4 id="循环网络的构造"><a href="#循环网络的构造" class="headerlink" title="循环网络的构造"></a>循环网络的构造</h4><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213504355.png" alt="image-20200214213504355"></p>
+<h4 id="循环网络的构造"><a href="#循环网络的构造" class="headerlink" title="循环网络的构造"></a>循环网络的构造</h4><p><img src="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2%5Cimage-20200214213504355.png" alt="image-20200214213504355"></p>
 <h4 id="从零开始实现循环神经网络"><a href="#从零开始实现循环神经网络" class="headerlink" title="从零开始实现循环神经网络"></a>从零开始实现循环神经网络</h4><p>我们先尝试从零开始实现一个基于字符级循环神经网络的语言模型，这里我们使用周杰伦的歌词作为语料，首先我们读入数据：</p>
 <p>In [1]:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import time</span><br><span class="line">import math</span><br><span class="line">import sys</span><br><span class="line">sys.path.append(&quot;&#x2F;home&#x2F;kesci&#x2F;input&quot;)</span><br><span class="line">import d2l_jay9460 as d2l</span><br><span class="line">(corpus_indices, char_to_idx, idx_to_char, vocab_size) &#x3D; d2l.load_data_jay_lyrics()</span><br><span class="line">device &#x3D; torch.device(&#39;cuda&#39; if torch.cuda.is_available() else &#39;cpu&#39;)</span><br></pre></td></tr></table></figure>
@@ -453,8 +453,8 @@
         <p><span>发布时间:</span>2020-02-14, 21:27:19</p>
         <p><span>最后更新:</span>2020-02-14, 21:39:50</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/" title="深度学习Task2">https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://chaomeiyan.github.io/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/　　作者: Maxwell" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/" title="深度学习Task2">https://chaomeiyan.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://chaomeiyan.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/　　作者: Maxwell" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
