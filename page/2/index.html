@@ -199,7 +199,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM/" rel="tag">ACM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyhon/" rel="tag">Pyhon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E6%83%B3/" rel="tag">感想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%AE%E9%A1%B6/" rel="tag">置顶</a></li></ul>
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM/" rel="tag">ACM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyhon/" rel="tag">Pyhon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E6%83%B3/" rel="tag">感想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%AE%E9%A1%B6/" rel="tag">置顶</a></li></ul>
                     </div>
                 </section>
                 
@@ -279,6 +279,340 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-深度学习Task2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/" class="article-date">
+      <time datetime="2020-02-14T13:27:19.000Z" itemprop="datePublished">2020-02-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task2/">深度学习Task2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="文本预处理"><a href="#文本预处理" class="headerlink" title="文本预处理"></a>文本预处理</h3><p>文本是一类序列数据，一篇文章可以看作是字符或单词的序列，本节将介绍文本数据的常见预处理步骤，预处理通常包括四个步骤：</p>
+<ol>
+<li>读入文本</li>
+<li>分词</li>
+<li>建立字典，将每个词映射到一个唯一的索引（index）</li>
+<li>将文本从词的序列转换为索引的序列，方便输入模型</li>
+</ol>
+<h4 id="读入文本"><a href="#读入文本" class="headerlink" title="读入文本"></a>读入文本</h4><p>我们用一部英文小说，即H. G. Well的<a href="http://www.gutenberg.org/ebooks/35" target="_blank" rel="noopener">Time Machine</a>，作为示例，展示文本预处理的具体过程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import collections</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">def read_time_machine():</span><br><span class="line">    with open(&#39;&#x2F;home&#x2F;kesci&#x2F;input&#x2F;timemachine7163&#x2F;timemachine.txt&#39;, &#39;r&#39;) as f:</span><br><span class="line">        lines &#x3D; [re.sub(&#39;[^a-z]+&#39;, &#39; &#39;, line.strip().lower()) for line in f]</span><br><span class="line">    return lines</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">lines &#x3D; read_time_machine()</span><br><span class="line">print(&#39;# sentences %d&#39; % len(lines))</span><br><span class="line"># sentences 3221</span><br></pre></td></tr></table></figure>
+
+<h4 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h4><p>我们对每个句子进行分词，也就是将一个句子划分成若干个词（token），转换为一个词的序列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">def tokenize(sentences, token&#x3D;&#39;word&#39;):</span><br><span class="line">    &quot;&quot;&quot;Split sentences into word or char tokens&quot;&quot;&quot;</span><br><span class="line">    if token &#x3D;&#x3D; &#39;word&#39;:</span><br><span class="line">        return [sentence.split(&#39; &#39;) for sentence in sentences]</span><br><span class="line">    elif token &#x3D;&#x3D; &#39;char&#39;:</span><br><span class="line">        return [list(sentence) for sentence in sentences]</span><br><span class="line">    else:</span><br><span class="line">        print(&#39;ERROR: unkown token type &#39;+token)</span><br><span class="line"></span><br><span class="line">tokens &#x3D; tokenize(lines)</span><br><span class="line">tokens[0:2]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[&#39;the&#39;, &#39;time&#39;, &#39;machine&#39;, &#39;by&#39;, &#39;h&#39;, &#39;g&#39;, &#39;wells&#39;, &#39;&#39;], [&#39;&#39;]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="建立字典"><a href="#建立字典" class="headerlink" title="建立字典"></a>建立字典</h4><p>为了方便模型处理，我们需要将字符串转换为数字。因此我们需要先构建一个字典（vocabulary），将每个词映射到一个唯一的索引编号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Vocab(object):</span><br><span class="line">    def __init__(self, tokens, min_freq&#x3D;0, use_special_tokens&#x3D;False):</span><br><span class="line">        counter &#x3D; count_corpus(tokens)  # : </span><br><span class="line">        self.token_freqs &#x3D; list(counter.items())</span><br><span class="line">        self.idx_to_token &#x3D; []</span><br><span class="line">        if use_special_tokens:</span><br><span class="line">            # padding, begin of sentence, end of sentence, unknown</span><br><span class="line">            self.pad, self.bos, self.eos, self.unk &#x3D; (0, 1, 2, 3)</span><br><span class="line">            self.idx_to_token +&#x3D; [&#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;]</span><br><span class="line">        else:</span><br><span class="line">            self.unk &#x3D; 0</span><br><span class="line">            self.idx_to_token +&#x3D; [&#39;&#39;]</span><br><span class="line">        self.idx_to_token +&#x3D; [token for token, freq in self.token_freqs</span><br><span class="line">                        if freq &gt;&#x3D; min_freq and token not in self.idx_to_token]</span><br><span class="line">        self.token_to_idx &#x3D; dict()</span><br><span class="line">        for idx, token in enumerate(self.idx_to_token):</span><br><span class="line">            self.token_to_idx[token] &#x3D; idx</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        return len(self.idx_to_token)</span><br><span class="line"></span><br><span class="line">    def __getitem__(self, tokens):</span><br><span class="line">        if not isinstance(tokens, (list, tuple)):</span><br><span class="line">            return self.token_to_idx.get(tokens, self.unk)</span><br><span class="line">        return [self.__getitem__(token) for token in tokens]</span><br><span class="line"></span><br><span class="line">    def to_tokens(self, indices):</span><br><span class="line">        if not isinstance(indices, (list, tuple)):</span><br><span class="line">            return self.idx_to_token[indices]</span><br><span class="line">        return [self.idx_to_token[index] for index in indices]</span><br><span class="line"></span><br><span class="line">def count_corpus(sentences):</span><br><span class="line">    tokens &#x3D; [tk for st in sentences for tk in st]</span><br><span class="line">    return collections.Counter(tokens)  # 返回一个字典，记录每个词的出现次数</span><br></pre></td></tr></table></figure>
+
+<p>我们看一个例子，这里我们尝试用Time Machine作为语料构建字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vocab &#x3D; Vocab(tokens)</span><br><span class="line">print(list(vocab.token_to_idx.items())[0:10])</span><br><span class="line">[(&#39;&#39;, 0), (&#39;the&#39;, 1), (&#39;time&#39;, 2), (&#39;machine&#39;, 3), (&#39;by&#39;, 4), (&#39;h&#39;, 5), (&#39;g&#39;, 6), (&#39;wells&#39;, 7), (&#39;i&#39;, 8), (&#39;traveller&#39;, 9)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="将词转为索引"><a href="#将词转为索引" class="headerlink" title="将词转为索引"></a>将词转为索引</h4><p>使用字典，我们可以将原文本中的句子从单词序列转换为索引序列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for i in range(8, 10):</span><br><span class="line">    print(&#39;words:&#39;, tokens[i])</span><br><span class="line">    print(&#39;indices:&#39;, vocab[tokens[i]])</span><br><span class="line">words: [&#39;the&#39;, &#39;time&#39;, &#39;traveller&#39;, &#39;for&#39;, &#39;so&#39;, &#39;it&#39;, &#39;will&#39;, &#39;be&#39;, &#39;convenient&#39;, &#39;to&#39;, &#39;speak&#39;, &#39;of&#39;, &#39;him&#39;, &#39;&#39;]</span><br><span class="line">indices: [1, 2, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0]</span><br><span class="line">words: [&#39;was&#39;, &#39;expounding&#39;, &#39;a&#39;, &#39;recondite&#39;, &#39;matter&#39;, &#39;to&#39;, &#39;us&#39;, &#39;his&#39;, &#39;grey&#39;, &#39;eyes&#39;, &#39;shone&#39;, &#39;and&#39;]</span><br><span class="line">indices: [20, 21, 22, 23, 24, 16, 25, 26, 27, 28, 29, 30]</span><br></pre></td></tr></table></figure>
+
+<h4 id="用现有工具进行分词"><a href="#用现有工具进行分词" class="headerlink" title="用现有工具进行分词"></a>用现有工具进行分词</h4><p>我们前面介绍的分词方式非常简单，它至少有以下几个缺点:</p>
+<ol>
+<li>标点符号通常可以提供语义信息，但是我们的方法直接将其丢弃了</li>
+<li>类似“shouldn’t”, “doesn’t”这样的词会被错误地处理</li>
+<li>类似”Mr.”, “Dr.”这样的词会被错误地处理</li>
+</ol>
+<p>我们可以通过引入更复杂的规则来解决这些问题，但是事实上，有一些现有的工具可以很好地进行分词，我们在这里简单介绍其中的两个：<a href="https://spacy.io/" target="_blank" rel="noopener">spaCy</a>和<a href="https://www.nltk.org/" target="_blank" rel="noopener">NLTK</a>。</p>
+<p>下面是一个简单的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text &#x3D; &quot;Mr. Chen doesn&#39;t agree with my suggestion.&quot;</span><br></pre></td></tr></table></figure>
+
+<p>spaCy:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import spacy</span><br><span class="line">nlp &#x3D; spacy.load(&#39;en_core_web_sm&#39;)</span><br><span class="line">doc &#x3D; nlp(text)</span><br><span class="line">print([token.text for token in doc])</span><br><span class="line">[&#39;Mr.&#39;, &#39;Chen&#39;, &#39;does&#39;, &quot;n&#39;t&quot;, &#39;agree&#39;, &#39;with&#39;, &#39;my&#39;, &#39;suggestion&#39;, &#39;.&#39;]</span><br></pre></td></tr></table></figure>
+
+<p>NLTK:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from nltk.tokenize import word_tokenize</span><br><span class="line">from nltk import data</span><br><span class="line">data.path.append(&#39;&#x2F;home&#x2F;kesci&#x2F;input&#x2F;nltk_data3784&#x2F;nltk_data&#39;)</span><br><span class="line">print(word_tokenize(text))</span><br><span class="line">[&#39;Mr.&#39;, &#39;Chen&#39;, &#39;does&#39;, &quot;n&#39;t&quot;, &#39;agree&#39;, &#39;with&#39;, &#39;my&#39;, &#39;suggestion&#39;, &#39;.&#39;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="语言模型"><a href="#语言模型" class="headerlink" title="语言模型"></a>语言模型</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>语言模型（language model）是自然语言处理的重要技术。自然语言处理中最常见的数据是文本数据。我们可以把一段自然语言文本看作一段离散的时间序列。假设一段长度为<em>T</em>的文本中的词依次为<em>w</em>1,<em>w</em>2,…,<em>w*</em>T<em>，那么在离散的时间序列中，</em>w<strong>t<em>（1≤</em>t<em>≤</em>T<em>）可看作在时间步（time step）</em>t<em>的输出或标签。给定一个长度为</em>T<em>的词的序列</em>w<em>1,</em>w<em>2,…,</em>w</strong>T*，语言模型将计算该序列的概率：</p>
+<p><em>P</em>(<em>w</em>1,<em>w</em>2,…,<em>w**T</em>).</p>
+<p>语言模型可用于提升语音识别和机器翻译的性能。例如，在语音识别中，给定一段“厨房里食油用完了”的语音，有可能会输出“厨房里食油用完了”和“厨房里石油用完了”这两个读音完全一样的文本序列。如果语言模型判断出前者的概率大于后者的概率，我们就可以根据相同读音的语音输出“厨房里食油用完了”的文本序列。在机器翻译中，如果对英文“you go first”逐词翻译成中文的话，可能得到“你走先”“你先走”等排列方式的文本序列。如果语言模型判断出“你先走”的概率大于其他排列方式的文本序列的概率，我们就可以把“you go first”翻译成“你先走”。</p>
+<h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142255_493.png" alt></p>
+<h4 id="n元语法"><a href="#n元语法" class="headerlink" title="n元语法"></a>n元语法</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142255_489.png" alt></p>
+<h3 id="循环神经网络基础"><a href="#循环神经网络基础" class="headerlink" title="循环神经网络基础"></a>循环神经网络基础</h3><p>上一节介绍的nn元语法中，时间步tt的词wtwt基于前面所有词的条件概率只考虑了最近时间步的n−1n−1个词。如果要考虑比t−(n−1)t−(n−1)更早时间步的词对wtwt的可能影响，我们需要增大nn。但这样模型参数的数量将随之呈指数级增长（可参考上一节的练习）。</p>
+<p>本节将介绍循环神经网络。它并非刚性地记忆所有固定长度的序列，而是通过隐藏状态来存储之前时间步的信息。首先我们回忆一下前面介绍过的多层感知机，然后描述如何添加隐藏状态来将它变成循环神经网络。</p>
+<h4 id="循环网络的构造"><a href="#循环网络的构造" class="headerlink" title="循环网络的构造"></a>循环网络的构造</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142256_508.png" alt></p>
+<h4 id="从零开始实现循环神经网络"><a href="#从零开始实现循环神经网络" class="headerlink" title="从零开始实现循环神经网络"></a>从零开始实现循环神经网络</h4><p>我们先尝试从零开始实现一个基于字符级循环神经网络的语言模型，这里我们使用周杰伦的歌词作为语料，首先我们读入数据：</p>
+<p>In [1]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import time</span><br><span class="line">import math</span><br><span class="line">import sys</span><br><span class="line">sys.path.append(&quot;&#x2F;home&#x2F;kesci&#x2F;input&quot;)</span><br><span class="line">import d2l_jay9460 as d2l</span><br><span class="line">(corpus_indices, char_to_idx, idx_to_char, vocab_size) &#x3D; d2l.load_data_jay_lyrics()</span><br><span class="line">device &#x3D; torch.device(&#39;cuda&#39; if torch.cuda.is_available() else &#39;cpu&#39;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="one-hot向量"><a href="#one-hot向量" class="headerlink" title="one-hot向量"></a>one-hot向量</h5><p>我们需要将字符表示成向量，这里采用one-hot向量。假设词典大小是NN，每次字符对应一个从00到N−1N−1的唯一的索引，则该字符的向量是一个长度为NN的向量，若字符的索引是ii，则该向量的第ii个位置为11，其他位置为00。下面分别展示了索引为0和2的one-hot向量，向量长度等于词典大小。</p>
+<p>In [2]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def one_hot(x, n_class, dtype&#x3D;torch.float32):</span><br><span class="line">    result &#x3D; torch.zeros(x.shape[0], n_class, dtype&#x3D;dtype, device&#x3D;x.device)  # shape: (n, n_class)</span><br><span class="line">    result.scatter_(1, x.long().view(-1, 1), 1)  # result[i, x[i, 0]] &#x3D; 1</span><br><span class="line">    return result</span><br><span class="line">    </span><br><span class="line">x &#x3D; torch.tensor([0, 2])</span><br><span class="line">x_one_hot &#x3D; one_hot(x, vocab_size)</span><br><span class="line">print(x_one_hot)</span><br><span class="line">print(x_one_hot.shape)</span><br><span class="line">print(x_one_hot.sum(axis&#x3D;1))</span><br><span class="line">tensor([[1., 0., 0.,  ..., 0., 0., 0.],</span><br><span class="line">        [0., 0., 1.,  ..., 0., 0., 0.]])</span><br><span class="line">torch.Size([2, 1027])</span><br><span class="line">tensor([1., 1.])</span><br></pre></td></tr></table></figure>
+
+<p>我们每次采样的小批量的形状是（批量大小, 时间步数）。下面的函数将这样的小批量变换成数个形状为（批量大小, 词典大小）的矩阵，矩阵个数等于时间步数。也就是说，时间步tt的输入为Xt∈Rn×dXt∈Rn×d，其中nn为批量大小，dd为词向量大小，即one-hot向量长度（词典大小）。</p>
+<p>In [3]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def to_onehot(X, n_class):</span><br><span class="line">    return [one_hot(X[:, i], n_class) for i in range(X.shape[1])]</span><br><span class="line"></span><br><span class="line">X &#x3D; torch.arange(10).view(2, 5)</span><br><span class="line">inputs &#x3D; to_onehot(X, vocab_size)</span><br><span class="line">print(len(inputs), inputs[0].shape)</span><br><span class="line">5 torch.Size([2, 1027])</span><br></pre></td></tr></table></figure>
+
+<h5 id="初始化模型参数"><a href="#初始化模型参数" class="headerlink" title="初始化模型参数"></a>初始化模型参数</h5><p>In [4]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">num_inputs, num_hiddens, num_outputs &#x3D; vocab_size, 256, vocab_size</span><br><span class="line"># num_inputs: d</span><br><span class="line"># num_hiddens: h, 隐藏单元的个数是超参数</span><br><span class="line"># num_outputs: q</span><br><span class="line"></span><br><span class="line">def get_params():</span><br><span class="line">    def _one(shape):</span><br><span class="line">        param &#x3D; torch.zeros(shape, device&#x3D;device, dtype&#x3D;torch.float32)</span><br><span class="line">        nn.init.normal_(param, 0, 0.01)</span><br><span class="line">        return torch.nn.Parameter(param)</span><br><span class="line"></span><br><span class="line">    # 隐藏层参数</span><br><span class="line">    W_xh &#x3D; _one((num_inputs, num_hiddens))</span><br><span class="line">    W_hh &#x3D; _one((num_hiddens, num_hiddens))</span><br><span class="line">    b_h &#x3D; torch.nn.Parameter(torch.zeros(num_hiddens, device&#x3D;device))</span><br><span class="line">    # 输出层参数</span><br><span class="line">    W_hq &#x3D; _one((num_hiddens, num_outputs))</span><br><span class="line">    b_q &#x3D; torch.nn.Parameter(torch.zeros(num_outputs, device&#x3D;device))</span><br><span class="line">    return (W_xh, W_hh, b_h, W_hq, b_q)</span><br></pre></td></tr></table></figure>
+
+<h5 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h5><p>函数<code>rnn</code>用循环的方式依次完成循环神经网络每个时间步的计算。</p>
+<p>In [5]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def rnn(inputs, state, params):</span><br><span class="line">    # inputs和outputs皆为num_steps个形状为(batch_size, vocab_size)的矩阵</span><br><span class="line">    W_xh, W_hh, b_h, W_hq, b_q &#x3D; params</span><br><span class="line">    H, &#x3D; state</span><br><span class="line">    outputs &#x3D; []</span><br><span class="line">    for X in inputs:</span><br><span class="line">        H &#x3D; torch.tanh(torch.matmul(X, W_xh) + torch.matmul(H, W_hh) + b_h)</span><br><span class="line">        Y &#x3D; torch.matmul(H, W_hq) + b_q</span><br><span class="line">        outputs.append(Y)</span><br><span class="line">    return outputs, (H,)</span><br></pre></td></tr></table></figure>
+
+<p>函数init_rnn_state初始化隐藏变量，这里的返回值是一个元组。</p>
+<p>In [6]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def init_rnn_state(batch_size, num_hiddens, device):</span><br><span class="line">    return (torch.zeros((batch_size, num_hiddens), device&#x3D;device), )</span><br></pre></td></tr></table></figure>
+
+<p>做个简单的测试来观察输出结果的个数（时间步数），以及第一个时间步的输出层输出的形状和隐藏状态的形状。</p>
+<p>In [7]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">print(X.shape)</span><br><span class="line">print(num_hiddens)</span><br><span class="line">print(vocab_size)</span><br><span class="line">state &#x3D; init_rnn_state(X.shape[0], num_hiddens, device)</span><br><span class="line">inputs &#x3D; to_onehot(X.to(device), vocab_size)</span><br><span class="line">params &#x3D; get_params()</span><br><span class="line">outputs, state_new &#x3D; rnn(inputs, state, params)</span><br><span class="line">print(len(inputs), inputs[0].shape)</span><br><span class="line">print(len(outputs), outputs[0].shape)</span><br><span class="line">print(len(state), state[0].shape)</span><br><span class="line">print(len(state_new), state_new[0].shape)</span><br><span class="line">torch.Size([2, 5])</span><br><span class="line">256</span><br><span class="line">1027</span><br><span class="line">5 torch.Size([2, 1027])</span><br><span class="line">5 torch.Size([2, 1027])</span><br><span class="line">1 torch.Size([2, 256])</span><br><span class="line">1 torch.Size([2, 256])</span><br></pre></td></tr></table></figure>
+
+<h5 id="裁剪梯度"><a href="#裁剪梯度" class="headerlink" title="裁剪梯度"></a>裁剪梯度</h5><p>循环神经网络中较容易出现梯度衰减或梯度爆炸，这会导致网络几乎无法训练。裁剪梯度（clip gradient）是一种应对梯度爆炸的方法。假设我们把所有模型参数的梯度拼接成一个向量 gg，并设裁剪的阈值是θθ。裁剪后的梯度</p>
+<p>min(θ∥g∥,1)gmin(θ‖g‖,1)g</p>
+<p>的L2L2范数不超过θθ。</p>
+<p>In [8]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def grad_clipping(params, theta, device):</span><br><span class="line">    norm &#x3D; torch.tensor([0.0], device&#x3D;device)</span><br><span class="line">    for param in params:</span><br><span class="line">        norm +&#x3D; (param.grad.data ** 2).sum()</span><br><span class="line">    norm &#x3D; norm.sqrt().item()</span><br><span class="line">    if norm &gt; theta:</span><br><span class="line">        for param in params:</span><br><span class="line">            param.grad.data *&#x3D; (theta &#x2F; norm)</span><br></pre></td></tr></table></figure>
+
+<h5 id="定义预测函数"><a href="#定义预测函数" class="headerlink" title="定义预测函数"></a>定义预测函数</h5><p>以下函数基于前缀<code>prefix</code>（含有数个字符的字符串）来预测接下来的<code>num_chars</code>个字符。这个函数稍显复杂，其中我们将循环神经单元<code>rnn</code>设置成了函数参数，这样在后面小节介绍其他循环神经网络时能重复使用这个函数。</p>
+<p>In [9]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def predict_rnn(prefix, num_chars, rnn, params, init_rnn_state,</span><br><span class="line">                num_hiddens, vocab_size, device, idx_to_char, char_to_idx):</span><br><span class="line">    state &#x3D; init_rnn_state(1, num_hiddens, device)</span><br><span class="line">    output &#x3D; [char_to_idx[prefix[0]]]   # output记录prefix加上预测的num_chars个字符</span><br><span class="line">    for t in range(num_chars + len(prefix) - 1):</span><br><span class="line">        # 将上一时间步的输出作为当前时间步的输入</span><br><span class="line">        X &#x3D; to_onehot(torch.tensor([[output[-1]]], device&#x3D;device), vocab_size)</span><br><span class="line">        # 计算输出和更新隐藏状态</span><br><span class="line">        (Y, state) &#x3D; rnn(X, state, params)</span><br><span class="line">        # 下一个时间步的输入是prefix里的字符或者当前的最佳预测字符</span><br><span class="line">        if t &lt; len(prefix) - 1:</span><br><span class="line">            output.append(char_to_idx[prefix[t + 1]])</span><br><span class="line">        else:</span><br><span class="line">            output.append(Y[0].argmax(dim&#x3D;1).item())</span><br><span class="line">    return &#39;&#39;.join([idx_to_char[i] for i in output])</span><br></pre></td></tr></table></figure>
+
+<p>我们先测试一下<code>predict_rnn</code>函数。我们将根据前缀“分开”创作长度为10个字符（不考虑前缀长度）的一段歌词。因为模型参数为随机值，所以预测结果也是随机的。</p>
+<p>In [10]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">predict_rnn(&#39;分开&#39;, 10, rnn, params, init_rnn_state, num_hiddens, vocab_size,</span><br><span class="line">            device, idx_to_char, char_to_idx)</span><br></pre></td></tr></table></figure>
+
+<p>Out[10]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;分开濡时食提危踢拆田唱母&#39;</span><br></pre></td></tr></table></figure>
+
+<h5 id="困惑度"><a href="#困惑度" class="headerlink" title="困惑度"></a>困惑度</h5><p>我们通常使用困惑度（perplexity）来评价语言模型的好坏。回忆一下<a href="https://staticcdn.boyuai.com/course/jupyter/chapter_deep-learning-basics/softmax-regression.ipynb" target="_blank" rel="noopener">“softmax回归”</a>一节中交叉熵损失函数的定义。困惑度是对交叉熵损失函数做指数运算后得到的值。特别地，</p>
+<ul>
+<li>最佳情况下，模型总是把标签类别的概率预测为1，此时困惑度为1；</li>
+<li>最坏情况下，模型总是把标签类别的概率预测为0，此时困惑度为正无穷；</li>
+<li>基线情况下，模型总是预测所有类别的概率都相同，此时困惑度为类别个数。</li>
+</ul>
+<p>显然，任何一个有效模型的困惑度必须小于类别个数。在本例中，困惑度必须小于词典大小<code>vocab_size</code>。</p>
+<h5 id="定义模型训练函数"><a href="#定义模型训练函数" class="headerlink" title="定义模型训练函数"></a>定义模型训练函数</h5><p>跟之前章节的模型训练函数相比，这里的模型训练函数有以下几点不同：</p>
+<ol>
+<li>使用困惑度评价模型。</li>
+<li>在迭代模型参数前裁剪梯度。</li>
+<li>对时序数据采用不同采样方法将导致隐藏状态初始化的不同。</li>
+</ol>
+<p>In [11]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">def train_and_predict_rnn(rnn, get_params, init_rnn_state, num_hiddens,</span><br><span class="line">                          vocab_size, device, corpus_indices, idx_to_char,</span><br><span class="line">                          char_to_idx, is_random_iter, num_epochs, num_steps,</span><br><span class="line">                          lr, clipping_theta, batch_size, pred_period,</span><br><span class="line">                          pred_len, prefixes):</span><br><span class="line">    if is_random_iter:</span><br><span class="line">        data_iter_fn &#x3D; d2l.data_iter_random</span><br><span class="line">    else:</span><br><span class="line">        data_iter_fn &#x3D; d2l.data_iter_consecutive</span><br><span class="line">    params &#x3D; get_params()</span><br><span class="line">    loss &#x3D; nn.CrossEntropyLoss()</span><br><span class="line"></span><br><span class="line">    for epoch in range(num_epochs):</span><br><span class="line">        if not is_random_iter:  # 如使用相邻采样，在epoch开始时初始化隐藏状态</span><br><span class="line">            state &#x3D; init_rnn_state(batch_size, num_hiddens, device)</span><br><span class="line">        l_sum, n, start &#x3D; 0.0, 0, time.time()</span><br><span class="line">        data_iter &#x3D; data_iter_fn(corpus_indices, batch_size, num_steps, device)</span><br><span class="line">        for X, Y in data_iter:</span><br><span class="line">            if is_random_iter:  # 如使用随机采样，在每个小批量更新前初始化隐藏状态</span><br><span class="line">                state &#x3D; init_rnn_state(batch_size, num_hiddens, device)</span><br><span class="line">            else:  # 否则需要使用detach函数从计算图分离隐藏状态</span><br><span class="line">                for s in state:</span><br><span class="line">                    s.detach_()</span><br><span class="line">            # inputs是num_steps个形状为(batch_size, vocab_size)的矩阵</span><br><span class="line">            inputs &#x3D; to_onehot(X, vocab_size)</span><br><span class="line">            # outputs有num_steps个形状为(batch_size, vocab_size)的矩阵</span><br><span class="line">            (outputs, state) &#x3D; rnn(inputs, state, params)</span><br><span class="line">            # 拼接之后形状为(num_steps * batch_size, vocab_size)</span><br><span class="line">            outputs &#x3D; torch.cat(outputs, dim&#x3D;0)</span><br><span class="line">            # Y的形状是(batch_size, num_steps)，转置后再变成形状为</span><br><span class="line">            # (num_steps * batch_size,)的向量，这样跟输出的行一一对应</span><br><span class="line">            y &#x3D; torch.flatten(Y.T)</span><br><span class="line">            # 使用交叉熵损失计算平均分类误差</span><br><span class="line">            l &#x3D; loss(outputs, y.long())</span><br><span class="line">            </span><br><span class="line">            # 梯度清0</span><br><span class="line">            if params[0].grad is not None:</span><br><span class="line">                for param in params:</span><br><span class="line">                    param.grad.data.zero_()</span><br><span class="line">            l.backward()</span><br><span class="line">            grad_clipping(params, clipping_theta, device)  # 裁剪梯度</span><br><span class="line">            d2l.sgd(params, lr, 1)  # 因为误差已经取过均值，梯度不用再做平均</span><br><span class="line">            l_sum +&#x3D; l.item() * y.shape[0]</span><br><span class="line">            n +&#x3D; y.shape[0]</span><br><span class="line"></span><br><span class="line">        if (epoch + 1) % pred_period &#x3D;&#x3D; 0:</span><br><span class="line">            print(&#39;epoch %d, perplexity %f, time %.2f sec&#39; % (</span><br><span class="line">                epoch + 1, math.exp(l_sum &#x2F; n), time.time() - start))</span><br><span class="line">            for prefix in prefixes:</span><br><span class="line">                print(&#39; -&#39;, predict_rnn(prefix, pred_len, rnn, params, init_rnn_state,</span><br><span class="line">                    num_hiddens, vocab_size, device, idx_to_char, char_to_idx))</span><br></pre></td></tr></table></figure>
+
+<h5 id="训练模型并创作歌词"><a href="#训练模型并创作歌词" class="headerlink" title="训练模型并创作歌词"></a>训练模型并创作歌词</h5><p>现在我们可以训练模型了。首先，设置模型超参数。我们将根据前缀“分开”和“不分开”分别创作长度为50个字符（不考虑前缀长度）的一段歌词。我们每过50个迭代周期便根据当前训练的模型创作一段歌词。</p>
+<p>In [12]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num_epochs, num_steps, batch_size, lr, clipping_theta &#x3D; 250, 35, 32, 1e2, 1e-2</span><br><span class="line">pred_period, pred_len, prefixes &#x3D; 50, 50, [&#39;分开&#39;, &#39;不分开&#39;]</span><br></pre></td></tr></table></figure>
+
+<p>下面采用随机采样训练模型并创作歌词。</p>
+<p>In [13]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">train_and_predict_rnn(rnn, get_params, init_rnn_state, num_hiddens,</span><br><span class="line">                      vocab_size, device, corpus_indices, idx_to_char,</span><br><span class="line">                      char_to_idx, True, num_epochs, num_steps, lr,</span><br><span class="line">                      clipping_theta, batch_size, pred_period, pred_len,</span><br><span class="line">                      prefixes)</span><br><span class="line">epoch 50, perplexity 65.808092, time 0.78 sec</span><br><span class="line"> - 分开 我想要这样 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我</span><br><span class="line"> - 不分开 别颗去 一颗两 三颗四 一颗四 三颗四 一颗四 一颗四 一颗四 一颗四 一颗四 一颗四 一颗四 一</span><br><span class="line">epoch 100, perplexity 9.794889, time 0.72 sec</span><br><span class="line"> - 分开 一直在美留 谁在它停 在小村外的溪边 默默等  什么 旧你在依旧 我有儿有些瘦 世色我遇见你是一场</span><br><span class="line"> - 不分开吗 我不能再想 我不 我不 我不 我不 我不 我不 我不 我不 我不 我不 我不 我不 我不 我不 </span><br><span class="line">epoch 150, perplexity 2.772557, time 0.80 sec</span><br><span class="line"> - 分开 有直在不妥 有话它停留 蜥蝪横怕落 不爽就 旧怪堂 是属于依 心故之 的片段 有一些风霜 老唱盘 </span><br><span class="line"> - 不分开吗 然后将过不 我慢 失些  如  静里回的太快 想通 却又再考倒我 说散 你想很久了吧?的我 从等</span><br><span class="line">epoch 200, perplexity 1.601744, time 0.73 sec</span><br><span class="line"> - 分开 那只都它满在我面妈 捏成你的形状啸而过 或愿说在后能 让梭时忆对着轻轻 我想就这样牵着你的手不放开</span><br><span class="line"> - 不分开期 然后将过去 慢慢温习 让我爱上你 那场悲剧 是你完美演出的一场戏 宁愿心碎哭泣 再狠狠忘记 不是</span><br><span class="line">epoch 250, perplexity 1.323342, time 0.78 sec</span><br><span class="line"> - 分开 出愿段的哭咒的天蛦丘好落 拜托当血穿永杨一定的诗篇 我给你的爱写在西元前 深埋在美索不达米亚平原 </span><br><span class="line"> - 不分开扫把的胖女巫 用拉丁文念咒语啦啦呜 她养的黑猫笑起来像哭 啦啦啦呜 我来了我 在我感外的溪边河口默默</span><br></pre></td></tr></table></figure>
+
+<p>接下来采用相邻采样训练模型并创作歌词。</p>
+<p>In [14]:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">train_and_predict_rnn(rnn, get_params, init_rnn_state, num_hiddens,</span><br><span class="line">                      vocab_size, device, corpus_indices, idx_to_char,</span><br><span class="line">                      char_to_idx, False, num_epochs, num_steps, lr,</span><br><span class="line">                      clipping_theta, batch_size, pred_period, pred_len,</span><br><span class="line">                      prefixes)</span><br><span class="line">epoch 50, perplexity 60.294393, time 0.74 sec</span><br><span class="line"> - 分开 我想要你想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我</span><br><span class="line"> - 不分开 我想要你 你有了 别不我的可爱女人 坏坏的让我疯狂的可爱女人 坏坏的让我疯狂的可爱女人 坏坏的让我</span><br><span class="line">epoch 100, perplexity 7.141162, time 0.72 sec</span><br><span class="line"> - 分开 我已要再爱 我不要再想 我不 我不 我不要再想 我不 我不 我不要 爱情我的见快就像龙卷风 离能开</span><br><span class="line"> - 不分开柳 你天黄一个棍 后知哈兮 快使用双截棍 哼哼哈兮 快使用双截棍 哼哼哈兮 快使用双截棍 哼哼哈兮 </span><br><span class="line">epoch 150, perplexity 2.090277, time 0.73 sec</span><br><span class="line"> - 分开 我已要这是你在著 不想我都做得到 但那个人已经不是我 没有你在 我却多难熬  没有你在我有多难熬多</span><br><span class="line"> - 不分开觉 你已经离 我想再好 这样心中 我一定带我 我的完空 不你是风 一一彩纵 在人心中 我一定带我妈走</span><br><span class="line">epoch 200, perplexity 1.305391, time 0.77 sec</span><br><span class="line"> - 分开 我已要这样牵看你的手 它一定实现它一定像现 载著你 彷彿载著阳光 不管到你留都是晴天 蝴蝶自在飞力</span><br><span class="line"> - 不分开觉 你已经离开我 不知不觉 我跟了这节奏 后知后觉 又过了一个秋 后知后觉 我该好好生活 我该好好生</span><br><span class="line">epoch 250, perplexity 1.230800, time 0.79 sec</span><br><span class="line"> - 分开 我不要 是你看的太快了悲慢 担心今手身会大早 其么我也睡不着  昨晚梦里你来找 我才  原来我只想</span><br><span class="line"> - 不分开觉 你在经离开我 不知不觉 你知了有节奏 后知后觉 后知了一个秋 后知后觉 我该好好生活 我该好好生</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-深度学习Task1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/" class="article-date">
+      <time datetime="2020-02-14T12:39:29.000Z" itemprop="datePublished">2020-02-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/">深度学习Task1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="机器学习与深度学习的关系"><a href="#机器学习与深度学习的关系" class="headerlink" title="机器学习与深度学习的关系"></a>机器学习与深度学习的关系</h3><p>​        机器学习研究如何使计算机系统利用经验改善性能。它是人工智能领域的分支，也是实现人工智能的一种手段。在机器学习的众多研究方向中，表征学习关注如何自动找出表示数据的合适方式，以便更好地将输入变换为正确的输出，而本书要重点探讨的深度学习是具有多级表示的表征学习方法。在每一级（从原始数据开始），深度学习通过简单的函数将该级的表示变换为更高级的表示。因此，深度学习模型也可以看作是由许多简单函数复合而成的函数。当这些复合的函数足够多时，深度学习模型就可以表达非常复杂的变换。</p>
+<h3 id="深度学习的特点"><a href="#深度学习的特点" class="headerlink" title="深度学习的特点"></a>深度学习的特点</h3><ul>
+<li>深度学习可以逐级表示越来越抽象的概念或模式</li>
+<li>深度学习的一个外在特点是端到端的训练</li>
+</ul>
+<p>​        相对其它经典的机器学习方法而言，深度学习的不同在于：对非最优解的包容、对非凸非线性优化的使用，以及勇于尝试没有被证明过的方法。这种在处理统计问题上的新经验主义吸引了大量人才的涌入，使得大量实际问题有了更好的解决方案。尽管大部分情况下需要为深度学习修改甚至重新发明已经存在数十年的工具，但是这绝对是一件非常有意义并令人兴奋的事。</p>
+<h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><h4 id="线性回归的基本要素"><a href="#线性回归的基本要素" class="headerlink" title="线性回归的基本要素"></a>线性回归的基本要素</h4><h5 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h5><h5 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h5><blockquote>
+<p>训练数据</p>
+</blockquote>
+<blockquote>
+<p>损失函数</p>
+</blockquote>
+<blockquote>
+<p>优化算法</p>
+</blockquote>
+<ul>
+<li>误差最小化问题的解可以直接用公式表达出来。这类解叫作解析解</li>
+<li>大多数深度学习模型并没有解析解，只能通过优化算法有限次迭代模型参数来尽可能降低损失函数的值。这类解叫作数值解</li>
+</ul>
+<p><strong>小批量随机梯度下降算法</strong>：先选取一组模型参数的初始值，如随机选取；接下来对参数进行多次迭代，使每次迭代都可能降低损失函数的值。在每次迭代中，先随机均匀采样一个由固定数目训练数据样本所组成的小批量（mini-batch）BB，然后求小批量中数据样本的平均损失有关模型参数的导数（梯度），最后用此结果与预先设定的一个正数的乘积作为模型参数在本次迭代的减小量。</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142231_40.png" alt></p>
+<p>在上式中，|B||B|代表每个小批量中的样本个数（批量大小，batch size），ηη称作学习率（learning rate）并取正数。需要强调的是，这里的批量大小和学习率的值是人为设定的，并不是通过模型训练学出的，因此叫作超参数（hyperparameter）。我们通常所说的“调参”指的正是调节超参数，例如通过反复试错来找到超参数合适的值。在少数情况下，超参数也可以通过模型训练学出。本书对此类情况不做讨论。</p>
+<h5 id="模型预测"><a href="#模型预测" class="headerlink" title="模型预测"></a>模型预测</h5><p>模型训练完成后，我们将模型参数w1,w2,bw1,w2,b在优化算法停止时的值分别记作w^1,w^2,b^w^1,w^2,b^。注意，这里我们得到的并不一定是最小化损失函数的最优解w∗1,w∗2,b∗w1∗,w2∗,b∗，而是对最优解的一个近似。然后，我们就可以使用学出的线性回归模型x1w^1+x2w^2+b^x1w^1+x2w^2+b^来估算训练数据集以外任意一栋面积（平方米）为x1x1、房龄（年）为x2x2的房屋的价格了。这里的估算也叫作模型预测、模型推断或模型测试。</p>
+<h4 id="线性回归的表示方法"><a href="#线性回归的表示方法" class="headerlink" title="线性回归的表示方法"></a>线性回归的表示方法</h4><h5 id="神经网络图"><a href="#神经网络图" class="headerlink" title="神经网络图"></a>神经网络图</h5><h5 id="矢量计算表达式"><a href="#矢量计算表达式" class="headerlink" title="矢量计算表达式"></a>矢量计算表达式</h5><h4 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h4><h5 id="从零实现"><a href="#从零实现" class="headerlink" title="从零实现"></a>从零实现</h5><p>只利用<code>NDArray</code>和<code>autograd</code>来实现一个线性回归的训练。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython <span class="keyword">import</span> display</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> autograd, nd</span><br><span class="line"><span class="keyword">import</span> random</span><br></pre></td></tr></table></figure>
+
+<p>生成数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num_examples = <span class="number">1000</span></span><br><span class="line">true_w = [<span class="number">2</span>, <span class="number">-3.4</span>]</span><br><span class="line">true_b = <span class="number">4.2</span></span><br><span class="line">features = nd.random.normal(scale=<span class="number">1</span>, shape=(num_examples, num_inputs))</span><br><span class="line">labels = true_w[<span class="number">0</span>] * features[:, <span class="number">0</span>] + true_w[<span class="number">1</span>] * features[:, <span class="number">1</span>] + true_b</span><br><span class="line">labels += nd.random.normal(scale=<span class="number">0.01</span>, shape=labels.shape)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">use_svg_display</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 用矢量图显示</span></span><br><span class="line">    display.set_matplotlib_formats(<span class="string">'svg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_figsize</span><span class="params">(figsize=<span class="params">(<span class="number">3.5</span>, <span class="number">2.5</span>)</span>)</span>:</span></span><br><span class="line">    use_svg_display()</span><br><span class="line">    <span class="comment"># 设置图的尺寸</span></span><br><span class="line">    plt.rcParams[<span class="string">'figure.figsize'</span>] = figsize</span><br><span class="line"></span><br><span class="line">set_figsize()</span><br><span class="line">plt.scatter(features[:, <span class="number">1</span>].asnumpy(), labels.asnumpy(), <span class="number">1</span>);  <span class="comment"># 加分号只显示图</span></span><br></pre></td></tr></table></figure>
+
+<p>读取数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_iter</span><span class="params">(batch_size, features, labels)</span>:</span></span><br><span class="line">    num_examples = len(features)</span><br><span class="line">    indices = list(range(num_examples))</span><br><span class="line">    random.shuffle(indices)  <span class="comment"># 样本的读取顺序是随机的</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, num_examples, batch_size):</span><br><span class="line">        j = nd.array(indices[i: min(i + batch_size, num_examples)])</span><br><span class="line">        <span class="keyword">yield</span> features.take(j), labels.take(j)  <span class="comment"># take函数根据索引返回对应元素</span></span><br></pre></td></tr></table></figure>
+
+<p>初始化模型参数</p>
+<p>我们将权重初始化成均值为0、标准差为0.01的正态随机数，偏差则初始化成0。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">w = nd.random.normal(scale=<span class="number">0.01</span>, shape=(num_inputs, <span class="number">1</span>))</span><br><span class="line">b = nd.zeros(shape=(<span class="number">1</span>,))</span><br><span class="line"></span><br><span class="line">w.attach_grad()</span><br><span class="line">b.attach_grad()</span><br></pre></td></tr></table></figure>
+
+<p>定义模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linreg</span><span class="params">(X, w, b)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">return</span> nd.dot(X, w) + b</span><br></pre></td></tr></table></figure>
+
+
+
+<p>定义损失函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squared_loss</span><span class="params">(y_hat, y)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">return</span> (y_hat - y.reshape(y_hat.shape)) ** <span class="number">2</span> / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>定义优化算法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sgd</span><span class="params">(params, lr, batch_size)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">for</span> param <span class="keyword">in</span> params:</span><br><span class="line">        param[:] = param - lr * param.grad / batch_size</span><br></pre></td></tr></table></figure>
+
+
+
+<p>训练模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">lr = <span class="number">0.03</span></span><br><span class="line">num_epochs = <span class="number">3</span></span><br><span class="line">net = linreg</span><br><span class="line">loss = squared_loss</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):  <span class="comment"># 训练模型一共需要num_epochs个迭代周期</span></span><br><span class="line">    <span class="comment"># 在每一个迭代周期中，会使用训练数据集中所有样本一次（假设样本数能够被批量大小整除）。X</span></span><br><span class="line">    <span class="comment"># 和y分别是小批量样本的特征和标签</span></span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> data_iter(batch_size, features, labels):</span><br><span class="line">        <span class="keyword">with</span> autograd.record():</span><br><span class="line">            l = loss(net(X, w, b), y)  <span class="comment"># l是有关小批量X和y的损失</span></span><br><span class="line">        l.backward()  <span class="comment"># 小批量的损失对模型参数求梯度</span></span><br><span class="line">        sgd([w, b], lr, batch_size)  <span class="comment"># 使用小批量随机梯度下降迭代模型参数</span></span><br><span class="line">    train_l = loss(net(features, w, b), labels)</span><br><span class="line">    print(<span class="string">'epoch %d, loss %f'</span> % (epoch + <span class="number">1</span>, train_l.mean().asnumpy()))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="softmax回归"><a href="#softmax回归" class="headerlink" title="softmax回归"></a>softmax回归</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>我们考虑一个简单的图像分类问题，其输入图像的高和宽均为2像素，且色彩为灰度。这样每个像素值都可以用一个标量表示。我们将图像中的4像素分别记为x1,x2,x3,x4x1,x2,x3,x4。假设训练数据集中图像的真实标签为狗、猫或鸡（假设可以用4像素表示出这3种动物），这些标签分别对应离散值y1,y2,y3y1,y2,y3。</p>
+<p>我们通常使用离散的数值来表示类别，例如y1=1,y2=2,y3=3y1=1,y2=2,y3=3。如此，一张图像的标签为1、2和3这3个数值中的一个。虽然我们仍然可以使用回归模型来进行建模，并将预测值就近定点化到1、2和3这3个离散值之一，但这种连续值到离散值的转化通常会影响到分类质量。因此我们一般使用更加适合离散值输出的模型来解决分类问题。</p>
+<p>softmax回归跟线性回归一样将输入特征与权重做线性叠加。与线性回归的一个主要不同在于，softmax回归的输出值个数等于标签里的类别数。因为一共有4种特征和3种输出动物类别，所以权重包含12个标量（带下标的ww）、偏差包含3个标量（带下标的bb），且对每个输入计算o1,o2,o3o1,o2,o3这3个输出：</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142233_77.png" alt></p>
+<h4 id="softmax运算"><a href="#softmax运算" class="headerlink" title="softmax运算"></a>softmax运算</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142233_3.png" alt></p>
+<p>softmax运算的主要作用就是将输出变成概率</p>
+<h5 id="单样本分类的矢量计算表达式"><a href="#单样本分类的矢量计算表达式" class="headerlink" title="单样本分类的矢量计算表达式"></a>单样本分类的矢量计算表达式</h5><p>为了提高计算效率，我们可以将单样本分类通过矢量计算来表达。在上面的图像分类问题中，假设softmax回归的权重和偏差参数分别为</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_349.png" alt></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_970.png" alt></p>
+<h5 id="小批量样本分类的矢量计算表达式"><a href="#小批量样本分类的矢量计算表达式" class="headerlink" title="小批量样本分类的矢量计算表达式"></a>小批量样本分类的矢量计算表达式</h5><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_645.png" alt></p>
+<h5 id="交叉熵损失函数"><a href="#交叉熵损失函数" class="headerlink" title="交叉熵损失函数"></a>交叉熵损失函数</h5><p>使用更适合衡量两个概率分布差异的测量函数。其中，交叉熵（cross entropy）是一个常用的衡量方法：</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142235_355.png" alt></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142250_450.png" alt></p>
+<h3 id="多层感知机"><a href="#多层感知机" class="headerlink" title="多层感知机"></a>多层感知机</h3><p>深度学习主要关注<strong>多层模型</strong>，以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。</p>
+<p>多层感知机在单层神经网络的基础上引入了一到多个隐藏层（hidden layer）。隐藏层位于输入层和输出层之间。图3.3展示了一个多层感知机的神经网络图。</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142251_51.png" alt></p>
+<p>在图3.3所示的多层感知机中，输入和输出个数分别为4和3，中间的隐藏层中包含了5个隐藏单元（hidden unit）。由于输入层不涉及计算，图3.3中的多层感知机的层数为2。由图3.3可见，隐藏层中的神经元和输入层中各个输入完全连接，输出层中的神经元和隐藏层中的各个神经元也完全连接。因此，多层感知机中的隐藏层和输出层都是全连接层。</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142251_572.png" alt></p>
+<h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p>上述问题的根源在于全连接层只是对数据做仿射变换（affine transformation），而多个仿射变换的叠加仍然是一个仿射变换。解决问题的一个方法是引入非线性变换，例如对隐藏变量使用按元素运算的非线性函数进行变换，然后再作为下一个全连接层的输入。这个非线性函数被称为激活函数（activation function）。下面我们介绍几个常用的激活函数。</p>
+<h6 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h6><p>ReLU（rectified linear unit）函数提供了一个很简单的非线性变换。给定元素xx，该函数定义为：</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142252_830.png" alt></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142252_944.png" alt></p>
+<h5 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h5><p>sigmoid函数可以将元素的值变换到0和1之间：</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_399.png" alt></p>
+<p>sigmoid函数在早期的神经网络中较为普遍，但它目前逐渐被更简单的ReLU函数取代。在后面“循环神经网络”一章中我们会介绍如何利用它值域在0到1之间这一特性来控制信息在神经网络中的流动。下面绘制了sigmoid函数。当输入接近0时，sigmoid函数接近线性变换。</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_802.png" alt></p>
+<p>依据链式法则，sigmoid函数的导数</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_388.png" alt></p>
+<p>下面绘制了sigmoid函数的导数。当输入为0时，sigmoid函数的导数达到最大值0.25；当输入越偏离0时，sigmoid函数的导数越接近0。</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_427.png" alt></p>
+<h5 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h5><p>tanh（双曲正切）函数可以将元素的值变换到-1和1之间：</p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_807.png" alt></p>
+<p>我们接着绘制tanh函数。当输入接近0时，tanh函数接近线性变换。虽然该函数的形状和sigmoid函数的形状很像，但tanh函数在坐标系的原点上对称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with autograd.record():</span><br><span class="line">    y &#x3D; x.tanh()</span><br><span class="line">xyplot(x, y, &#39;tanh&#39;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_20.png" alt></p>
+<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142255_743.png" alt></p>
+<h5 id="多层感知机-1"><a href="#多层感知机-1" class="headerlink" title="多层感知机"></a>多层感知机</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214202555144.png" alt="image-20200214202555144"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-python中yield的用法详解——最简单，最清晰的解释" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -449,6 +783,29 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">q = deque()</span><br><span class="line">q.append(args)</span><br><span class="line">q.pop()</span><br></pre></td></tr></table></figure>
 
 <h3 id="4-查找最大或最小的N个元素"><a href="#4-查找最大或最小的N个元素" class="headerlink" title="4.查找最大或最小的N个元素"></a>4.查找最大或最小的N个元素</h3><p>怎样从一个集合中获得最大或者最小的 N 个元素列表？</p>
+<p>答案是使用heaq，heapq 模块有两个函数：<code>nlargest()</code> 和 <code>nsmallest()</code> 可以完美解决这个问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">23</span>,<span class="number">646</span>,<span class="number">75</span>,<span class="number">56</span>,<span class="number">24</span>,<span class="number">62</span>,<span class="number">22</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">heapq.nlargest(<span class="number">3</span>,nums)</span><br><span class="line">heapq.nsmallest(<span class="number">3</span>,nums)</span><br></pre></td></tr></table></figure>
+
+<p>当要查找的元素个数相对比较小的时候，函数 <code>nlargest()</code> 和 <code>nsmallest()</code> 是很合适的。 如果你仅仅想查找唯一的最小或最大（N=1）的元素的话，那么使用 <code>min()</code> 和 <code>max()</code> 函数会更快些。 类似的，如果 N 的大小和集合大小接近的时候，通常先排序这个集合然后再使用切片操作会更快点 （ <code>sorted(items)[:N]</code> 或者是 <code>sorted(items)[-N:]</code> ）。 需要在正确场合使用函数 <code>nlargest()</code> 和 <code>nsmallest()</code> 才能发挥它们的优势 （如果 N 快接近集合大小了，那么使用排序操作会更好些）。</p>
+<h3 id="5-实现一个优先级队列"><a href="#5-实现一个优先级队列" class="headerlink" title="5.实现一个优先级队列"></a>5.实现一个优先级队列</h3><p>也就是实现一个heap</p>
+<p>使用<code>heapq</code>模块实现一个优先级队列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PriorityQueue</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self._queue = []</span><br><span class="line">        self._index = <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,item,priority)</span>:</span></span><br><span class="line">        heapq.heappush(self._queue,(-priority, self._index, item))</span><br><span class="line">        <span class="comment"># 优先级为负数的目的是使得元素按照优先级从高到低排序。 这个跟普通的按优先级从低到高排序的堆排序恰巧相反。</span></span><br><span class="line">        self._index+=<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> heapq.heappop(self._queue)[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是heapq是将元素按照从小到大的顺序排的，也就是<strong>数值小的默认优先级高</strong>，</p>
+<p><code>index</code> 变量的作用是保证同等优先级元素的正确排序。 通过保存一个不断增加的 <code>index</code> 下标变量，可以确保元素按照它们插入的顺序排序。 而且， <code>index</code> 变量也在相同优先级元素比较的时候起到重要作用。</p>
+<p>Python 在做元组比较时候，如果前面的比较已经可以确定结果了， 后面的比较操作就不会发生了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; (1, 0, Item(&#39;foo&#39;))</span><br><span class="line">&gt;&gt;&gt; b &#x3D; (5, 1, Item(&#39;bar&#39;))</span><br><span class="line">&gt;&gt;&gt; c &#x3D; (1, 2, Item(&#39;grok&#39;))</span><br><span class="line">&gt;&gt;&gt; a &lt; b</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; a &lt; c</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
 
       
     </div>
@@ -707,182 +1064,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-递归方法论" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/12/%E9%80%92%E5%BD%92%E6%96%B9%E6%B3%95%E8%AE%BA/" class="article-date">
-      <time datetime="2020-02-12T02:39:49.000Z" itemprop="datePublished">2020-02-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/12/%E9%80%92%E5%BD%92%E6%96%B9%E6%B3%95%E8%AE%BA/">递归方法论</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-专注力与执行力是人与人之间产生差别的主要原因" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/11/%E4%B8%93%E6%B3%A8%E5%8A%9B%E4%B8%8E%E6%89%A7%E8%A1%8C%E5%8A%9B%E6%98%AF%E4%BA%BA%E4%B8%8E%E4%BA%BA%E4%B9%8B%E9%97%B4%E4%BA%A7%E7%94%9F%E5%B7%AE%E5%88%AB%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8E%9F%E5%9B%A0/" class="article-date">
-      <time datetime="2020-02-11T10:53:53.000Z" itemprop="datePublished">2020-02-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/11/%E4%B8%93%E6%B3%A8%E5%8A%9B%E4%B8%8E%E6%89%A7%E8%A1%8C%E5%8A%9B%E6%98%AF%E4%BA%BA%E4%B8%8E%E4%BA%BA%E4%B9%8B%E9%97%B4%E4%BA%A7%E7%94%9F%E5%B7%AE%E5%88%AB%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8E%9F%E5%9B%A0/">专注力与执行力是人与人之间产生差别的主要原因</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">大部分人的智力水平相差不大，那为什么到学期末的成绩差异会那么大呢？答案可能是在学期开始时不同的人先前的知识累计和能力不同，但如果是知识累计和能力相差不大的两个人，经过一个学期上课后差异很大的主要原因大概就是专注力与执行力，所谓的提升学习效率，听课效率等等归根结底都是提升专注力，如果一个人做事情足够专注，不三心二意，那他的各种表面的能力比如学习效率，听课效率，写作业效率，认真的态度都会随之而来。</span><br><span class="line">回想我考差的几科，有好几个原因导致考差，一是上课不是特别专心，有时候会看手机，有时候是因为上课走神了一会就直接听不懂导致不想听，然后课后又因为作业太多而无法弥补。二是复习的时候也不专注，总是复习一小时手机一小时，这样的复习效率直接导致期末出大问题。三是对自己的水平预估有偏差，以为自己会了但其实一考才发现其实没有掌握，这和平时总想省心省力作业不认真做，书不认真看有很大关系。平时的省心省力到期末就是爆炸。</span><br><span class="line">那解决办法有哪些呢？一是要培养自己专注的能力，二是一定要预习 以保证自己能跟上老师讲课从而不会在课下花费太多时间而得不到多少提升；三是要多刷题，那么刷题也是很考验专注力和执行力的，保质保量得刷，去多总结。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">那么如何提高专注能力呢？这里引用知乎上一个回答：</span><br></pre></td></tr></table></figure>
-
-
-
-<p>所有学习和工作效率低的人，都有一个困惑：为什么一到要做事的时候，就会感觉全世界的风吹草动都是诱惑。</p>
-<p>当你无法集中注意力的时候，绝大多数的勤奋都是在耗费时间，成效低下而又疲惫不堪。</p>
-<h5 id="勤奋能决定的只是下限，真正决定人与人上限差距的，是你能否长时间将注意力集中到你正在做的事情上，全神贯注。"><a href="#勤奋能决定的只是下限，真正决定人与人上限差距的，是你能否长时间将注意力集中到你正在做的事情上，全神贯注。" class="headerlink" title="勤奋能决定的只是下限，真正决定人与人上限差距的，是你能否长时间将注意力集中到你正在做的事情上，全神贯注。"></a>勤奋能决定的只是下限，真正决定人与人上限差距的，是你能否长时间将注意力集中到你正在做的事情上，全神贯注。</h5><p>而这才是那些优秀的人身上真正拥有的特质。</p>
-<p>他们在集中注意力学习和工作的时候，几乎可以忽略全世界，保持全身心投入、高度集中注意力。</p>
-<p>更可怕的是，只要需要，他们往往可以一天十多个小时持续这样，经年累月、从不懈怠。</p>
-<p>这才是隐藏在勤奋表象背后的真正特质，一种更本元的能力：<strong>专注</strong>。</p>
-<p>专注于明确的目标，并排除干扰，这是在任何领域取得成功的关键。——威斯康星大学心理中心戴维森</p>
-<p>十个小时的低效勤奋，也比不上一个小时的专注。</p>
-<p>但很多人没有意识到的是，相对于勤奋之类的东西，专注更像是一种天赋，一种自发行为。</p>
-<p>同样的家庭环境，同样的父母，两个孩子一起学习，也可能一个专心致志，一个三心二意。</p>
-<p>我前面提到的那些清北学霸们，则几乎从小学起就总是比同龄人注意力更集中，更能够抗拒外在诱惑，保持高效率学习的时间更长。</p>
-<p>现代的神经科学研究发现，这种能忽略干扰和抑制冲动的注意力系统，一般在小孩儿3岁时开始发展，8岁时达致成熟。</p>
-<p>这意味着，绝大多数人的专注能力在很小的时候就已经被决定了，而有些人（大约10%）甚至天生患有注意力缺陷障碍。</p>
-<p>他们甚至连一两个小时的专注都做不到。</p>
-<p>后来我看心理学才知道，原来专注包括了“<strong>自下而上</strong>”和“<strong>自上而下</strong>”两套神经系统，分别对应着“<strong>本能驱动</strong>”和“<strong>动机驱动</strong>”。</p>
-<p>自下而上，比如你跑步、打游戏的时候，不需要做什么也能集中注意力，也不用多努力，这是本能和天赋的领域。</p>
-<p>而自上而下，就像考试前临时抱佛脚，需要克服内心的懈怠、克服外在的诱惑，时刻提醒自己。如果没有极强的动机，是很难做到的。</p>
-<p>说实话，大家都到这个年龄了，早过了天赋的积累和开发期，如果还想依靠本能就可以做到专注，几乎是不可能的。</p>
-<p><strong>你拥有多强烈的动机，你才能在多大程度上掌控自己的注意力</strong>。</p>
-<p>心理学甚至研究发现，如果人们的动机足够强烈，即使连续三个晚上或更长时间不睡觉，也可以保持敏锐的专注力，但假如他们根本无所谓，那么很快就会开始打磕睡。</p>
-<p>当我们通过“自上而下”系统有意识地去锻炼专注力的时候，这种能力最终会影响“自下而上”系统。</p>
-<p>也就是说，专注其实是可以通过后天训练达到或加强的。</p>
-<p>这些年，我把自己关于如何通过主动意识增强专注能力的方法总结成了三重境界。</p>
-<p><strong>第一重境界：打造有利于专注的环境</strong>。</p>
-<p>我一个朋友在腾讯做游戏，那是腾讯最庞大的部门，他们这群天资聪颖、每天晚上加班到12小时的人，主要工作就是为了让游戏更好玩，让你的注意力更集中到游戏之上。</p>
-<p>另外一个在今日头条的朋友，做信息流，压力非常大，他以前在广告公司，做的广告超过10秒钟不能吸引到人，人们就会换台。但现在做信息流，如果一个页面5秒钟不能让人看进去，人们可能就会去点开别的A，所以他们需要不断研究出最能吸引人注意力的算法、制造更多噱头十足的内容。</p>
-<p>结果他最近告诉我，他居然沉迷进了抖音，有时候就是不小心顺着链接点进去，不感兴趣就立马刷下一个，一不小心一两个小时就过去了。</p>
-<p>从商业上看，腾讯、头条乃至抖音，它们都是成功的。</p>
-<p>但对我而言，则是敲响巨大的警钟。</p>
-<p>生活中的每一分每一秒都被这样的东西所占据，怎么可能集中注意力来做别的东西。</p>
-<p>过量的信息消费的是人们的专注力，信息越多，人们越不专注，我们越是分心，就越难去深入地思考，思考时间越短，就越容易流于肤浅。</p>
-<p>所以，对于像我这种天生专注力不强的人而言，最好的方法就是不要给自己的脆弱的专注力制造“敌人”，不看、不关注、不安装这些炫人耳目的东西，让自己处在一种更有利于专注的环境中。空出的时间，多去看纸质书籍，做深入思考。</p>
-<p>这一重境界之所以最低，是因为完全依赖于和外界对抗，太被动。</p>
-<p><strong>第二重境界：训练进入专注的模式</strong></p>
-<p>集中注意力和收缩肌肉一样会产生疲劳。这意味着如果天生注意力不强，就不要去做什么看5个小时电影或者玩6个小时游戏后再学习工作的挑战了。</p>
-<p>要学会用80%的精力去做20%的重要工作，更要学会通过有意识地锻炼，做到当需要专注的时候能很快收心，只要想投入注意力，就能投入。</p>
-<p>比如有意识地把自己专注能力特别强的时候和某些声音、气味进行关联，当你需要专注的时候，就播放这种音乐、燃起某种香，提醒自己要进入专注模式了。</p>
-<p>还比如，在需要专注的时候，用5分钟进行一下冥想，去平复大脑里纷繁复杂的思维，一旦察觉到自己走神，就提醒自己拉回来，如果再次走神，重复相同步骤，循环往复。经过练习之后，停止胡思乱想、保持专一思想会变得越来越简单。长期冥想者的大脑神经联结增多，与有实力的举重运动员拥有完美的胸肌是一样的道理。</p>
-<p>还有一种极端方式，就是定期将自己置于某种“危险境地”，这就是很多人热爱登山等危险运动的原因之一，危险运动让本能接手对你大脑的控制，让你不得不投人全部专注力。通过这种方式去感受专注力的产生过程，去体会专注力强大的能量，有助于训练自己在日常生活中进入这种模式。</p>
-<p>（时间管理的番茄工作法也是一种不错的训练方法，大脑会逐渐习惯这个时间周期，当你需要专注的时候，大脑会将专注力集中起来，感兴趣的可以微信后台回复“时间”查看相关文章。）</p>
-<p>到了这一重，专注更依赖于自己内心的训练和法则，已经可以有意识地控制注意力了。</p>
-<p><strong>第三重境界： 努力激发专注的心流</strong></p>
-<p>当我们用意志力支撑专注力、有意识地抑制各种干扰，通过长期训练后，专注力就可能从主动行动变为被动形态，本能的专注力就能得到恢复和提升。</p>
-<p>甚至有可能因为太过于专注，而进入到一种物我两忘、无喜无悲的状态，甚至连时间的流逝都感知不到。</p>
-<p><strong>这种强烈的专注力所引发的平和、喜悦的感觉，叫做心流。</strong></p>
-<p>可惜的是，绝大多数人只有在玩游戏时候才能有这种体验。</p>
-<p>当然，心理学上还不带任何倾向地推荐了另外一种所有人都可以轻易就体验到心流的事情——做爱。</p>
-<p>但除此外，所有那种需要通过主动意识去确保全身心投入的事情，比如看书、学习、工作、写代码之类的，大部分人都无法进入心流，大脑无时无刻不在提醒自己：累了累了，休息一会儿。</p>
-<p>在生活中产生更多心流的一个秘诀是把我们的注意力和兴趣结合起来，能做到这一点的人无疑是幸运的，无论在哪个领域，凡是取得巨大成就的人都找到了这个结合点。</p>
-<p>另外还有一些产生心流的途径，比如我们在全身心处理一件事的时候，把能力发挥到了极致，达到了“力所能及”的范围，心流也可能出现。</p>
-<p>把大脑当成是一支军队，心流就是整支军队战斗力最强的时候，每一个单位都动员起来，冲锋的冲锋、射箭的射箭、运粮的运粮，数以亿计的神经信号川流不息而又井井有条。</p>
-<p>那一刻，不同大脑区域之间的神经联结既频繁又精，在这种状态下，不管我们做什么都能发挥出最佳水平。</p>
-<p>一些著名作家年轻时经常徜徉其间，文思泉涌，倚马千言，但随着精力衰退，无法进入这种状态后，甚至会尝试服用兴奋类药物。</p>
-<p>侦探小说里的福尔摩斯也好、柯南也好，之所以看似随便走过一个地方，就能关注到常人所无法理解的惊人细节，也是因为他们能够长期保持心流的状态。</p>
-<p>只可惜，对常人而言，心流永远都是一种可遇而不可求的理想状态，我自己偶尔才能在工作或写作中进入，所以无法准确描述那种美妙的感觉。</p>
-<p>总结一下。绝大部分人的努力，都是在低效的勤奋中努力，要想突破天赋的束缚，需要在训练专注力上下更大的努力，因为只有这样子的努力，才可能弥补天赋上的不足。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%84%9F%E6%83%B3/" rel="tag">感想</a></li></ul>
     </div>
 
       

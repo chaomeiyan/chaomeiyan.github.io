@@ -15,16 +15,16 @@
 
 
 
-<meta name="description" content="01建立一个目标首先要建立一个具体的目标，比如这学期绩点达到3.8以上。目标要适合自己的水平，比自己上学期绩点高5%~10%左右比较合适。 然后就是要细化目标 没有人能够一步登天，仅仅靠期末是极其容易翻车的 可以分阶段设置目标，设置目标的时候需要将每门课分拆，细化得分点，比如一门专业课大概分为平时分（点名，作业，PRE等等）+期中（可能没有）+期末+实验， 需要明确的是每一部分都需要认认真真对待，">
+<meta name="description" content="Python中的堆：heapq1、heappush(heap,n)数据堆入 12345678910111213141516171819In [1]: import heapq as hqIn [2]: import numpy as npIn [3]: data &#x3D; np.arange(10)#将生成的数据随机打乱顺序In [4]: np.random.shuffle(data)In [5]: d">
 <meta property="og:type" content="article">
-<meta property="og:title" content="拿到高GPA技巧——持续更新">
-<meta property="og:url" content="https://chaomeiyan.github.io/.com/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/index.html">
+<meta property="og:title" content="数据结构——堆">
+<meta property="og:url" content="https://chaomeiyan.github.io/.com/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/index.html">
 <meta property="og:site_name" content="Maxwell&#39;s Blog">
-<meta property="og:description" content="01建立一个目标首先要建立一个具体的目标，比如这学期绩点达到3.8以上。目标要适合自己的水平，比自己上学期绩点高5%~10%左右比较合适。 然后就是要细化目标 没有人能够一步登天，仅仅靠期末是极其容易翻车的 可以分阶段设置目标，设置目标的时候需要将每门课分拆，细化得分点，比如一门专业课大概分为平时分（点名，作业，PRE等等）+期中（可能没有）+期末+实验， 需要明确的是每一部分都需要认认真真对待，">
-<meta property="article:published_time" content="2020-02-14T15:23:07.000Z">
-<meta property="article:modified_time" content="2020-02-14T16:06:58.575Z">
+<meta property="og:description" content="Python中的堆：heapq1、heappush(heap,n)数据堆入 12345678910111213141516171819In [1]: import heapq as hqIn [2]: import numpy as npIn [3]: data &#x3D; np.arange(10)#将生成的数据随机打乱顺序In [4]: np.random.shuffle(data)In [5]: d">
+<meta property="article:published_time" content="2020-02-15T08:11:03.000Z">
+<meta property="article:modified_time" content="2020-02-15T11:01:13.093Z">
 <meta property="article:author" content="Maxwell">
-<meta property="article:tag" content="学习技巧">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -59,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>拿到高GPA技巧——持续更新 | Maxwell&#39;s Blog</title>
+<title>数据结构——堆 | Maxwell&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -276,11 +276,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-拿到高GPA技巧——持续更新" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构——堆" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" class="article-date">
-      <time datetime="2020-02-14T15:23:07.000Z" itemprop="datePublished">2020-02-14</time>
+      <a href="/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/" class="article-date">
+      <time datetime="2020-02-15T08:11:03.000Z" itemprop="datePublished">2020-02-15</time>
 </a>
 
 
@@ -295,7 +295,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      拿到高GPA技巧——持续更新
+      数据结构——堆
     </h1>
   
 
@@ -306,7 +306,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -316,24 +316,22 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="01建立一个目标"><a href="#01建立一个目标" class="headerlink" title="01建立一个目标"></a>01建立一个目标</h3><p>首先要建立一个具体的目标，比如这学期绩点达到3.8以上。目标要适合自己的水平，比自己上学期绩点高5%~10%左右比较合适。</p>
-<p>然后就是要<strong>细化目标</strong></p>
-<p>没有人能够一步登天，仅仅靠期末是<strong>极其容易</strong>翻车的</p>
-<p>可以分阶段设置目标，设置目标的时候需要将每门课分拆，细化得分点，比如一门专业课大概分为<strong>平时分（点名，作业，PRE等等）+期中（可能没有）+期末+实验</strong>， 需要明确的是每一部分都需要认认真真对待，因为你不知道老师会不会为了调分而大幅度修改各项的比例。原则就是要有每一分都要拿到手的心态。 </p>
-<p>​        尽量知道每一项的评分细则，特别是实验，在知道评分细则之后就去拟合就行，尽量拿分。</p>
-<p>​        然后为了达成期中和期末的好分数，需要给自己每周设定一个小任务，当完成了一项小任务，会对自己的实力有更加清晰的认知，这样也能带动接下来任务的成功。</p>
-<p><strong>分析目标最优解</strong>：</p>
-<p>​        最优解就是要在给定的时间内达到最大的效益，也就是要确定任务的优先级，这是很必要的，当有很多事情向做的时候需要给他们排个优先级，达到最大效益，一般来说要把难的放在比较前面做，一股气解决。</p>
-<h4 id="01-1平时分拿分诀窍"><a href="#01-1平时分拿分诀窍" class="headerlink" title="01.1平时分拿分诀窍"></a>01.1平时分拿分诀窍</h4><p>平时分包括作业+课堂表现+小组活动+老师印象分</p>
-<p>作业是以周为单位的，需要每周做好预习，认真听课，认真复习，然后再认认真真完成作业。最好和同学对一下答案再交，保证作业的准确率。不过切记<strong>一定要自己认认真真做过思考过</strong>，在每次上课时要跟着老师的思路，坚决不玩手机，敢于回答老师的问题，小组合作时积极参加，踊跃地当发言人。在课后要多去问一些有价值的问题以及可以指出老师讲课的某个小错误。<strong>不管什么课尽量去第三排，一堂课对老师紧紧跟随，老师提问问题时尽量提出自己的想法，</strong> </p>
-<p><strong>预习+独立完成作业+复盘</strong>，这是每周的一个小循环，每天晚上用25min预习第二天的科目，勾画重点和不懂的地方，最大用处是<strong>防止上课走神就听不懂了</strong>     独立完成作业最重要的就是<strong>独立</strong>，一道题从<strong>审题思考做题再回过头反思</strong>最离不开的就是<strong>独立</strong> 独立做作业就是<strong>把知识内化的过程</strong> 如果早早得翻看答案或者与人交流那自己不过是个计算器。     最后是<strong>复盘</strong>，复盘是<strong>复习上课的笔记，书上的重点，还有作业和以前考试的错题</strong>，以及思考最近的知识掌握情况，这些知识之间的关联，<strong>每周结束时画个思维导图，构建自己的知识树</strong></p>
-<h4 id="01-2期中和期末考试复习技巧"><a href="#01-2期中和期末考试复习技巧" class="headerlink" title="01.2期中和期末考试复习技巧"></a>01.2期中和期末考试复习技巧</h4><p>首先要明确一个观点：<strong>除了特别硬核的课之外，大部分课只靠期末冲刺拿到85分左右的成绩是不难的，只要划分20~40个小时的时间去有步骤地复习</strong></p>
-<p>切记：<strong>一定要把复习时间精确到小时</strong></p>
-<p>很多人考试周也会抱着电脑和书去图书馆坐一天，但可能大部分时间被其他一些无关紧要的东西给中断了，比如看B站，看知乎，看QQ，微信，小说等等，这种行为的本质原因是专注力不够，是一定要克服的，不然谈什么技巧都是白搭。一天结束看似一直在图书馆，但学习时间可能总共都不够一个小时，这就血妈亏，三天下来还不如别人一个晚上，这就叫<strong>虚假努力，自我感动</strong>，你想想怎么可能拿高分嘛。所以需要实实在在得<strong>根据期末周的安排把每门课的复习量精确到小时并且坚决地执行</strong>，推荐<strong>番茄todo</strong>， 以周为单位去规划平时要做的事情，<strong>对任务量的估计要做到把自己估计需要的时间乘个1.5，多试几次就能掌握自己需要的任务时间。</strong></p>
-<h3 id="02及时复盘"><a href="#02及时复盘" class="headerlink" title="02及时复盘"></a>02及时复盘</h3><p>每一天，每一周，每一个阶段都要去做一个反思，看自己的学习状态怎么样，有没有达到自己的目标，没有的话要怎么去解决，对自己的计划不断地做修正。</p>
-<p>其实这些技巧都建立在一个事实上——你足够专注，能够在一个小时以上投入地做一件事情，以及坚持每天都做，嗯，<strong>学不会不要紧，再来就行了</strong>，重要的是要有重复再来的坚持与相信自己能学会的信心，<strong>当做一个任务没那么舒服没那么容易的时候要去享受，以为你在提升啊，这多爽</strong>，每天给自己的评价就是<strong>做了什么事情，学了多少东西，</strong></p>
-<p>其实以上最重要的还是<strong>坚持</strong>，以及保持足够的<strong>专注</strong></p>
-<p>​        </p>
+        <h3 id="Python中的堆：heapq"><a href="#Python中的堆：heapq" class="headerlink" title="Python中的堆：heapq"></a>Python中的堆：heapq</h3><p><strong>1、heappush(heap,n)数据堆入</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> heapq <span class="keyword">as</span> hq</span><br><span class="line">In [<span class="number">2</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">In [<span class="number">3</span>]: data = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="comment">#将生成的数据随机打乱顺序</span></span><br><span class="line">In [<span class="number">4</span>]: np.random.shuffle(data)</span><br><span class="line">In [<span class="number">5</span>]: data</span><br><span class="line">Out[<span class="number">5</span>]: array([<span class="number">5</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">9</span>])</span><br><span class="line"><span class="comment">#定义heap列表</span></span><br><span class="line">In [<span class="number">6</span>]: heap = []</span><br><span class="line"><span class="comment">#使用heapq库的heappush函数将数据堆入</span></span><br><span class="line">In [<span class="number">7</span>]: <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">   ...:     hq.heappush(heap,i)</span><br><span class="line">   ...:</span><br><span class="line">In [<span class="number">8</span>]: heap</span><br><span class="line">Out[<span class="number">8</span>]: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">9</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">9</span>]: hq.heappush(heap,<span class="number">0.5</span>)</span><br><span class="line">In [<span class="number">10</span>]: heap</span><br><span class="line">Out[<span class="number">10</span>]: [<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、heappop(heap)将数组堆中的最小元素弹出</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">11</span>]: hq.heappop(heap)</span><br><span class="line">Out[<span class="number">11</span>]: <span class="number">0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: hq.heappop(heap)</span><br><span class="line">Out[<span class="number">12</span>]: <span class="number">0.5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3、heapify(heap) 将heap属性强制应用到任意一个列表</strong></p>
+<p>heapify 函数将使用任意列表作为参数，并且尽可能少的移位操作，，将其转化为合法的堆。如果没有建立堆，那么在使用heappush和heappop前应该使用该函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">13</span>]: heap = [<span class="number">5</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: hq.heapify(heap)</span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: heap</span><br><span class="line">Out[<span class="number">15</span>]: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、heapreplace(heap，n)弹出最小的元素被n替代</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">17</span>]: hq.heapreplace(heap,<span class="number">0.5</span>)</span><br><span class="line">Out[<span class="number">17</span>]: <span class="number">0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">18</span>]: heap</span><br><span class="line">Out[<span class="number">18</span>]: [<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、nlargest(n,iter)、nsmallest(n,iter)</strong><br>heapq中剩下的两个函数nlargest(n.iter)和nsmallest(n.iter)分别用来寻找任何可迭代的对象iter中第n大或者第n小的元素。可以通过使用排序（sorted函数）和分片进行完成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#返回第一个最大的数</span></span><br><span class="line">In [<span class="number">19</span>]: hq.nlargest(<span class="number">1</span>,heap)</span><br><span class="line">Out[<span class="number">19</span>]: [<span class="number">9</span>]</span><br><span class="line"><span class="comment">#返回第一个最小的数</span></span><br><span class="line">In [<span class="number">20</span>]: hq.nsmallest(<span class="number">1</span>,heap)</span><br><span class="line">Out[<span class="number">20</span>]: [<span class="number">0.5</span>]</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -342,13 +340,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">拿到高GPA技巧——持续更新</a></p>
+        <p><span>本文标题:</span><a href="/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/">数据结构——堆</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Maxwell</a></p>
-        <p><span>发布时间:</span>2020-02-14, 23:23:07</p>
-        <p><span>最后更新:</span>2020-02-15, 00:06:58</p>
+        <p><span>发布时间:</span>2020-02-15, 16:11:03</p>
+        <p><span>最后更新:</span>2020-02-15, 19:01:13</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" title="拿到高GPA技巧——持续更新">https://chaomeiyan.github.io/.com/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://chaomeiyan.github.io/.com/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/　　作者: Maxwell" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/" title="数据结构——堆">https://chaomeiyan.github.io/.com/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://chaomeiyan.github.io/.com/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/　　作者: Maxwell" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -361,15 +359,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/">
-                    数据结构——堆
+                <a href="/2020/02/20/C%E8%AF%AD%E8%A8%80%E7%BC%93%E5%86%B2%E5%8C%BA%E8%AF%A6%E8%A7%A3/">
+                    C语言缓冲区详解
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2020/02/14/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%96%87%E6%9C%AC/">
-                    Python字符串和文本
+                <a href="/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
+                    拿到高GPA技巧——持续更新
                 </a>
             </div>
         
@@ -381,7 +379,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#01建立一个目标"><span class="toc-number">1.</span> <span class="toc-text">01建立一个目标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#01-1平时分拿分诀窍"><span class="toc-number">1.1.</span> <span class="toc-text">01.1平时分拿分诀窍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#01-2期中和期末考试复习技巧"><span class="toc-number">1.2.</span> <span class="toc-text">01.2期中和期末考试复习技巧</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02及时复盘"><span class="toc-number">2.</span> <span class="toc-text">02及时复盘</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python中的堆：heapq"><span class="toc-number">1.</span> <span class="toc-text">Python中的堆：heapq</span></a></li></ol>
         
     </div>
     <style>
@@ -417,7 +415,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"拿到高GPA技巧——持续更新　| Maxwell's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"数据结构——堆　| Maxwell's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -437,7 +435,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/" title="上一篇: 数据结构——堆">
+            <a href="/2020/02/20/C%E8%AF%AD%E8%A8%80%E7%BC%93%E5%86%B2%E5%8C%BA%E8%AF%A6%E8%A7%A3/" title="上一篇: C语言缓冲区详解">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -445,7 +443,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2020/02/14/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%96%87%E6%9C%AC/" title="下一篇: Python字符串和文本">
+            <a href="/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" title="下一篇: 拿到高GPA技巧——持续更新">
                 <i class="fa fa-angle-right"></i>
             </a>
         
