@@ -199,7 +199,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM/" rel="tag">ACM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyhon/" rel="tag">Pyhon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E6%83%B3/" rel="tag">感想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%AE%E9%A1%B6/" rel="tag">置顶</a></li></ul>
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ACM/" rel="tag">ACM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyhon/" rel="tag">Pyhon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" rel="tag">基础算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E6%83%B3/" rel="tag">感想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%AE%E9%A1%B6/" rel="tag">置顶</a></li></ul>
                     </div>
                 </section>
                 
@@ -279,6 +279,346 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-C语言缓冲区详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/20/C%E8%AF%AD%E8%A8%80%E7%BC%93%E5%86%B2%E5%8C%BA%E8%AF%A6%E8%A7%A3/" class="article-date">
+      <time datetime="2020-02-20T05:36:45.000Z" itemprop="datePublished">2020-02-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/20/C%E8%AF%AD%E8%A8%80%E7%BC%93%E5%86%B2%E5%8C%BA%E8%AF%A6%E8%A7%A3/">C语言缓冲区详解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="c语言-缓冲区详解"><a href="#c语言-缓冲区详解" class="headerlink" title="c语言 - 缓冲区详解"></a>c语言 - 缓冲区详解</h2><p>c语言 - 缓冲区详解，<code>缓冲区</code>(Buffer)又称为<code>缓存</code>(Cache)，是内存空间的一部分<br>也就是说，在内存中预留了一定的存储空间，用来暂时保存输入或输出的数据，这部分预留的空间就叫做缓冲区</p>
+<h2 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h2><p>缓冲区根据其对应的是<code>输入设备</code>还是<code>输出设备</code>，分为<code>输入缓冲区</code>和<code>输出缓冲区</code></p>
+<p><strong>为什么要引入缓冲区</strong>？<br>比如从磁盘里取信息，我们先把读出的数据放在缓冲区，计算机再直接从缓冲区中取数据，等缓冲区的数据取完后再去磁盘中读取，这样就可以减少磁盘的读写次数，再加上计算机对缓冲区的操作大大快于对磁盘的操作，故应用缓冲区可大大提高计算机的运行速度。</p>
+<p>又比如，我们使用打印机打印文档，由于打印机的打印速度相对较慢，我们先把文档输出到打印机相应的缓冲区，打印机再自行逐步打印，这时我们的CPU可以处理别的事情。</p>
+<p>现在你基本明白了吧，缓冲区就是一块内存区，它用在输入输出设备和CPU之间，用来缓存数据。它使得低速的输入输出设备和高速的CPU能够协调工作，避免低速的输入输出设备占用CPU，解放出CPU，使其能够高效率工作。</p>
+<h2 id="缓冲区类型"><a href="#缓冲区类型" class="headerlink" title="缓冲区类型"></a>缓冲区类型</h2><p>缓冲区分为三种类型：全缓冲、行缓冲和不带缓冲</p>
+<ul>
+<li><code>全缓冲</code><br>在这种情况下，当填满缓冲区后才进行实际I/O操作。<br>全缓冲的典型代表是对磁盘文件的读写。</li>
+<li><code>行缓冲</code><br>在这种情况下，当在输入和输出中遇到换行符时，执行真正的I/O操作。<br>这时，我们输入的字符先存放在缓冲区，等按下回车键换行时才进行实际的I/O操作。<br>典型代表是标准输入(stdin)和标准输出(stdout)。</li>
+<li><code>不带缓冲</code><br>也就是不进行缓冲，标准错误文件 stderr 是典型代表，这使得出错信息可以直接尽快地显示出来</li>
+</ul>
+<h2 id="缓冲区大小"><a href="#缓冲区大小" class="headerlink" title="缓冲区大小"></a>缓冲区大小</h2><p>如果我们没有自己设置缓冲区的话，系统会默认为标准输入输出设置一个缓冲区，这个缓冲区的大小通常是<code>512个字节</code>的大小</p>
+<p>缓冲区大小由 stdio.h 头文件中的宏 BUFSIZ 定义，如果希望查看它的大小，包含头文件，直接输出它的值即可<br>缓冲区的大小是可以改变的，也可以将文件关联到自定义的缓冲区，详情可以查看 <code>setvbuf()</code> 和 <code>setbuf()</code> 函数</p>
+<h2 id="刷新缓冲区"><a href="#刷新缓冲区" class="headerlink" title="刷新缓冲区"></a>刷新缓冲区</h2><p>下列情况会引发缓冲区的刷新：</p>
+<ul>
+<li>缓冲区满时</li>
+<li>行缓冲区遇到回车时</li>
+<li>关闭文件</li>
+<li>使用特定函数刷新缓冲区</li>
+</ul>
+<p><strong>scanf() 缓冲区的影响</strong><br>scanf()是带有缓冲区的，scanf()先从缓冲区获取数据，如果缓冲区没有数据，则等待用户输入<br>scanf()匹配到想要的数据之后，就会将匹配到的数据从缓冲区中删除，没有匹配到的数据不被影响</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">50</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"b: "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;b);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;b);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, str);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a: %d, b: %d, str: %s\n"</span>, a, b, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>C</p>
+<p>Copy</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># root @ localhost in ~ [18:51:11]</span></span><br><span class="line">$ gcc a.c</span><br><span class="line"></span><br><span class="line"><span class="meta"># root @ localhost in ~ [18:51:12]</span></span><br><span class="line">$ ./a.out</span><br><span class="line">b: <span class="number">99</span></span><br><span class="line"><span class="number">11</span> <span class="number">22</span> <span class="built_in">string</span></span><br><span class="line">a: <span class="number">11</span>, b: <span class="number">22</span>, str: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># root @ localhost in ~ [18:51:25]</span></span><br><span class="line">$ ./a.out</span><br><span class="line">b: <span class="number">99</span></span><br><span class="line"><span class="number">11</span> <span class="built_in">string</span></span><br><span class="line">a: <span class="number">11</span>, b: <span class="number">99</span>, str: <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># root @ localhost in ~ [18:51:35]</span></span><br><span class="line">$ ./a.out</span><br><span class="line">b: <span class="number">99</span></span><br><span class="line"><span class="built_in">string</span></span><br><span class="line">a: <span class="number">0</span>, b: <span class="number">99</span>, str: <span class="built_in">string</span></span><br></pre></td></tr></table></figure>
+
+<p>C</p>
+<p>Copy</p>
+<p>需要注意的是，从命令行输入的都是字符串类型，都可以被<code>%s</code>匹配</p>
+<p>输入缓冲区虽然方便，但是有时候却会带来别的麻烦：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m, n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"m=%d"</span>, &amp;m);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"n=%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"m=%d, n=%d\n"</span>, m, n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>C</p>
+<p>Copy</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># root @ localhost in ~ [19:01:19]</span></span><br><span class="line">$ gcc a.c</span><br><span class="line"></span><br><span class="line"><span class="meta"># root @ localhost in ~ [19:01:49]</span></span><br><span class="line">$ ./a.out</span><br><span class="line">m=<span class="number">10</span></span><br><span class="line">m=<span class="number">10</span>, n=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>C</p>
+<p>Copy</p>
+<p>我们还没有输入n，就直接打印数值了，这就是输入缓冲区导致的。输入<code>m=10</code>然后按下回车，第一个scanf()匹配成功，这时候缓冲区的内容是换行符，一般情况下scanf()会忽略它，但是当控制字符串不是以<code>%xxx</code>开头时，就不会忽略了，比如，下面这种情况就会被scanf()忽略。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m, n;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter 2 nums:\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"m = %d, n = %d\n"</span>, m, n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>C</p>
+<p>Copy</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># root @ localhost in ~ [19:07:31]</span></span><br><span class="line">$ ./a.out</span><br><span class="line">enter <span class="number">2</span> nums:</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line">m = <span class="number">10</span>, n = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p>C</p>
+<p>Copy</p>
+<p><strong>清空缓冲区</strong><br>清空缓冲区主要有两种思路：一是将缓冲区的数据直接丢弃，二是将缓冲区的数据读取出来，但不使用<br>第一种思路：<br>windows下用<code>fflush(stdin)</code>，linux下用<code>setbuf(stdin, NULL)</code>，这两个函数都在头文件<code>stdio.h</code>中</p>
+<p>第二种思路：</p>
+<ul>
+<li><p>第一种方法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c;</span><br><span class="line"><span class="keyword">while</span>((c = getchar()) != <span class="string">'\n'</span> &amp;&amp; c != EOF);</span><br></pre></td></tr></table></figure>
+
+<p>C</p>
+<p>Copy</p>
+</li>
+<li><p>第二种方法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%*[^\n]%*c"</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">%*[^\n] 匹配除了换行符之外的字符，前面的*号表示不保存这些数据，直接丢弃</span></span><br><span class="line"><span class="comment">%c      匹配剩下的换行符，*号的作用同上</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>C</p>
+<p>Copy</p>
+</li>
+</ul>
+<p>综上所述，如果不考虑移植性，就用第一种思路的方法，如果考虑移植性，建议用第二种思路的第二种方法</p>
+<p><strong>getch() getche() getchar()</strong><br>getchar()是有缓冲区的，而getche()和getch()没有缓冲区</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-数据结构——堆" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/" class="article-date">
+      <time datetime="2020-02-15T08:11:03.000Z" itemprop="datePublished">2020-02-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%A0%86/">数据结构——堆</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="Python中的堆：heapq"><a href="#Python中的堆：heapq" class="headerlink" title="Python中的堆：heapq"></a>Python中的堆：heapq</h3><p><strong>1、heappush(heap,n)数据堆入</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> heapq <span class="keyword">as</span> hq</span><br><span class="line">In [<span class="number">2</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">In [<span class="number">3</span>]: data = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="comment">#将生成的数据随机打乱顺序</span></span><br><span class="line">In [<span class="number">4</span>]: np.random.shuffle(data)</span><br><span class="line">In [<span class="number">5</span>]: data</span><br><span class="line">Out[<span class="number">5</span>]: array([<span class="number">5</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">9</span>])</span><br><span class="line"><span class="comment">#定义heap列表</span></span><br><span class="line">In [<span class="number">6</span>]: heap = []</span><br><span class="line"><span class="comment">#使用heapq库的heappush函数将数据堆入</span></span><br><span class="line">In [<span class="number">7</span>]: <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">   ...:     hq.heappush(heap,i)</span><br><span class="line">   ...:</span><br><span class="line">In [<span class="number">8</span>]: heap</span><br><span class="line">Out[<span class="number">8</span>]: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">9</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">9</span>]: hq.heappush(heap,<span class="number">0.5</span>)</span><br><span class="line">In [<span class="number">10</span>]: heap</span><br><span class="line">Out[<span class="number">10</span>]: [<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、heappop(heap)将数组堆中的最小元素弹出</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">11</span>]: hq.heappop(heap)</span><br><span class="line">Out[<span class="number">11</span>]: <span class="number">0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: hq.heappop(heap)</span><br><span class="line">Out[<span class="number">12</span>]: <span class="number">0.5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3、heapify(heap) 将heap属性强制应用到任意一个列表</strong></p>
+<p>heapify 函数将使用任意列表作为参数，并且尽可能少的移位操作，，将其转化为合法的堆。如果没有建立堆，那么在使用heappush和heappop前应该使用该函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">13</span>]: heap = [<span class="number">5</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: hq.heapify(heap)</span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: heap</span><br><span class="line">Out[<span class="number">15</span>]: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、heapreplace(heap，n)弹出最小的元素被n替代</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">17</span>]: hq.heapreplace(heap,<span class="number">0.5</span>)</span><br><span class="line">Out[<span class="number">17</span>]: <span class="number">0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">18</span>]: heap</span><br><span class="line">Out[<span class="number">18</span>]: [<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、nlargest(n,iter)、nsmallest(n,iter)</strong><br>heapq中剩下的两个函数nlargest(n.iter)和nsmallest(n.iter)分别用来寻找任何可迭代的对象iter中第n大或者第n小的元素。可以通过使用排序（sorted函数）和分片进行完成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#返回第一个最大的数</span></span><br><span class="line">In [<span class="number">19</span>]: hq.nlargest(<span class="number">1</span>,heap)</span><br><span class="line">Out[<span class="number">19</span>]: [<span class="number">9</span>]</span><br><span class="line"><span class="comment">#返回第一个最小的数</span></span><br><span class="line">In [<span class="number">20</span>]: hq.nsmallest(<span class="number">1</span>,heap)</span><br><span class="line">Out[<span class="number">20</span>]: [<span class="number">0.5</span>]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-拿到高GPA技巧——持续更新" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" class="article-date">
+      <time datetime="2020-02-14T15:23:07.000Z" itemprop="datePublished">2020-02-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/14/%E6%8B%BF%E5%88%B0%E9%AB%98GPA%E6%8A%80%E5%B7%A7%E2%80%94%E2%80%94%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">拿到高GPA技巧——持续更新</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="01建立一个目标"><a href="#01建立一个目标" class="headerlink" title="01建立一个目标"></a>01建立一个目标</h3><p>首先要建立一个具体的目标，比如这学期绩点达到3.8以上。目标要适合自己的水平，比自己上学期绩点高5%~10%左右比较合适。</p>
+<p>然后就是要<strong>细化目标</strong></p>
+<p>没有人能够一步登天，仅仅靠期末是<strong>极其容易</strong>翻车的</p>
+<p>可以分阶段设置目标，设置目标的时候需要将每门课分拆，细化得分点，比如一门专业课大概分为<strong>平时分（点名，作业，PRE等等）+期中（可能没有）+期末+实验</strong>， 需要明确的是每一部分都需要认认真真对待，因为你不知道老师会不会为了调分而大幅度修改各项的比例。原则就是要有每一分都要拿到手的心态。 </p>
+<p>​        尽量知道每一项的评分细则，特别是实验，在知道评分细则之后就去拟合就行，尽量拿分。</p>
+<p>​        然后为了达成期中和期末的好分数，需要给自己每周设定一个小任务，当完成了一项小任务，会对自己的实力有更加清晰的认知，这样也能带动接下来任务的成功。</p>
+<p><strong>分析目标最优解</strong>：</p>
+<p>​        最优解就是要在给定的时间内达到最大的效益，也就是要确定任务的优先级，这是很必要的，当有很多事情向做的时候需要给他们排个优先级，达到最大效益，一般来说要把难的放在比较前面做，一股气解决。</p>
+<h4 id="01-1平时分拿分诀窍"><a href="#01-1平时分拿分诀窍" class="headerlink" title="01.1平时分拿分诀窍"></a>01.1平时分拿分诀窍</h4><p>平时分包括作业+课堂表现+小组活动+老师印象分</p>
+<p>作业是以周为单位的，需要每周做好预习，认真听课，认真复习，然后再认认真真完成作业。最好和同学对一下答案再交，保证作业的准确率。不过切记<strong>一定要自己认认真真做过思考过</strong>，在每次上课时要跟着老师的思路，坚决不玩手机，敢于回答老师的问题，小组合作时积极参加，踊跃地当发言人。在课后要多去问一些有价值的问题以及可以指出老师讲课的某个小错误。<strong>不管什么课尽量去第三排，一堂课对老师紧紧跟随，老师提问问题时尽量提出自己的想法，</strong> </p>
+<p><strong>预习+独立完成作业+复盘</strong>，这是每周的一个小循环，每天晚上用25min预习第二天的科目，勾画重点和不懂的地方，最大用处是<strong>防止上课走神就听不懂了</strong>     独立完成作业最重要的就是<strong>独立</strong>，一道题从<strong>审题思考做题再回过头反思</strong>最离不开的就是<strong>独立</strong> 独立做作业就是<strong>把知识内化的过程</strong> 如果早早得翻看答案或者与人交流那自己不过是个计算器。     最后是<strong>复盘</strong>，复盘是<strong>复习上课的笔记，书上的重点，还有作业和以前考试的错题</strong>，以及思考最近的知识掌握情况，这些知识之间的关联，<strong>每周结束时画个思维导图，构建自己的知识树</strong></p>
+<h4 id="01-2期中和期末考试复习技巧"><a href="#01-2期中和期末考试复习技巧" class="headerlink" title="01.2期中和期末考试复习技巧"></a>01.2期中和期末考试复习技巧</h4><p>首先要明确一个观点：<strong>除了特别硬核的课之外，大部分课只靠期末冲刺拿到85分左右的成绩是不难的，只要划分20~40个小时的时间去有步骤地复习</strong></p>
+<p>切记：<strong>一定要把复习时间精确到小时</strong></p>
+<p>很多人考试周也会抱着电脑和书去图书馆坐一天，但可能大部分时间被其他一些无关紧要的东西给中断了，比如看B站，看知乎，看QQ，微信，小说等等，这种行为的本质原因是专注力不够，是一定要克服的，不然谈什么技巧都是白搭。一天结束看似一直在图书馆，但学习时间可能总共都不够一个小时，这就血妈亏，三天下来还不如别人一个晚上，这就叫<strong>虚假努力，自我感动</strong>，你想想怎么可能拿高分嘛。所以需要实实在在得<strong>根据期末周的安排把每门课的复习量精确到小时并且坚决地执行</strong>，推荐<strong>番茄todo</strong>， 以周为单位去规划平时要做的事情，<strong>对任务量的估计要做到把自己估计需要的时间乘个1.5，多试几次就能掌握自己需要的任务时间。</strong></p>
+<h3 id="02及时复盘"><a href="#02及时复盘" class="headerlink" title="02及时复盘"></a>02及时复盘</h3><p>每一天，每一周，每一个阶段都要去做一个反思，看自己的学习状态怎么样，有没有达到自己的目标，没有的话要怎么去解决，对自己的计划不断地做修正。</p>
+<p>其实这些技巧都建立在一个事实上——你足够专注，能够在一个小时以上投入地做一件事情，以及坚持每天都做，嗯，<strong>学不会不要紧，再来就行了</strong>，重要的是要有重复再来的坚持与相信自己能学会的信心，<strong>当做一个任务没那么舒服没那么容易的时候要去享受，以为你在提升啊，这多爽</strong>，每天给自己的评价就是<strong>做了什么事情，学了多少东西，</strong></p>
+<p>其实以上最重要的还是<strong>坚持</strong>，以及保持足够的<strong>专注</strong></p>
+<h3 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h3><p>除了以上所说的那些，还想补充一些观点。就是在学习过程中要注意两个点，就是<strong>监督信息</strong>和<strong>反馈</strong> 监督是说你看书或者听课或者看文章等等是不够的，你还需要去做习题，去写代码，去复现一波，再去思考蕴含的东西，才能真正的学会学好，而这带来的成就感也会作为一个正反馈让自己爱上这种感觉，从而达到<strong>持续专注</strong> 以及<strong>提高自己的执行力。</strong> </p>
+<p>也就是说  <strong>只看书或者听课而不刷题写代码是学不会东西的，反而会造成我已经学会了的假象</strong>（就像我的模电一样） 还有就是这里的刷题写代码一定得是独立自主的，不能直接抄答案，不然后悔的一定是自己</p>
+<p>“现在我认为真正的学习应该是<strong>非常“主动”地去进行</strong>，看书、论文的时候要对框架和motivation有一个清晰的把握，知道/理解算法这样设计的目的是什么，并要相对频繁地去ask some questions，批判地进行阅读与消化。但可惜当时的自己还差得很远。另一方面，自己习题、coding做得太少，没有获得足够的<strong>监督信息</strong>，自以为自己学懂了，但其实只学了点皮毛。好在那时候还算是通过一些课程的作业获得了很多<strong>正反馈</strong>，支持着我的学习热情。”</p>
+<p>对此我也有体会，就是要主动去掌握这门课的一个大体框架，然后再一章一章去突破 而且要主动的思考，主动刷题，主动总结，<strong>多对自己提问</strong>，</p>
+<p>​        </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%8A%80%E5%B7%A7/" rel="tag">学习技巧</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Python字符串和文本" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/14/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%96%87%E6%9C%AC/" class="article-date">
+      <time datetime="2020-02-14T15:11:09.000Z" itemprop="datePublished">2020-02-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/14/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%96%87%E6%9C%AC/">Python字符串和文本</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pyhon/" rel="tag">Pyhon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-深度学习Task2" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -459,633 +799,9 @@
 
 
   
-    <article id="post-深度学习Task1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/" class="article-date">
-      <time datetime="2020-02-14T12:39:29.000Z" itemprop="datePublished">2020-02-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/">深度学习Task1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="机器学习与深度学习的关系"><a href="#机器学习与深度学习的关系" class="headerlink" title="机器学习与深度学习的关系"></a>机器学习与深度学习的关系</h3><p>​        机器学习研究如何使计算机系统利用经验改善性能。它是人工智能领域的分支，也是实现人工智能的一种手段。在机器学习的众多研究方向中，表征学习关注如何自动找出表示数据的合适方式，以便更好地将输入变换为正确的输出，而本书要重点探讨的深度学习是具有多级表示的表征学习方法。在每一级（从原始数据开始），深度学习通过简单的函数将该级的表示变换为更高级的表示。因此，深度学习模型也可以看作是由许多简单函数复合而成的函数。当这些复合的函数足够多时，深度学习模型就可以表达非常复杂的变换。</p>
-<h3 id="深度学习的特点"><a href="#深度学习的特点" class="headerlink" title="深度学习的特点"></a>深度学习的特点</h3><ul>
-<li>深度学习可以逐级表示越来越抽象的概念或模式</li>
-<li>深度学习的一个外在特点是端到端的训练</li>
-</ul>
-<p>​        相对其它经典的机器学习方法而言，深度学习的不同在于：对非最优解的包容、对非凸非线性优化的使用，以及勇于尝试没有被证明过的方法。这种在处理统计问题上的新经验主义吸引了大量人才的涌入，使得大量实际问题有了更好的解决方案。尽管大部分情况下需要为深度学习修改甚至重新发明已经存在数十年的工具，但是这绝对是一件非常有意义并令人兴奋的事。</p>
-<h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><h4 id="线性回归的基本要素"><a href="#线性回归的基本要素" class="headerlink" title="线性回归的基本要素"></a>线性回归的基本要素</h4><h5 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h5><h5 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h5><blockquote>
-<p>训练数据</p>
-</blockquote>
-<blockquote>
-<p>损失函数</p>
-</blockquote>
-<blockquote>
-<p>优化算法</p>
-</blockquote>
-<ul>
-<li>误差最小化问题的解可以直接用公式表达出来。这类解叫作解析解</li>
-<li>大多数深度学习模型并没有解析解，只能通过优化算法有限次迭代模型参数来尽可能降低损失函数的值。这类解叫作数值解</li>
-</ul>
-<p><strong>小批量随机梯度下降算法</strong>：先选取一组模型参数的初始值，如随机选取；接下来对参数进行多次迭代，使每次迭代都可能降低损失函数的值。在每次迭代中，先随机均匀采样一个由固定数目训练数据样本所组成的小批量（mini-batch）BB，然后求小批量中数据样本的平均损失有关模型参数的导数（梯度），最后用此结果与预先设定的一个正数的乘积作为模型参数在本次迭代的减小量。</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142231_40.png" alt></p>
-<p>在上式中，|B||B|代表每个小批量中的样本个数（批量大小，batch size），ηη称作学习率（learning rate）并取正数。需要强调的是，这里的批量大小和学习率的值是人为设定的，并不是通过模型训练学出的，因此叫作超参数（hyperparameter）。我们通常所说的“调参”指的正是调节超参数，例如通过反复试错来找到超参数合适的值。在少数情况下，超参数也可以通过模型训练学出。本书对此类情况不做讨论。</p>
-<h5 id="模型预测"><a href="#模型预测" class="headerlink" title="模型预测"></a>模型预测</h5><p>模型训练完成后，我们将模型参数w1,w2,bw1,w2,b在优化算法停止时的值分别记作w^1,w^2,b^w^1,w^2,b^。注意，这里我们得到的并不一定是最小化损失函数的最优解w∗1,w∗2,b∗w1∗,w2∗,b∗，而是对最优解的一个近似。然后，我们就可以使用学出的线性回归模型x1w^1+x2w^2+b^x1w^1+x2w^2+b^来估算训练数据集以外任意一栋面积（平方米）为x1x1、房龄（年）为x2x2的房屋的价格了。这里的估算也叫作模型预测、模型推断或模型测试。</p>
-<h4 id="线性回归的表示方法"><a href="#线性回归的表示方法" class="headerlink" title="线性回归的表示方法"></a>线性回归的表示方法</h4><h5 id="神经网络图"><a href="#神经网络图" class="headerlink" title="神经网络图"></a>神经网络图</h5><h5 id="矢量计算表达式"><a href="#矢量计算表达式" class="headerlink" title="矢量计算表达式"></a>矢量计算表达式</h5><h4 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h4><h5 id="从零实现"><a href="#从零实现" class="headerlink" title="从零实现"></a>从零实现</h5><p>只利用<code>NDArray</code>和<code>autograd</code>来实现一个线性回归的训练。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython <span class="keyword">import</span> display</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> autograd, nd</span><br><span class="line"><span class="keyword">import</span> random</span><br></pre></td></tr></table></figure>
-
-<p>生成数据集</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num_examples = <span class="number">1000</span></span><br><span class="line">true_w = [<span class="number">2</span>, <span class="number">-3.4</span>]</span><br><span class="line">true_b = <span class="number">4.2</span></span><br><span class="line">features = nd.random.normal(scale=<span class="number">1</span>, shape=(num_examples, num_inputs))</span><br><span class="line">labels = true_w[<span class="number">0</span>] * features[:, <span class="number">0</span>] + true_w[<span class="number">1</span>] * features[:, <span class="number">1</span>] + true_b</span><br><span class="line">labels += nd.random.normal(scale=<span class="number">0.01</span>, shape=labels.shape)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">use_svg_display</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 用矢量图显示</span></span><br><span class="line">    display.set_matplotlib_formats(<span class="string">'svg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_figsize</span><span class="params">(figsize=<span class="params">(<span class="number">3.5</span>, <span class="number">2.5</span>)</span>)</span>:</span></span><br><span class="line">    use_svg_display()</span><br><span class="line">    <span class="comment"># 设置图的尺寸</span></span><br><span class="line">    plt.rcParams[<span class="string">'figure.figsize'</span>] = figsize</span><br><span class="line"></span><br><span class="line">set_figsize()</span><br><span class="line">plt.scatter(features[:, <span class="number">1</span>].asnumpy(), labels.asnumpy(), <span class="number">1</span>);  <span class="comment"># 加分号只显示图</span></span><br></pre></td></tr></table></figure>
-
-<p>读取数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">data_iter</span><span class="params">(batch_size, features, labels)</span>:</span></span><br><span class="line">    num_examples = len(features)</span><br><span class="line">    indices = list(range(num_examples))</span><br><span class="line">    random.shuffle(indices)  <span class="comment"># 样本的读取顺序是随机的</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, num_examples, batch_size):</span><br><span class="line">        j = nd.array(indices[i: min(i + batch_size, num_examples)])</span><br><span class="line">        <span class="keyword">yield</span> features.take(j), labels.take(j)  <span class="comment"># take函数根据索引返回对应元素</span></span><br></pre></td></tr></table></figure>
-
-<p>初始化模型参数</p>
-<p>我们将权重初始化成均值为0、标准差为0.01的正态随机数，偏差则初始化成0。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">w = nd.random.normal(scale=<span class="number">0.01</span>, shape=(num_inputs, <span class="number">1</span>))</span><br><span class="line">b = nd.zeros(shape=(<span class="number">1</span>,))</span><br><span class="line"></span><br><span class="line">w.attach_grad()</span><br><span class="line">b.attach_grad()</span><br></pre></td></tr></table></figure>
-
-<p>定义模型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linreg</span><span class="params">(X, w, b)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">return</span> nd.dot(X, w) + b</span><br></pre></td></tr></table></figure>
-
-
-
-<p>定义损失函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squared_loss</span><span class="params">(y_hat, y)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">return</span> (y_hat - y.reshape(y_hat.shape)) ** <span class="number">2</span> / <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>定义优化算法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sgd</span><span class="params">(params, lr, batch_size)</span>:</span>  <span class="comment"># 本函数已保存在d2lzh包中方便以后使用</span></span><br><span class="line">    <span class="keyword">for</span> param <span class="keyword">in</span> params:</span><br><span class="line">        param[:] = param - lr * param.grad / batch_size</span><br></pre></td></tr></table></figure>
-
-
-
-<p>训练模型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">lr = <span class="number">0.03</span></span><br><span class="line">num_epochs = <span class="number">3</span></span><br><span class="line">net = linreg</span><br><span class="line">loss = squared_loss</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):  <span class="comment"># 训练模型一共需要num_epochs个迭代周期</span></span><br><span class="line">    <span class="comment"># 在每一个迭代周期中，会使用训练数据集中所有样本一次（假设样本数能够被批量大小整除）。X</span></span><br><span class="line">    <span class="comment"># 和y分别是小批量样本的特征和标签</span></span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> data_iter(batch_size, features, labels):</span><br><span class="line">        <span class="keyword">with</span> autograd.record():</span><br><span class="line">            l = loss(net(X, w, b), y)  <span class="comment"># l是有关小批量X和y的损失</span></span><br><span class="line">        l.backward()  <span class="comment"># 小批量的损失对模型参数求梯度</span></span><br><span class="line">        sgd([w, b], lr, batch_size)  <span class="comment"># 使用小批量随机梯度下降迭代模型参数</span></span><br><span class="line">    train_l = loss(net(features, w, b), labels)</span><br><span class="line">    print(<span class="string">'epoch %d, loss %f'</span> % (epoch + <span class="number">1</span>, train_l.mean().asnumpy()))</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="softmax回归"><a href="#softmax回归" class="headerlink" title="softmax回归"></a>softmax回归</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>我们考虑一个简单的图像分类问题，其输入图像的高和宽均为2像素，且色彩为灰度。这样每个像素值都可以用一个标量表示。我们将图像中的4像素分别记为x1,x2,x3,x4x1,x2,x3,x4。假设训练数据集中图像的真实标签为狗、猫或鸡（假设可以用4像素表示出这3种动物），这些标签分别对应离散值y1,y2,y3y1,y2,y3。</p>
-<p>我们通常使用离散的数值来表示类别，例如y1=1,y2=2,y3=3y1=1,y2=2,y3=3。如此，一张图像的标签为1、2和3这3个数值中的一个。虽然我们仍然可以使用回归模型来进行建模，并将预测值就近定点化到1、2和3这3个离散值之一，但这种连续值到离散值的转化通常会影响到分类质量。因此我们一般使用更加适合离散值输出的模型来解决分类问题。</p>
-<p>softmax回归跟线性回归一样将输入特征与权重做线性叠加。与线性回归的一个主要不同在于，softmax回归的输出值个数等于标签里的类别数。因为一共有4种特征和3种输出动物类别，所以权重包含12个标量（带下标的ww）、偏差包含3个标量（带下标的bb），且对每个输入计算o1,o2,o3o1,o2,o3这3个输出：</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142233_77.png" alt></p>
-<h4 id="softmax运算"><a href="#softmax运算" class="headerlink" title="softmax运算"></a>softmax运算</h4><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142233_3.png" alt></p>
-<p>softmax运算的主要作用就是将输出变成概率</p>
-<h5 id="单样本分类的矢量计算表达式"><a href="#单样本分类的矢量计算表达式" class="headerlink" title="单样本分类的矢量计算表达式"></a>单样本分类的矢量计算表达式</h5><p>为了提高计算效率，我们可以将单样本分类通过矢量计算来表达。在上面的图像分类问题中，假设softmax回归的权重和偏差参数分别为</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_349.png" alt></p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_970.png" alt></p>
-<h5 id="小批量样本分类的矢量计算表达式"><a href="#小批量样本分类的矢量计算表达式" class="headerlink" title="小批量样本分类的矢量计算表达式"></a>小批量样本分类的矢量计算表达式</h5><p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142234_645.png" alt></p>
-<h5 id="交叉熵损失函数"><a href="#交叉熵损失函数" class="headerlink" title="交叉熵损失函数"></a>交叉熵损失函数</h5><p>使用更适合衡量两个概率分布差异的测量函数。其中，交叉熵（cross entropy）是一个常用的衡量方法：</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142235_355.png" alt></p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142250_450.png" alt></p>
-<h3 id="多层感知机"><a href="#多层感知机" class="headerlink" title="多层感知机"></a>多层感知机</h3><p>深度学习主要关注<strong>多层模型</strong>，以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。</p>
-<p>多层感知机在单层神经网络的基础上引入了一到多个隐藏层（hidden layer）。隐藏层位于输入层和输出层之间。图3.3展示了一个多层感知机的神经网络图。</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142251_51.png" alt></p>
-<p>在图3.3所示的多层感知机中，输入和输出个数分别为4和3，中间的隐藏层中包含了5个隐藏单元（hidden unit）。由于输入层不涉及计算，图3.3中的多层感知机的层数为2。由图3.3可见，隐藏层中的神经元和输入层中各个输入完全连接，输出层中的神经元和隐藏层中的各个神经元也完全连接。因此，多层感知机中的隐藏层和输出层都是全连接层。</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142251_572.png" alt></p>
-<h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p>上述问题的根源在于全连接层只是对数据做仿射变换（affine transformation），而多个仿射变换的叠加仍然是一个仿射变换。解决问题的一个方法是引入非线性变换，例如对隐藏变量使用按元素运算的非线性函数进行变换，然后再作为下一个全连接层的输入。这个非线性函数被称为激活函数（activation function）。下面我们介绍几个常用的激活函数。</p>
-<h6 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h6><p>ReLU（rectified linear unit）函数提供了一个很简单的非线性变换。给定元素xx，该函数定义为：</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142252_830.png" alt></p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142252_944.png" alt></p>
-<h5 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h5><p>sigmoid函数可以将元素的值变换到0和1之间：</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_399.png" alt></p>
-<p>sigmoid函数在早期的神经网络中较为普遍，但它目前逐渐被更简单的ReLU函数取代。在后面“循环神经网络”一章中我们会介绍如何利用它值域在0到1之间这一特性来控制信息在神经网络中的流动。下面绘制了sigmoid函数。当输入接近0时，sigmoid函数接近线性变换。</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_802.png" alt></p>
-<p>依据链式法则，sigmoid函数的导数</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142253_388.png" alt></p>
-<p>下面绘制了sigmoid函数的导数。当输入为0时，sigmoid函数的导数达到最大值0.25；当输入越偏离0时，sigmoid函数的导数越接近0。</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_427.png" alt></p>
-<h5 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h5><p>tanh（双曲正切）函数可以将元素的值变换到-1和1之间：</p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_807.png" alt></p>
-<p>我们接着绘制tanh函数。当输入接近0时，tanh函数接近线性变换。虽然该函数的形状和sigmoid函数的形状很像，但tanh函数在坐标系的原点上对称。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with autograd.record():</span><br><span class="line">    y &#x3D; x.tanh()</span><br><span class="line">xyplot(x, y, &#39;tanh&#39;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142254_20.png" alt></p>
-<p><img src="http://q5p38kfbx.bkt.clouddn.com/202002142255_743.png" alt></p>
-<h5 id="多层感知机-1"><a href="#多层感知机-1" class="headerlink" title="多层感知机"></a>多层感知机</h5><p><img src="/.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0Task1/image-20200214202555144.png" alt="image-20200214202555144"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-python中yield的用法详解——最简单，最清晰的解释" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/14/python%E4%B8%ADyield%E7%9A%84%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3%E2%80%94%E2%80%94%E6%9C%80%E7%AE%80%E5%8D%95%EF%BC%8C%E6%9C%80%E6%B8%85%E6%99%B0%E7%9A%84%E8%A7%A3%E9%87%8A/" class="article-date">
-      <time datetime="2020-02-14T06:35:10.000Z" itemprop="datePublished">2020-02-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/14/python%E4%B8%ADyield%E7%9A%84%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3%E2%80%94%E2%80%94%E6%9C%80%E7%AE%80%E5%8D%95%EF%BC%8C%E6%9C%80%E6%B8%85%E6%99%B0%E7%9A%84%E8%A7%A3%E9%87%8A/">python中yield的用法详解——最简单，最清晰的解释</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>首先我要吐槽一下，看程序的过程中遇见了yield这个关键字，然后百度的时候，发现没有一个能简单的让我懂的，讲起来真TM的都是头头是道，什么参数，什么传递的，还口口声声说自己的教程是最简单的，最浅显易懂的，我就想问没有有考虑过读者的感受。</p>
-<p>接下来是正题：</p>
-<p>首先，如果你还没有对yield有个初步分认识，那么你先把yield看做“return”，这个是直观的，它首先是个return，普通的return是什么意思，就是在程序中返回某个值，返回之后程序就不再往下运行了。看做return之后再把它看做一个是生成器（generator）的一部分（带yield的函数才是真正的迭代器），好了，如果你对这些不明白的话，那先把yield看做return,然后直接看下面的程序，你就会明白yield的全部意思了：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"starting..."</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res = <span class="keyword">yield</span> <span class="number">4</span></span><br><span class="line">        print(<span class="string">"res:"</span>,res)</span><br><span class="line">g = foo()</span><br><span class="line">print(next(g))</span><br><span class="line">print(<span class="string">"*"</span>*<span class="number">20</span>)</span><br><span class="line">print(next(g))</span><br></pre></td></tr></table></figure>
-
-
-<p>就这么简单的几行代码就让你明白什么是yield，代码的输出这个：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">starting...</span><br><span class="line"><span class="number">4</span></span><br><span class="line"></span><br><span class="line">********************</span><br><span class="line"></span><br><span class="line">res: <span class="literal">None</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>我直接解释代码运行顺序，相当于代码单步调试：</p>
-<p>1.程序开始执行以后，因为foo函数中有yield关键字，所以foo函数并不会真的执行，而是先得到一个生成器g(相当于一个对象)</p>
-<p>2.直到调用next方法，foo函数正式开始执行，先执行foo函数中的print方法，然后进入while循环</p>
-<p>3.程序遇到yield关键字，然后把yield想想成return,return了一个4之后，程序停止，并没有执行赋值给res操作，此时next(g)语句执行完成，所以输出的前两行（第一个是while上面的print的结果,第二个是return出的结果）是执行print(next(g))的结果，</p>
-<p>4.程序执行print(“<em>“</em>20)，输出20个*</p>
-<p>5.又开始执行下面的print(next(g)),这个时候和上面那个差不多，不过不同的是，这个时候是从刚才那个next程序停止的地方开始执行的，也就是要执行res的赋值操作，这时候要注意，这个时候赋值操作的右边是没有值的（因为刚才那个是return出去了，并没有给赋值操作的左边传参数），所以这个时候res赋值是None,所以接着下面的输出就是res:None,</p>
-<p>6.程序会继续在while里执行，又一次碰到yield,这个时候同样return 出4，然后程序停止，print函数输出的4就是这次return出的4.</p>
-<p>到这里你可能就明白yield和return的关系和区别了，带yield的函数是一个生成器，而不是一个函数了，这个生成器有一个函数就是next函数，next就相当于“下一步”生成哪个数，这一次的next开始的地方是接着上一次的next停止的地方执行的，所以调用next的时候，生成器并不会从foo函数的开始执行，只是接着上一步停止的地方开始，然后遇到yield后，return出要生成的数，此步就结束。</p>
-<hr>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"starting..."</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res = <span class="keyword">yield</span> <span class="number">4</span></span><br><span class="line">        print(<span class="string">"res:"</span>,res)</span><br><span class="line">g = foo()</span><br><span class="line">print(next(g))</span><br><span class="line">print(<span class="string">"*"</span>*<span class="number">20</span>)</span><br><span class="line">print(g.send(<span class="number">7</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>再看一个这个生成器的send函数的例子，这个例子就把上面那个例子的最后一行换掉了，输出结果：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">starting...</span><br><span class="line"><span class="number">4</span></span><br><span class="line"></span><br><span class="line">********************</span><br><span class="line"></span><br><span class="line">res: <span class="number">7</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>先大致说一下send函数的概念：此时你应该注意到上面那个的紫色的字，还有上面那个res的值为什么是None，这个变成了7，到底为什么，这是因为，send是发送一个参数给res的，因为上面讲到，return的时候，并没有把4赋值给res，下次执行的时候只好继续执行赋值操作，只好赋值为None了，而如果用send的话，开始执行的时候，先接着上一次（return 4之后）执行，先把7赋值给了res,然后执行next的作用，遇见下一回的yield，return出结果后结束。</p>
-<p>5.程序执行g.send(7)，程序会从yield关键字那一行继续向下运行，send会把7这个值赋值给res变量</p>
-<p>6.由于send方法中包含next()方法，所以程序会继续向下运行执行print方法，然后再次进入while循环</p>
-<p>7.程序执行再次遇到yield关键字，yield会返回后面的值后，程序再次暂停，直到再次调用next方法或send方法。</p>
-<p>这就结束了，说一下，<strong>为什么用这个生成器</strong>，是因为如果用List的话，会占用更大的空间，比如说取0,1,2,3,4,5,6…………1000</p>
-<p>你可能会这样：</p>
-<p>for n in range(1000):<br>    a=n<br>这个时候range(1000)就默认生成一个含有1000个数的list了，所以很占内存。</p>
-<p>这个时候你可以用刚才的yield组合成生成器进行实现，也可以用xrange(1000)这个生成器实现</p>
-<p>yield组合：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(num)</span>:</span></span><br><span class="line">    print(<span class="string">"starting..."</span>)</span><br><span class="line">    <span class="keyword">while</span> num&lt;<span class="number">10</span>:</span><br><span class="line">        num=num+<span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> num</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> foo(<span class="number">0</span>):</span><br><span class="line">    print(n)</span><br><span class="line">输出：</span><br><span class="line"></span><br><span class="line">starting...</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
-
-<p> xrange(1000):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> xrange(<span class="number">1000</span>):</span><br><span class="line">    a=n</span><br></pre></td></tr></table></figure>
-
-
-
-<p> 其中要注意的是python3时已经没有xrange()了，在python3中，range()就是xrange()了，你可以在python3中查看range()的类型，它已经是个&lt;class ‘range’&gt;了，而不是一个list了，毕竟这个是需要优化的。 </p>
-<p>————————————————<br>版权声明：本文为CSDN博主「冯爽朗」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mieleizhi0522/article/details/82142856" target="_blank" rel="noopener">https://blog.csdn.net/mieleizhi0522/article/details/82142856</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Python数据结构和算法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/14/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/" class="article-date">
-      <time datetime="2020-02-14T04:12:59.000Z" itemprop="datePublished">2020-02-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/14/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">Python数据结构和算法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="1-解压序列赋值给多个变量"><a href="#1-解压序列赋值给多个变量" class="headerlink" title="1.解压序列赋值给多个变量"></a>1.解压序列赋值给多个变量</h3><p>直接用 = 就可以解压赋值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">x,y = a</span><br></pre></td></tr></table></figure>
-
-<p>实际上，这种解压赋值可以用在任何可迭代对象上面，而不仅仅是<strong>列表</strong>或者<strong>元组</strong>。 包括<strong>字符串</strong>，<strong>文件对象</strong>，<strong>迭代器</strong>和<strong>生成器。</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'Hello'</span></span><br><span class="line">a,b,c,d,e = s</span><br></pre></td></tr></table></figure>
-
-<p>当我们只想解压一部分时没有特殊的语法，需要使用任意变量名去占位，然后丢弃不需要的变量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="string">'ACE'</span>, <span class="number">50</span>, <span class="number">91.1</span>, (<span class="number">2020</span>, <span class="number">2</span>, <span class="number">14</span>)]</span><br><span class="line">_, shares, price, _ = data</span><br><span class="line"><span class="comment"># 其中_就是不错的占位符 因为平时很少用它来命名变量</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-解压可迭代对象赋值给多个变量"><a href="#2-解压可迭代对象赋值给多个变量" class="headerlink" title="2.解压可迭代对象赋值给多个变量"></a>2.解压可迭代对象赋值给多个变量</h3><p>当可迭代对象的元素个数比较多的时候，怎么才能从这个对象中解压出N个元素出来呢？</p>
-<p>Python 的星号表达式可以用来解决这个问题。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(grades)</span>:</span></span><br><span class="line">	first, *middle, last = grades</span><br><span class="line">    <span class="keyword">return</span> avg(middle)</span><br><span class="line"><span class="comment"># 注意 不管这个可迭代对象是什么，使用*取出的一定是列表</span></span><br></pre></td></tr></table></figure>
-
-<p>扩展的迭代解压语法是专门为解压不确定个数或任意个数元素的可迭代对象而设计的。 通常，这些可迭代对象的元素结构有确定的规则（比如第 1 个元素后面都是电话号码）， 星号表达式让开发人员可以很容易的利用这些规则来解压出元素来。 而不是通过一些比较复杂的手段去获取这些关联的元素值。</p>
-<p><strong>值得注意的是，星号表达式在迭代元素为可变长元组的序列时是很有用的。</strong> 比如，下面是一个带有标签的元组序列：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">records = [</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="string">'bar'</span>, <span class="string">'hello'</span>),</span><br><span class="line">    (<span class="string">'foo'</span>, <span class="number">3</span>, <span class="number">4</span>),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_foo</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    print(<span class="string">'foo'</span>,x,y)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_bar</span><span class="params">(s)</span>:</span></span><br><span class="line">    print(s)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> tag, *args <span class="keyword">in</span> records:</span><br><span class="line">    <span class="keyword">if</span> tag == <span class="string">'foo'</span>:</span><br><span class="line">		do_foo(*args)</span><br><span class="line">    <span class="keyword">if</span> tag == <span class="string">'bar'</span>:</span><br><span class="line">        do_bar(*args)</span><br></pre></td></tr></table></figure>
-
-<p><strong>星号解压语法在字符串操作的时候也会很有用，比如字符串的分割。</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">line = <span class="string">'nobody:*:-2:-2:UnprivilegedUser:/var/empty:/usr/bin/false'</span></span><br><span class="line">uname, *fields, homedir, sh = line.split(<span class="string">':'</span>)</span><br><span class="line"><span class="comment"># split()方法的作用就是以：为界分出多个元素</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>有时候，你想解压一些元素后丢弃它们</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">record = (<span class="string">'ACME'</span>, <span class="number">50</span>, <span class="number">123.45</span>, (<span class="number">12</span>, <span class="number">18</span>, <span class="number">2012</span>))</span><br><span class="line">name, *_, (*_, year) = record</span><br></pre></td></tr></table></figure>
-
-<p><strong>在很多函数式语言中，星号解压语法跟列表处理有许多相似之处。</strong>比如，如果你有一个列表， 你可以很容易的将它分割成前后两部分：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">items = [<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">head, *tail = items</span><br><span class="line"><span class="comment"># 类似切片效果</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-保留最后N个元素"><a href="#3-保留最后N个元素" class="headerlink" title="3.保留最后N个元素"></a>3.保留最后N个元素</h3><p>保留有限历史记录正是 <code>collections.deque</code> 大显身手的时候。比如，下面的代码在多行上面做简单的文本匹配， 并返回匹配所在行的最后N行：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(lines, pattern, history=<span class="number">5</span>)</span>:</span></span><br><span class="line">	previous_lines = deque(maxlen=history)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">if</span> pattern <span class="keyword">in</span> line:</span><br><span class="line">            <span class="keyword">yield</span> line, previous_lines</span><br><span class="line">        previous_lines.append(line)</span><br><span class="line"></span><br><span class="line"><span class="comment"># example use on a file</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">r'./xxx.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line, prevlines <span class="keyword">in</span> search(f,<span class="string">'ss'</span>):</span><br><span class="line">			<span class="keyword">for</span> pline <span class="keyword">in</span> prevlines:</span><br><span class="line">                print(pline, end=<span class="string">''</span>)</span><br><span class="line">                print(<span class="string">'-'</span> * <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
-
-<p>我们在写<strong>查询元素</strong>的代码时，通常会使用包含 <code>yield</code> 表达式的<strong>生成器函数</strong>，也就是我们上面示例代码中的那样。 这样可以将搜索过程代码和使用搜索结果代码解耦。</p>
-<p>更一般的， <code>deque</code> 类可以被用在任何你<strong>只需要一个简单队列数据结构的场合</strong>。 如果你不设置最大队列大小，那么就会得到一个无限大小队列，你可以在队列的两端执行添加和弹出元素的操作。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">q = deque()</span><br><span class="line">q.append(args)</span><br><span class="line">q.pop()</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-查找最大或最小的N个元素"><a href="#4-查找最大或最小的N个元素" class="headerlink" title="4.查找最大或最小的N个元素"></a>4.查找最大或最小的N个元素</h3><p>怎样从一个集合中获得最大或者最小的 N 个元素列表？</p>
-<p>答案是使用heaq，heapq 模块有两个函数：<code>nlargest()</code> 和 <code>nsmallest()</code> 可以完美解决这个问题。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">23</span>,<span class="number">646</span>,<span class="number">75</span>,<span class="number">56</span>,<span class="number">24</span>,<span class="number">62</span>,<span class="number">22</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">heapq.nlargest(<span class="number">3</span>,nums)</span><br><span class="line">heapq.nsmallest(<span class="number">3</span>,nums)</span><br></pre></td></tr></table></figure>
-
-<p>当要查找的元素个数相对比较小的时候，函数 <code>nlargest()</code> 和 <code>nsmallest()</code> 是很合适的。 如果你仅仅想查找唯一的最小或最大（N=1）的元素的话，那么使用 <code>min()</code> 和 <code>max()</code> 函数会更快些。 类似的，如果 N 的大小和集合大小接近的时候，通常先排序这个集合然后再使用切片操作会更快点 （ <code>sorted(items)[:N]</code> 或者是 <code>sorted(items)[-N:]</code> ）。 需要在正确场合使用函数 <code>nlargest()</code> 和 <code>nsmallest()</code> 才能发挥它们的优势 （如果 N 快接近集合大小了，那么使用排序操作会更好些）。</p>
-<h3 id="5-实现一个优先级队列"><a href="#5-实现一个优先级队列" class="headerlink" title="5.实现一个优先级队列"></a>5.实现一个优先级队列</h3><p>也就是实现一个heap</p>
-<p>使用<code>heapq</code>模块实现一个优先级队列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PriorityQueue</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self._queue = []</span><br><span class="line">        self._index = <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,item,priority)</span>:</span></span><br><span class="line">        heapq.heappush(self._queue,(-priority, self._index, item))</span><br><span class="line">        <span class="comment"># 优先级为负数的目的是使得元素按照优先级从高到低排序。 这个跟普通的按优先级从低到高排序的堆排序恰巧相反。</span></span><br><span class="line">        self._index+=<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> heapq.heappop(self._queue)[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是heapq是将元素按照从小到大的顺序排的，也就是<strong>数值小的默认优先级高</strong>，</p>
-<p><code>index</code> 变量的作用是保证同等优先级元素的正确排序。 通过保存一个不断增加的 <code>index</code> 下标变量，可以确保元素按照它们插入的顺序排序。 而且， <code>index</code> 变量也在相同优先级元素比较的时候起到重要作用。</p>
-<p>Python 在做元组比较时候，如果前面的比较已经可以确定结果了， 后面的比较操作就不会发生了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a &#x3D; (1, 0, Item(&#39;foo&#39;))</span><br><span class="line">&gt;&gt;&gt; b &#x3D; (5, 1, Item(&#39;bar&#39;))</span><br><span class="line">&gt;&gt;&gt; c &#x3D; (1, 2, Item(&#39;grok&#39;))</span><br><span class="line">&gt;&gt;&gt; a &lt; b</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; a &lt; c</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-markdown学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/13/markdown%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
-      <time datetime="2020-02-13T09:18:36.000Z" itemprop="datePublished">2020-02-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/13/markdown%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">markdown学习笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="Markdown段落格式"><a href="#Markdown段落格式" class="headerlink" title="Markdown段落格式"></a>Markdown段落格式</h3><p>显示标题： #</p>
-<p>显示字体： *  **  *** 斜体 粗体 粗斜体</p>
-<p>分隔线：***</p>
-<hr>
-<p>删除线： <del>~ ~</del>    <del>示意</del></p>
-<p>下划线： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;u&gt;&lt;&#x2F;u&gt;</span><br></pre></td></tr></table></figure>
-
-<p><u>示例</u></p>
-<p>脚注： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[^要注明的文本]</span><br></pre></td></tr></table></figure>
-
-<p>哈哈哈[^要注明的文本]</p>
-<h3 id="Markdown列表"><a href="#Markdown列表" class="headerlink" title="Markdown列表"></a>Markdown列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 无序列表</span><br><span class="line">2. 有序列表</span><br></pre></td></tr></table></figure>
-
-
-
-<ol>
-<li>无序列表</li>
-<li>有序列表</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">* 第二项</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>第一项</li>
-<li>第二项</li>
-</ul>
-<h4 id="列表嵌套"><a href="#列表嵌套" class="headerlink" title="列表嵌套"></a>列表嵌套</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. text</span><br><span class="line">- 第一个元素</span><br></pre></td></tr></table></figure>
-
-
-
-<ol>
-<li>text<ul>
-<li>第一个元素</li>
-</ul>
-</li>
-</ol>
-<h3 id="Markdown-区块"><a href="#Markdown-区块" class="headerlink" title="Markdown 区块"></a>Markdown 区块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 区块引用</span><br><span class="line"></span><br><span class="line">&gt; 区块嵌套</span><br><span class="line">&gt;&gt; 第二层</span><br><span class="line">&gt;&gt;&gt; 第三层</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>区块引用</p>
-</blockquote>
-<blockquote>
-<p>示例</p>
-<p>二行</p>
-</blockquote>
-<blockquote>
-<p>区块嵌套</p>
-<blockquote>
-<p>第二层</p>
-<blockquote>
-<p>第三层</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h4 id="区块中使用列表"><a href="#区块中使用列表" class="headerlink" title="区块中使用列表"></a>区块中使用列表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 区块中使用列表</span><br><span class="line">&gt; 1. 第一项</span><br><span class="line">&gt; 2. 第二项</span><br><span class="line">&gt; + 第一项</span><br><span class="line">&gt; + 第二项</span><br><span class="line">&gt; + 第三项</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>区块中使用列表</p>
-<ol>
-<li>第一项</li>
-<li>第二项</li>
-</ol>
-<ul>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
-</ul>
-</blockquote>
-<h4 id="列表中使用区块"><a href="#列表中使用区块" class="headerlink" title="列表中使用区块"></a>列表中使用区块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">    &gt; 菜鸟教程</span><br><span class="line">    &gt; 学的不仅是技术更是梦想</span><br><span class="line">* 第二项</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>第一项<blockquote>
-<p>菜鸟教程<br>学的不仅是技术更是梦想</p>
-</blockquote>
-</li>
-<li>第二项</li>
-</ul>
-<h3 id="Markdown代码"><a href="#Markdown代码" class="headerlink" title="Markdown代码"></a>Markdown代码</h3><h4 id="函数或片段代码"><a href="#函数或片段代码" class="headerlink" title="函数或片段代码"></a>函数或片段代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;printf()&#96; 函数   使用 &#96;包围</span><br></pre></td></tr></table></figure>
-
-<p><code>printf()</code> 函数</p>
-<p><code>cout</code></p>
-<h4 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用&#96;&#96;&#96;来包围一段代码</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Markdown链接"><a href="#Markdown链接" class="headerlink" title="Markdown链接"></a>Markdown链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[链接名称](链接地址)</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">&lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
-
-<p><a href="www.baidu.com">链接名称</a></p>
-<p>&lt;<a href="http://www.baidu,com&gt;" target="_blank" rel="noopener">www.baidu,com&gt;</a></p>
-<h4 id="高级链接"><a href="#高级链接" class="headerlink" title="高级链接"></a>高级链接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">链接也可以用变量来代替，文档末尾附带变量地址：</span><br><span class="line">这个链接用 1 作为网址变量 [Google][1]</span><br><span class="line">这个链接用 Maxwell 作为网址变量 [Maxwell][maxwell]</span><br><span class="line">然后在文档的结尾为变量赋值（网址）</span><br><span class="line"></span><br><span class="line">  [1]: http:&#x2F;&#x2F;www.google.com&#x2F;</span><br><span class="line">  [maxwell]: http:&#x2F;&#x2F;www.chaomeiyan.github.io&#x2F;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Markdown图片"><a href="#Markdown图片" class="headerlink" title="Markdown图片"></a>Markdown图片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">![alt 属性文本](图片地址)</span><br><span class="line"></span><br><span class="line">![alt 属性文本](图片地址 &quot;可选标题&quot;)</span><br><span class="line"></span><br><span class="line">你也可以直接把图片拖进编辑器</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Markdown表格"><a href="#Markdown表格" class="headerlink" title="Markdown表格"></a>Markdown表格</h3><p>Markdown 制作表格使用 <strong>|</strong> 来分隔不同的单元格，使用 <strong>-</strong> 来分隔表头和其他行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|  表头   | 表头  |</span><br><span class="line">|  ----  | ----  |</span><br><span class="line">| 单元格  | 单元格 |</span><br><span class="line">| 单元格  | 单元格 |</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>表头</th>
-<th>表头</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>单元格</td>
-<td>单元格</td>
-</tr>
-<tr>
-<td>单元格</td>
-<td>单元格</td>
-</tr>
-</tbody></table>
-<p><strong>我们可以设置表格的对齐方式：</strong></p>
-<ul>
-<li><strong>-:</strong> 设置内容和标题栏居右对齐。</li>
-<li><strong>:-</strong> 设置内容和标题栏居左对齐。</li>
-<li><strong>:-:</strong> 设置内容和标题栏居中对齐。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="left">左对齐</th>
-<th align="right">右对齐</th>
-<th align="center">居中对齐</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">单元格</td>
-<td align="right">单元格</td>
-<td align="center">单元格</td>
-</tr>
-<tr>
-<td align="left">单元格</td>
-<td align="right">单元格</td>
-<td align="center">单元格</td>
-</tr>
-</tbody></table>
-<h3 id="Markdown高级技巧"><a href="#Markdown高级技巧" class="headerlink" title="Markdown高级技巧"></a>Markdown高级技巧</h3><h4 id="支持的-HTML-元素"><a href="#支持的-HTML-元素" class="headerlink" title="支持的 HTML 元素"></a>支持的 HTML 元素</h4><p>不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。</p>
-<p>目前支持的 HTML 元素有：<code></code>等 ，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用 &lt;kbd&gt;Ctrl&lt;&#x2F;kbd&gt;+&lt;kbd&gt;Alt&lt;&#x2F;kbd&gt;+&lt;kbd&gt;Del&lt;&#x2F;kbd&gt; 重启电脑</span><br></pre></td></tr></table></figure>
-
-<p>使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd> 重启电脑</p>
-<h4 id="转义"><a href="#转义" class="headerlink" title="转义"></a>转义</h4><p>Markdown 使用了很多特殊符号来表示特定的意义，如果需要显示特定的符号则需要使用转义字符，Markdown 使用反斜杠转义特殊字符：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">**文本加粗** </span><br><span class="line">\*\* 正常显示星号 \*\*</span><br></pre></td></tr></table></figure>
-
-<p><strong>文本加粗</strong><br>** 正常显示星号 **</p>
-<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><p>当你需要在编辑器中插入数学公式时，可以使用两个美元符 $$ 包裹 TeX 或 LaTeX 格式的数学公式来实现。提交后，问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\mathbf&#123;V&#125;_1 \times \mathbf&#123;V&#125;_2 &#x3D;  \begin&#123;vmatrix&#125; </span><br><span class="line">\mathbf&#123;i&#125; &amp; \mathbf&#123;j&#125; &amp; \mathbf&#123;k&#125; \\</span><br><span class="line">\frac&#123;\partial X&#125;&#123;\partial u&#125; &amp;  \frac&#123;\partial Y&#125;&#123;\partial u&#125; &amp; 0 \\</span><br><span class="line">\frac&#123;\partial X&#125;&#123;\partial v&#125; &amp;  \frac&#123;\partial Y&#125;&#123;\partial v&#125; &amp; 0 \\</span><br><span class="line">\end&#123;vmatrix&#125;</span><br><span class="line">$$tep1&#125;&#123;\style&#123;visibility:hidden&#125;&#123;(x+1)(x+1)&#125;&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
-
-<p>$$</p>
-<p>$$</p>
-<h3 id="Markdown画流程图"><a href="#Markdown画流程图" class="headerlink" title="Markdown画流程图"></a>Markdown画流程图</h3><p><strong>1、横向流程图源码格式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;mermaid</span><br><span class="line">graph LR</span><br><span class="line">A[方形] --&gt;B(圆角)</span><br><span class="line">    B --&gt; C&#123;条件a&#125;</span><br><span class="line">    C --&gt;|a&#x3D;1| D[结果1]</span><br><span class="line">    C --&gt;|a&#x3D;2| E[结果2]</span><br><span class="line">    F[横向流程图]</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;mermaid</span><br><span class="line">graph LR</span><br><span class="line">A[方形] --&gt;B(圆角)</span><br><span class="line">    B --&gt; C&#123;条件a&#125;</span><br><span class="line">    C --&gt;|a&#x3D;1| D[结果1]</span><br><span class="line">    C --&gt;|a&#x3D;2| E[结果2]</span><br><span class="line">    F[横向流程图]</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、竖向流程图源码格式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;mermaid</span><br><span class="line">graph TD</span><br><span class="line">A[方形] --&gt; B(圆角)</span><br><span class="line">    B --&gt; C&#123;条件a&#125;</span><br><span class="line">    C --&gt; |a&#x3D;1| D[结果1]</span><br><span class="line">    C --&gt; |a&#x3D;2| E[结果2]</span><br><span class="line">    F[竖向流程图]</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;mermaid</span><br><span class="line">graph TD</span><br><span class="line">A[方形] --&gt; B(圆角)</span><br><span class="line">    B --&gt; C&#123;条件a&#125;</span><br><span class="line">    C --&gt; |a&#x3D;1| D[结果1]</span><br><span class="line">    C --&gt; |a&#x3D;2| E[结果2]</span><br><span class="line">    F[竖向流程图]</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、标准流程图源码格式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;flow</span><br><span class="line">st&#x3D;&gt;start: 开始框</span><br><span class="line">op&#x3D;&gt;operation: 处理框</span><br><span class="line">cond&#x3D;&gt;condition: 判断框(是或否?)</span><br><span class="line">sub1&#x3D;&gt;subroutine: 子流程</span><br><span class="line">io&#x3D;&gt;inputoutput: 输入输出框</span><br><span class="line">e&#x3D;&gt;end: 结束框</span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;io-&gt;e</span><br><span class="line">cond(no)-&gt;sub1(right)-&gt;op</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;mermaid</span><br><span class="line">graph TD</span><br><span class="line">A[方形] --&gt; B(圆角)</span><br><span class="line">    B --&gt; C&#123;条件a&#125;</span><br><span class="line">    C --&gt; |a&#x3D;1| D[结果1]</span><br><span class="line">    C --&gt; |a&#x3D;2| E[结果2]</span><br><span class="line">    F[竖向流程图]</span><br></pre></td></tr></table></figure>
-
-<p>4、标准流程图源码格式（横向）：**</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;flow</span><br><span class="line">st&#x3D;&gt;start: 开始框</span><br><span class="line">op&#x3D;&gt;operation: 处理框</span><br><span class="line">cond&#x3D;&gt;condition: 判断框(是或否?)</span><br><span class="line">sub1&#x3D;&gt;subroutine: 子流程</span><br><span class="line">io&#x3D;&gt;inputoutput: 输入输出框</span><br><span class="line">e&#x3D;&gt;end: 结束框</span><br><span class="line">st(right)-&gt;op(right)-&gt;cond</span><br><span class="line">cond(yes)-&gt;io(bottom)-&gt;e</span><br><span class="line">cond(no)-&gt;sub1(right)-&gt;op</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;flow</span><br><span class="line">st&#x3D;&gt;start: 开始框</span><br><span class="line">op&#x3D;&gt;operation: 处理框</span><br><span class="line">cond&#x3D;&gt;condition: 判断框(是或否?)</span><br><span class="line">sub1&#x3D;&gt;subroutine: 子流程</span><br><span class="line">io&#x3D;&gt;inputoutput: 输入输出框</span><br><span class="line">e&#x3D;&gt;end: 结束框</span><br><span class="line">st(right)-&gt;op(right)-&gt;cond</span><br><span class="line">cond(yes)-&gt;io(bottom)-&gt;e</span><br><span class="line">cond(no)-&gt;sub1(right)-&gt;op</span><br></pre></td></tr></table></figure>
-
-<p><strong>5、UML时序图源码样例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;sequence</span><br><span class="line">对象A-&gt;对象B: 对象B你好吗?（请求）</span><br><span class="line">Note right of 对象B: 对象B的描述</span><br><span class="line">Note left of 对象A: 对象A的描述(提示)</span><br><span class="line">对象B--&gt;对象A: 我很好(响应)</span><br><span class="line">对象A-&gt;对象B: 你真的好吗？</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;sequence</span><br><span class="line">对象A-&gt;对象B: 对象B你好吗?（请求）</span><br><span class="line">Note right of 对象B: 对象B的描述</span><br><span class="line">Note left of 对象A: 对象A的描述(提示)</span><br><span class="line">对象B--&gt;对象A: 我很好(响应)</span><br><span class="line">对象A-&gt;对象B: 你真的好吗？</span><br></pre></td></tr></table></figure>
-
-<p><strong>6、UML时序图源码复杂样例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;sequence</span><br><span class="line">Title: 标题：复杂使用</span><br><span class="line">对象A-&gt;对象B: 对象B你好吗?（请求）</span><br><span class="line">Note right of 对象B: 对象B的描述</span><br><span class="line">Note left of 对象A: 对象A的描述(提示)</span><br><span class="line">对象B--&gt;对象A: 我很好(响应)</span><br><span class="line">对象B-&gt;小三: 你好吗</span><br><span class="line">小三--&gt;&gt;对象A: 对象B找我了</span><br><span class="line">对象A-&gt;对象B: 你真的好吗？</span><br><span class="line">Note over 小三,对象B: 我们是朋友</span><br><span class="line">participant C</span><br><span class="line">Note right of C: 没人陪我玩</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;sequence</span><br><span class="line">Title: 标题：复杂使用</span><br><span class="line">对象A-&gt;对象B: 对象B你好吗?（请求）</span><br><span class="line">Note right of 对象B: 对象B的描述</span><br><span class="line">Note left of 对象A: 对象A的描述(提示)</span><br><span class="line">对象B--&gt;对象A: 我很好(响应)</span><br><span class="line">对象B-&gt;小三: 你好吗</span><br><span class="line">小三--&gt;&gt;对象A: 对象B找我了</span><br><span class="line">对象A-&gt;对象B: 你真的好吗？</span><br><span class="line">Note over 小三,对象B: 我们是朋友</span><br><span class="line">participant C</span><br><span class="line">Note right of C: 没人陪我玩</span><br></pre></td></tr></table></figure>
-
-<p><strong>7、UML标准时序图样例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;mermaid</span><br><span class="line">%% 时序图例子,-&gt; 直线，--&gt;虚线，-&gt;&gt;实线箭头</span><br><span class="line">  sequenceDiagram</span><br><span class="line">    participant 张三</span><br><span class="line">    participant 李四</span><br><span class="line">    张三-&gt;王五: 王五你好吗？</span><br><span class="line">    loop 健康检查</span><br><span class="line">        王五-&gt;王五: 与疾病战斗</span><br><span class="line">    end</span><br><span class="line">    Note right of 王五: 合理 食物 &lt;br&#x2F;&gt;看医生...</span><br><span class="line">    李四--&gt;&gt;张三: 很好!</span><br><span class="line">    王五-&gt;李四: 你怎么样?</span><br><span class="line">    李四--&gt;王五: 很好!</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;mermaid</span><br><span class="line">%% 时序图例子,-&gt; 直线，--&gt;虚线，-&gt;&gt;实线箭头</span><br><span class="line">  sequenceDiagram</span><br><span class="line">    participant 张三</span><br><span class="line">    participant 李四</span><br><span class="line">    张三-&gt;王五: 王五你好吗？</span><br><span class="line">    loop 健康检查</span><br><span class="line">        王五-&gt;王五: 与疾病战斗</span><br><span class="line">    end</span><br><span class="line">    Note right of 王五: 合理 食物 &lt;br&#x2F;&gt;看医生...</span><br><span class="line">    李四--&gt;&gt;张三: 很好!</span><br><span class="line">    王五-&gt;李四: 你怎么样?</span><br><span class="line">    李四--&gt;王五: 很好!</span><br></pre></td></tr></table></figure>
-
-<p><strong>8、甘特图样例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;mermaid</span><br><span class="line">%% 语法示例</span><br><span class="line">        gantt</span><br><span class="line">        dateFormat  YYYY-MM-DD</span><br><span class="line">        title 软件开发甘特图</span><br><span class="line">        section 设计</span><br><span class="line">        需求                      :done,    des1, 2014-01-06,2014-01-08</span><br><span class="line">        原型                      :active,  des2, 2014-01-09, 3d</span><br><span class="line">        UI设计                     :         des3, after des2, 5d</span><br><span class="line">    未来任务                     :         des4, after des3, 5d</span><br><span class="line">        section 开发</span><br><span class="line">        学习准备理解需求                      :crit, done, 2014-01-06,24h</span><br><span class="line">        设计框架                             :crit, done, after des2, 2d</span><br><span class="line">        开发                                 :crit, active, 3d</span><br><span class="line">        未来任务                              :crit, 5d</span><br><span class="line">        耍                                   :2d</span><br><span class="line">        section 测试</span><br><span class="line">        功能测试                              :active, a1, after des3, 3d</span><br><span class="line">        压力测试                               :after a1  , 20h</span><br><span class="line">        测试报告                               : 48h</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;mermaid</span><br><span class="line">%% 语法示例</span><br><span class="line">        gantt</span><br><span class="line">        dateFormat  YYYY-MM-DD</span><br><span class="line">        title 软件开发甘特图</span><br><span class="line">        section 设计</span><br><span class="line">        需求                      :done,    des1, 2014-01-06,2014-01-08</span><br><span class="line">        原型                      :active,  des2, 2014-01-09, 3d</span><br><span class="line">        UI设计                     :         des3, after des2, 5d</span><br><span class="line">    未来任务                     :         des4, after des3, 5d</span><br><span class="line">        section 开发</span><br><span class="line">        学习准备理解需求                      :crit, done, 2014-01-06,24h</span><br><span class="line">        设计框架                             :crit, done, after des2, 2d</span><br><span class="line">        开发                                 :crit, active, 3d</span><br><span class="line">        未来任务                              :crit, 5d</span><br><span class="line">        耍                                   :2d</span><br><span class="line">        section 测试</span><br><span class="line">        功能测试                              :active, a1, after des3, 3d</span><br><span class="line">        压力测试                               :after a1  , 20h</span><br><span class="line">        测试报告                               : 48h</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 </div>
